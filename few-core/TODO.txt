@@ -1,0 +1,42 @@
+тесты производительности - Java(JSP, JSP-EL, JSF, FTL, XSLT, Velocity), PHP, PHP-Smarty, Perl
+    --> в блог
++ аннотации для модельных бинов, автосоставление RootModel
+паковка шаблонов в jar'ники - отладить компонент - M(ModelBean) V(ftl) C(ActionClass) -
+сущность widget
+router config
+--> widget для просмотра текущей конфы приложения
+--> tool для генерации документации по widget'ам - модель, action'ы, параметры,
+
+no session + защититься от кражи sessionId
+
+мониторинг -
+    состояния памяти, GC, JIT, health-status
+    health'ы scheduler'ов, http-connector'ов и т.п.
+    нагрузка, латентность на сервере
+    время загрузки страницы с клиента
+    --> widget
+
++ annotations for model beans
+routing
+action parameter
+PRG с сохранением message'ей
+json/ajax
++ много message'ей для одного source
+jetty
+--> tool для быстрого создания проекта/страницы/widget'а
+
+Ajax - JSON, JSON + ftl
+
+сборка maven'ом
+OSS проект - TRAC+GIT+MAVEN+HUDSON
+
+open-source
+
+логирование + в БД
+message bundles
+переименовывание страницы - сейчас ПЦ. routing, генерация url'ов
+
+наладить использование in-memory db для меняющихся/временных данных
+наладить использование JPA
+
+страничка с выводом конфигурации фреймворка
