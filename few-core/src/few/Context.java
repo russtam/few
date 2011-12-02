@@ -8,6 +8,7 @@ import few.needed.OuterFactory;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 /**
@@ -93,5 +94,9 @@ public class Context {
 
     public Map<String, List<Message>> getMessages() {
         return Collections.unmodifiableMap(messages);
+    }
+
+    public HttpSession getSession() {
+        return request.getSession();
     }
 }

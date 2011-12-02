@@ -1,13 +1,18 @@
-тесты производительности - Java(JSP, JSP-EL, JSF, FTL, XSLT, Velocity), PHP, PHP-Smarty, Perl
-    --> в блог
-+ аннотации для модельных бинов, автосоставление RootModel
-паковка шаблонов в jar'ники - отладить компонент - M(ModelBean) V(ftl) C(ActionClass) -
-сущность widget
-router config
---> widget для просмотра текущей конфы приложения
+
+!routing (action parameter)
+!PRG с сохранением message'ей
+!Ajax - JSON, JSON + ftl
+jetty
+--> tool для быстрого создания проекта/страницы/widget'а
+
+паковка шаблонов в jar'ники - отладить компонент - M(ModelBean) V(ftl) C(ActionClass)
+--> widget для просмотра текущей конфы приложения (controllers, models, routing)
 --> tool для генерации документации по widget'ам - модель, action'ы, параметры,
 
 no session + защититься от кражи sessionId
+
+сборка maven'ом
+OSS проект - TRAC+GIT+MAVEN+HUDSON
 
 мониторинг -
     состояния памяти, GC, JIT, health-status
@@ -16,27 +21,8 @@ no session + защититься от кражи sessionId
     время загрузки страницы с клиента
     --> widget
 
-+ annotations for model beans
-routing
-action parameter
-PRG с сохранением message'ей
-json/ajax
-+ много message'ей для одного source
-jetty
---> tool для быстрого создания проекта/страницы/widget'а
+обкатать использование in-memory db для меняющихся/временных данных (sessions)
+обкатать использование JPA
+тесты производительности - Java(JSP, JSP-EL, JSF, FTL, XSLT, Velocity), PHP, PHP-Smarty, Perl
+    --> выложить
 
-Ajax - JSON, JSON + ftl
-
-сборка maven'ом
-OSS проект - TRAC+GIT+MAVEN+HUDSON
-
-open-source
-
-логирование + в БД
-message bundles
-переименовывание страницы - сейчас ПЦ. routing, генерация url'ов
-
-наладить использование in-memory db для меняющихся/временных данных
-наладить использование JPA
-
-страничка с выводом конфигурации фреймворка
