@@ -2,6 +2,7 @@ package few;
 
 import few.core.Dispatcher;
 import few.core.DispatcherMap;
+import few.utils.JSONRenderer;
 
 import java.net.MalformedURLException;
 import java.util.Collections;
@@ -20,6 +21,7 @@ public class ActionResponse {
     public static final int REDIRECT = 2;
     public static final int ACTION   = 3;
     public static final int ERROR    = 4;
+    public static final int JSON     = 5;
 
     private int error_code;
     private int response_type;
@@ -42,7 +44,7 @@ public class ActionResponse {
 
     public static ActionResponse view(String where) {
         checkPage(where);
-        if( "GET".equals( Context.get().getRequest() ) )
+        if( "GET".equals( Context.get().getRequest().getMethod() ) )
             return new ActionResponse(FORWARD, where);
         else
             return new ActionResponse(REDIRECT, "/" + where);
@@ -58,6 +60,10 @@ public class ActionResponse {
 
     public static ActionResponse action(String which) {
         return new ActionResponse(ACTION, which);
+    }
+
+    public static ActionResponse json(Object res) {
+        return new ActionResponse(JSON, JSONRenderer.buildJSON(res));
     }
 
     public static ActionResponse error(int code) {

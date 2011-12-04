@@ -4,7 +4,6 @@ import few.ActionResponse;
 import few.Context;
 import few.MyURL;
 import few.support.FreemarkerService;
-import freemarker.template.*;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -104,6 +103,9 @@ public class Dispatcher implements Filter{
                     throw new Error("not implemented yet");
                 case ActionResponse.ERROR:
                     response.sendError(ar.getError_code());
+                case ActionResponse.JSON:
+                    response.getOutputStream().print(ar.getKey());
+                    response.getOutputStream().close();
             }
 
         } finally {
@@ -140,14 +142,7 @@ public class Dispatcher implements Filter{
         response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, post-check=0, pre-check=0");
         response.setHeader("Pragma", "no-cache");
 
-        Template t = FreemarkerService.get().getTemplate(template);
-
-        try {
-            t.process(Context.get().getModel(), response.getWriter());
-        } catch (TemplateException e) {
-            throw new ServletException(
-                    "Error while processing FreeMarker template", e);
-        }
+        FreemarkerService.get().processTemplate(template, response.getWriter());
     }
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {

@@ -1,15 +1,15 @@
 package few.support;
 
+import few.Context;
 import few.needed.OuterFactory;
-import freemarker.template.Configuration;
-import freemarker.template.ObjectWrapper;
-import freemarker.template.Template;
-import freemarker.template.TemplateExceptionHandler;
+import freemarker.template.*;
 
 import javax.servlet.ServletContext;
-import java.io.File;
-import java.io.IOException;
+import javax.servlet.ServletException;
+import java.io.*;
 import java.util.Locale;
+import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Created by IntelliJ IDEA.
@@ -81,7 +81,30 @@ public class FreemarkerService {
     }
 
 
-    public Template getTemplate(String template) throws IOException {
-        return cfg.getTemplate(template);
+    public void processTemplate(String template, Writer writer) {
+        processTemplate(template, writer, Context.get().getModel());
     }
+
+    public void processTemplate(String template, Writer writer, Map parameters) {
+        try {
+            Template t = cfg.getTemplate(template);
+            t.process(parameters, writer);
+        } catch (Exception e) {
+            e.printStackTrace(new PrintWriter(writer));
+        }
+    }
+
+    public String processTemplate(String template) {
+        StringWriter sw = new StringWriter();
+        processTemplate(template, sw);
+        return sw.toString();
+    }
+
+    public String processTemplate(String template, Map parameters) {
+        StringWriter sw = new StringWriter();
+        processTemplate(template, sw, parameters);
+        return sw.toString();
+    }
+
+    Logger log = Logger.getLogger(FreemarkerService.class.getName());
 }

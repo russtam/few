@@ -2,6 +2,7 @@
 + PRG с сохранением message'ей
 + много message'ей для одного source
 + аннотации для модельных бинов, автосоставление RootModel
++ Ajax - JSON, JSON + ftl
 
 тесты производительности - Java(JSP, JSP-EL, JSF, FTL, XSLT, Velocity), PHP, PHP-Smarty, Perl
     --> в блог
@@ -25,8 +26,6 @@ action parameter
 context-path/virtual-hosts
 jetty/tomcat embedded
 --> tool для быстрого создания проекта/страницы/widget'а
-
-Ajax - JSON, JSON + ftl
 
 сборка maven'ом
 OSS проект - TRAC+GIT+MAVEN+HUDSON
