@@ -40,9 +40,12 @@ public class ActionResponse {
         return new ActionResponse(DEFAULT, null);
     }
 
-    public static ActionResponse forward(String where) {
+    public static ActionResponse view(String where) {
         checkPage(where);
-        return new ActionResponse(FORWARD, where);
+        if( "GET".equals( Context.get().getRequest() ) )
+            return new ActionResponse(FORWARD, where);
+        else
+            return new ActionResponse(REDIRECT, "/" + where);
     }
 
     public static ActionResponse redirect(String where) {

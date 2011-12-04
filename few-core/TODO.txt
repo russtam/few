@@ -1,6 +1,10 @@
++ annotations for model beans
++ PRG с сохранением message'ей
++ много message'ей для одного source
++ аннотации для модельных бинов, автосоставление RootModel
+
 тесты производительности - Java(JSP, JSP-EL, JSF, FTL, XSLT, Velocity), PHP, PHP-Smarty, Perl
     --> в блог
-+ аннотации для модельных бинов, автосоставление RootModel
 паковка шаблонов в jar'ники - отладить компонент - M(ModelBean) V(ftl) C(ActionClass) -
 сущность widget
 router config
@@ -16,13 +20,10 @@ no session + защититься от кражи sessionId
     время загрузки страницы с клиента
     --> widget
 
-+ annotations for model beans
 routing
 action parameter
-PRG с сохранением message'ей
-json/ajax
-+ много message'ей для одного source
-jetty
+context-path/virtual-hosts
+jetty/tomcat embedded
 --> tool для быстрого создания проекта/страницы/widget'а
 
 Ajax - JSON, JSON + ftl

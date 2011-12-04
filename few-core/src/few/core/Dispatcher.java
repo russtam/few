@@ -83,7 +83,7 @@ public class Dispatcher implements Filter{
             }
 
             if( ar.getResponse_type() == ActionResponse.DEFAULT )
-                ar = ActionResponse.forward(action);
+                ar = ActionResponse.view(action);
 
             String ftl = null;
             if( ar.getResponse_type() == ActionResponse.FORWARD ) {

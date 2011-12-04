@@ -19,6 +19,7 @@ import java.util.*;
  */
 public class Context {
 
+    protected static final String MESSAGE_SESSION_KEY = "few_messages";
     protected static ThreadLocal<Context> threadLocal = new ThreadLocal<Context>();
 
     static public void init(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext, DispatcherMap config) {
@@ -30,6 +31,7 @@ public class Context {
     }
 
     static public void fini() {
+        threadLocal.get()._fini();
         threadLocal.set(null);
     }
 
@@ -46,8 +48,17 @@ public class Context {
         this.request = request;
         this.response = response;
         this.servletContext = servletContext;
-        this.messages = new HashMap<String, List<Message>>();
         this.model = new LazyDataModel(config);
+        if( "GET".equals(request.getMethod()) )
+            this.messages = (Map<String, List<Message>>) request.getSession().getAttribute(MESSAGE_SESSION_KEY);
+        if(this.messages == null )
+            this.messages = new HashMap<String, List<Message>>();
+    }
+
+    private void _fini() {
+        if( !"GET".equals(request.getMethod()) && !messages.isEmpty() ) {
+            request.getSession().setAttribute(MESSAGE_SESSION_KEY, messages);
+        }
     }
 
     public LazyDataModel getModel() {
