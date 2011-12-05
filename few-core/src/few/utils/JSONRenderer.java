@@ -44,7 +44,7 @@ public class JSONRenderer {
     public static String buildJSON(Object model) {
         StringBuilder builder = new StringBuilder();
 
-        visitObject(model, builder);
+        visitValue(model, builder);
 
         return builder.toString();
     }
