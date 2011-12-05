@@ -13,6 +13,7 @@
     <orderEntry type="library" name="commons-fileupload" level="project" />
     <orderEntry type="library" name="bcel-tomcat" level="project" />
     <orderEntry type="library" name="junit" level="project" />
+    <orderEntry type="library" name="junit" level="project" />
   </component>
 </module>
 
