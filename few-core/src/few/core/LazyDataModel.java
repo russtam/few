@@ -1,10 +1,7 @@
 package few.core;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,8 +24,10 @@ public class LazyDataModel implements Map<String, Object> {
         Object o = instances.get(key);
         if( o == null ) {
             DispatcherMap.ModelBeanDescription desc = description.get(key);
-            if( desc == null )
-                throw new IllegalArgumentException("no such modelBean");
+            if( desc == null ) {
+                //throw new IllegalArgumentException("no such modelBean");
+                return null;
+            }
 
             try {
                 o = desc.method.invoke(null);
@@ -51,15 +50,17 @@ public class LazyDataModel implements Map<String, Object> {
         return description.isEmpty();
     }
     public boolean containsKey(Object key) {
-        return description.containsKey(key);
+        if( description.containsKey(key) )
+            return true;
+        return instances.containsKey(key);
     }
     public Set<String> keySet() {
         return description.keySet();
     }
-
     public Object put(String key, Object value) {
-        throw new UnsupportedOperationException();
+        return instances.put(key, value);
     }
+
     public boolean containsValue(Object value) {
         throw new UnsupportedOperationException();
     }

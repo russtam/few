@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import java.io.*;
 import java.util.Locale;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -90,7 +91,7 @@ public class FreemarkerService {
             Template t = cfg.getTemplate(template);
             t.process(parameters, writer);
         } catch (Exception e) {
-            e.printStackTrace(new PrintWriter(writer));
+            log.log(Level.SEVERE, "", e);
         }
     }
 

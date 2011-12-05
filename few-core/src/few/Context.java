@@ -32,6 +32,9 @@ public class Context {
     }
 
     static public void fini() {
+        if( threadLocal.get() == null ) {
+            throw new IllegalStateException();
+        }
         threadLocal.get()._fini();
         threadLocal.set(null);
     }
