@@ -11,18 +11,8 @@
     <orderEntry type="library" name="freemarker" level="project" />
     <orderEntry type="library" name="servlet-api" level="project" />
     <orderEntry type="library" name="commons-fileupload" level="project" />
-    <orderEntry type="library" name="commons-io" level="project" />
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
-          <root url="jar://$APPLICATION_HOME_DIR$/lib/junit.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="library" name="bcel-tomcat" level="project" />
-    <orderEntry type="library" name="tomcat (for debug)" level="project" />
+    <orderEntry type="library" name="junit" level="project" />
   </component>
 </module>
 

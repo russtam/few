@@ -75,11 +75,19 @@ public class DispatcherMap {
 
         // 2. parse ActionClass annotations
         List<Class> classes = annotations.get(ActionClass.class);
-        loadControllers(classes);
+        if( classes != null )
+            loadControllers(classes);
+        else {
+            this.actions = Collections.emptyMap();
+            this.controllers = Collections.emptyMap();
+        }
 
         // 3. parse ModelBean annotations
         classes = annotations.get(ModelBean.class);
-        loadModels(classes);
+        if( classes != null )
+            loadModels(classes);
+        else
+            this.models = Collections.emptyMap();
 
         unmoifable();
     }

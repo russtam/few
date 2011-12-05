@@ -20,8 +20,8 @@ import java.util.*;
  */
 public class Dispatcher implements Filter{
     public static final String BASE_SERVLET_PATH = "/";
-    public static final String BASE_RESOURCE_PATH = "/pages/";
-    public static final String DEFAULT_PAGE = "about";
+    public static final String BASE_PAGE_PATH = "/pages/";
+    public static final String BASE_RESOURCE_PATH = "/static";
 
     ServletContext servletContext;
     DispatcherMap config;
@@ -86,7 +86,7 @@ public class Dispatcher implements Filter{
 
             String ftl = null;
             if( ar.getResponse_type() == ActionResponse.FORWARD ) {
-                ftl= BASE_RESOURCE_PATH + ar.getKey() + ".ftl";
+                ftl= BASE_PAGE_PATH + ar.getKey() + ".ftl";
                 if( servletContext.getResource(ftl) == null ) {
                     ar = ActionResponse.error(404);
                 }
@@ -147,7 +147,7 @@ public class Dispatcher implements Filter{
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         String uri = ((HttpServletRequest)request).getRequestURI();
-        if( uri.startsWith("/static") ) {
+        if( uri.startsWith(BASE_RESOURCE_PATH) ) {
             filterChain.doFilter(request, response);
         } else
             service((HttpServletRequest)request, (HttpServletResponse) response);

@@ -85,7 +85,7 @@ public class FreemarkerService {
         processTemplate(template, writer, Context.get().getModel());
     }
 
-    public void processTemplate(String template, Writer writer, Map parameters) {
+    public void processTemplate(String template, Writer writer, Object parameters) {
         try {
             Template t = cfg.getTemplate(template);
             t.process(parameters, writer);
@@ -100,7 +100,7 @@ public class FreemarkerService {
         return sw.toString();
     }
 
-    public String processTemplate(String template, Map parameters) {
+    public String processTemplate(String template, Object parameters) {
         StringWriter sw = new StringWriter();
         processTemplate(template, sw, parameters);
         return sw.toString();

@@ -5,7 +5,6 @@ import few.core.DispatcherMap;
 import few.utils.JSONRenderer;
 
 import java.net.MalformedURLException;
-import java.util.Collections;
 
 /**
  * Created by IntelliJ IDEA.
@@ -84,7 +83,7 @@ public class ActionResponse {
 
 
     private static void checkPage(String where) {
-        String ftl= Dispatcher.BASE_RESOURCE_PATH + where + ".ftl";
+        String ftl= Dispatcher.BASE_PAGE_PATH + where + ".ftl";
         try {
             if( Context.get().getServletContext().getResource(ftl) == null ) {
                 throw new IllegalArgumentException("page " + where + " does not exists");
