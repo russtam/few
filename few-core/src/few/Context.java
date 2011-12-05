@@ -50,8 +50,10 @@ public class Context {
         this.response = response;
         this.servletContext = servletContext;
         this.model = new LazyDataModel(config);
-        if( "GET".equals(request.getMethod()) )
+        if( "GET".equals(request.getMethod()) ) {
             this.messages = (Map<String, List<Message>>) request.getSession().getAttribute(MESSAGE_SESSION_KEY);
+            request.getSession().removeAttribute(MESSAGE_SESSION_KEY);
+        }
         if(this.messages == null )
             this.messages = new HashMap<String, List<Message>>();
     }
