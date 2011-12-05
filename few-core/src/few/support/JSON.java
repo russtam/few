@@ -33,7 +33,7 @@ public class JSON implements TemplateMethodModelEx {
         return new SimpleScalar(res);
     }
 
-    public static IDGenerator build() {
-        return new IDGenerator();
+    public static JSON build() {
+        return new JSON();
     }
 }
