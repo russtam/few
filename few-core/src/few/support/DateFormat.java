@@ -2,7 +2,6 @@ package few.support;
 
 import few.ModelBean;
 import freemarker.ext.beans.DateModel;
-import freemarker.template.SimpleNumber;
 import freemarker.template.SimpleScalar;
 import freemarker.template.TemplateMethodModelEx;
 import freemarker.template.TemplateModelException;

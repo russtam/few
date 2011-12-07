@@ -4,7 +4,9 @@ import few.ModelBean;
 import few.utils.JSONRenderer;
 import freemarker.core.Environment;
 import freemarker.ext.beans.StringModel;
-import freemarker.template.*;
+import freemarker.template.SimpleScalar;
+import freemarker.template.TemplateMethodModelEx;
+import freemarker.template.TemplateModelException;
 
 import java.util.List;
 

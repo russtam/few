@@ -1,7 +1,6 @@
 package few;
 
 import few.core.Dispatcher;
-import few.core.DispatcherMap;
 import few.utils.JSONRenderer;
 
 import java.net.MalformedURLException;

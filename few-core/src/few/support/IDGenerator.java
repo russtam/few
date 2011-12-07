@@ -1,11 +1,7 @@
 package few.support;
 
 import few.ModelBean;
-import few.utils.JSONRenderer;
-import freemarker.core.Environment;
-import freemarker.ext.beans.StringModel;
 import freemarker.template.SimpleNumber;
-import freemarker.template.SimpleScalar;
 import freemarker.template.TemplateMethodModelEx;
 import freemarker.template.TemplateModelException;
 

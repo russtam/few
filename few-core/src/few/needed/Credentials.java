@@ -1,6 +1,5 @@
 package few.needed;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Set;
 
