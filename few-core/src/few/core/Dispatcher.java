@@ -149,7 +149,7 @@ public class Dispatcher implements Filter{
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         String uri = ((HttpServletRequest)request).getRequestURI();
-        if( uri.startsWith(BASE_RESOURCE_PATH) ) {
+        if( uri.startsWith(BASE_RESOURCE_PATH) || uri.startsWith("/favicon.ico")) {
             filterChain.doFilter(request, response);
         } else
             service((HttpServletRequest)request, (HttpServletResponse) response);

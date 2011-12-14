@@ -1,32 +1,6 @@
-<<<<<<< HEAD
-+ annotations for model beans
-+ PRG с сохранением message'ей
-+ много message'ей для одного source
-+ аннотации для модельных бинов, автосоставление RootModel
-+ Ajax - JSON, JSON + ftl
 
-тесты производительности - Java(JSP, JSP-EL, JSF, FTL, XSLT, Velocity), PHP, PHP-Smarty, Perl
-    --> в блог
-паковка шаблонов в jar'ники - отладить компонент - M(ModelBean) V(ftl) C(ActionClass) -
-сущность widget
-router config
---> widget для просмотра текущей конфы приложения
-=======
+базовая библиотека для FEW - логин и прочее.
 
-!routing (action parameter)
-!PRG с сохранением message'ей
-!Ajax - JSON, JSON + ftl
-jetty
---> tool для быстрого создания проекта/страницы/widget'а
-
-паковка шаблонов в jar'ники - отладить компонент - M(ModelBean) V(ftl) C(ActionClass)
---> widget для просмотра текущей конфы приложения (controllers, models, routing)
->>>>>>> f9ccbe0d0cd335df760b6e12c196466be2d75e68
---> tool для генерации документации по widget'ам - модель, action'ы, параметры,
-
-no session + защититься от кражи sessionId
-
-сборка maven'ом
 OSS проект - TRAC+GIT+MAVEN+HUDSON
 
 мониторинг -
@@ -36,12 +10,12 @@ OSS проект - TRAC+GIT+MAVEN+HUDSON
     время загрузки страницы с клиента
     --> widget
 
-<<<<<<< HEAD
-routing
-action parameter
-context-path/virtual-hosts
-jetty/tomcat embedded
---> tool для быстрого создания проекта/страницы/widget'а
+!routing
+!action parameter
+!context-path/virtual-hosts
+!jetty/tomcat embedded
+--> widget для просмотра текущей конфы приложения
+--> tool для генерации документации по widget'ам - модель, action'ы, параметры,
 
 сборка maven'ом
 OSS проект - TRAC+GIT+MAVEN+HUDSON
@@ -52,12 +26,10 @@ open-source
 message bundles
 переименовывание страницы - сейчас ПЦ. routing, генерация url'ов
 
-наладить использование in-memory db для меняющихся/временных данных
-наладить использование JPA
-=======
 обкатать использование in-memory db для меняющихся/временных данных (sessions)
 обкатать использование JPA
 тесты производительности - Java(JSP, JSP-EL, JSF, FTL, XSLT, Velocity), PHP, PHP-Smarty, Perl
     --> выложить
->>>>>>> f9ccbe0d0cd335df760b6e12c196466be2d75e68
 
+no session + защититься от кражи sessionId
+сборка maven'ом
