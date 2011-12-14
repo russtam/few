@@ -1,5 +1,7 @@
 package few.core;
 
+import few.Context;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,14 +33,7 @@ public class LazyDataModel implements Map<String, Object> {
                 return null;
             }
 
-            try {
-                o = desc.method.invoke(null);
-            } catch (Throwable e) {
-                if( e.getCause() != null )
-                    throw new RuntimeException("can not create ModelBean " + key, e.getCause());
-                else
-                    throw new RuntimeException("can not create ModelBean " + key, e);
-            }
+            o = ActionInvoker.invokeModelMethod(desc, Context.get().getRequest(), Context.get().getResponse());
 
             instances.put((String) key, o);
         }

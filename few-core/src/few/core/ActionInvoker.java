@@ -45,6 +45,23 @@ public class ActionInvoker {
         }
     }
 
+    public static Object invokeModelMethod(DispatcherMap.ModelBeanDescription desc, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            Method m = desc.method;
+
+            Object[] args = mapParameters(m, request, response);
+
+            Object ret = desc.method.invoke(null, args);
+
+            return ret;
+        } catch (Throwable e) {
+            if( e.getCause() != null )
+                throw new RuntimeException("can not create ModelBean " + desc.name, e.getCause());
+            else
+                throw new RuntimeException("can not create ModelBean " + desc.name, e);
+        }
+    }
+
     private static Object[] mapParameters(Method method, HttpServletRequest request, HttpServletResponse response) {
         Object[] ret = new Object[method.getParameterTypes().length];
 
@@ -117,4 +134,5 @@ public class ActionInvoker {
     }
 
     static Logger log = Logger.getLogger(ActionInvoker.class.getName());
+
 }

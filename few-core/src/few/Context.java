@@ -115,4 +115,8 @@ public class Context {
     public HttpSession getSession() {
         return request.getSession();
     }
+
+    public HttpServletResponse getResponse() {
+        return response;
+    }
 }

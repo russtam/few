@@ -1,5 +1,8 @@
 package few.utils;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -127,4 +130,14 @@ public class Utils {
         return new Date( (System.currentTimeMillis() / 1000L) * 1000L );
     }
 
+    public static String exceptionToString(Throwable t) {
+        ByteArrayOutputStream str = new ByteArrayOutputStream();
+        t.printStackTrace(new PrintStream(str));
+        try {
+            str.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return str.toString();
+    }
 }
