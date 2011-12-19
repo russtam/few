@@ -1,7 +1,7 @@
++- open-source - треба сделать версионность и билды, прописать лицензию
++ tomcat embedded
 
-базовая библиотека для FEW - логин и прочее.
-
-OSS проект - TRAC+GIT+MAVEN+HUDSON
++- базовая библиотека для FEW - логин и прочее.
 
 мониторинг -
     состояния памяти, GC, JIT, health-status
@@ -13,23 +13,17 @@ OSS проект - TRAC+GIT+MAVEN+HUDSON
 !routing
 !action parameter
 !context-path/virtual-hosts
-!jetty/tomcat embedded
 --> widget для просмотра текущей конфы приложения
 --> tool для генерации документации по widget'ам - модель, action'ы, параметры,
 
 сборка maven'ом
-OSS проект - TRAC+GIT+MAVEN+HUDSON
-
-open-source
 
 логирование + в БД
 message bundles
 переименовывание страницы - сейчас ПЦ. routing, генерация url'ов
 
 обкатать использование in-memory db для меняющихся/временных данных (sessions)
-обкатать использование JPA
 тесты производительности - Java(JSP, JSP-EL, JSF, FTL, XSLT, Velocity), PHP, PHP-Smarty, Perl
     --> выложить
 
 no session + защититься от кражи sessionId
-сборка maven'ом

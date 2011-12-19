@@ -1,7 +1,7 @@
 package few;
 
-import few.needed.Configuration;
-import few.needed.OuterFactory;
+import few.core.ServiceRegistry;
+import few.services.Configuration;
 import few.utils.Utils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,12 +19,15 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class MyURL {
+
+    public static final Configuration conf = ServiceRegistry.get(Configuration.class);
+
     public static final String WEB_SERVER_HOST =
-            OuterFactory.get().getConfiguration().getString(Configuration.WEB_SERVER_HOST);
+            conf.getProperty(Configuration.WEB_SERVER_HOST);
     public static final int WEB_SERVER_HTTP_PORT =
-            OuterFactory.get().getConfiguration().getInteger(Configuration.WEB_SERVER_HTTP_PORT);
+            Integer.valueOf( conf.getProperty(Configuration.WEB_SERVER_HTTP_PORT) );
     public static final int WEB_SERVER_HTTPS_PORT =
-            OuterFactory.get().getConfiguration().getInteger(Configuration.WEB_SERVER_HTTPS_PORT);
+            Integer.valueOf( conf.getProperty(Configuration.WEB_SERVER_HTTPS_PORT) );
 
     boolean secure;
     String page;

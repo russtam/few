@@ -1,0 +1,5 @@
+[#ftl]
+[#-- @implicitly included --]
+[#-- @ftlvariable name="loginForm" type="few.common.users.presentation.LoginForm" --]
+[#-- @ftlvariable name="messages" type="few.support.Messages" --]
+[#-- @ftlvariable name="userInfo" type="few.common.users.presentation.UserInfo" --]

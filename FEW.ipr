@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AntConfiguration">
+    <defaultAnt bundledAnt="true" />
+  </component>
+  <component name="ArtifactManager">
+    <artifact type="exploded-war" build-on-make="true" name="few-sample:war exploded">
+      <output-path>$PROJECT_DIR$/out/artifacts/few_sample_war_exploded</output-path>
+      <root id="root">
+        <element id="javaee-facet-resources" facet="few-sample/web/Web" />
+        <element id="directory" name="WEB-INF">
+          <element id="directory" name="classes">
+            <element id="module-output" name="few-sample" />
+            <element id="module-output" name="few-core" />
+            <element id="module-output" name="few-common" />
+          </element>
+          <element id="directory" name="lib">
+            <element id="library" level="project" name="bcel-tomcat" />
+            <element id="library" level="project" name="commons-fileupload" />
+            <element id="library" level="project" name="freemarker" />
+            <element id="library" level="project" name="mail" />
+            <element id="library" level="project" name="mybatis" />
+            <element id="library" level="project" name="postgres" />
+          </element>
+        </element>
+      </root>
+    </artifact>
+  </component>
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
     <resourceExtensions />
@@ -14,8 +40,12 @@
       <entry name="?*.dtd" />
       <entry name="?*.tld" />
       <entry name="?*.ftl" />
+      <entry name="ssl_key" />
     </wildcardResourcePatterns>
     <annotationProcessing enabled="false" useClasspath="true" />
+  </component>
+  <component name="CopyrightManager" default="">
+    <module2copyright />
   </component>
   <component name="DependencyValidationManager">
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
@@ -23,6 +53,28 @@
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
+  </component>
+  <component name="FacetAutodetectingManager">
+    <autodetection-disabled>
+      <facet-type id="hibernate">
+        <modules>
+          <module name="few-common">
+            <files>
+              <file url="file://$PROJECT_DIR$/few-common/src/hibernate.cfg.xml" />
+            </files>
+          </module>
+        </modules>
+      </facet-type>
+      <facet-type id="jpa">
+        <modules>
+          <module name="few-common">
+            <files>
+              <file url="file://$PROJECT_DIR$/few-common/META-INF/persistence.xml" />
+            </files>
+          </module>
+        </modules>
+      </facet-type>
+    </autodetection-disabled>
   </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" />
@@ -43,8 +95,14 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/few-common/few-common.iml" filepath="$PROJECT_DIR$/few-common/few-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/few-core/few-core.iml" filepath="$PROJECT_DIR$/few-core/few-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/few-runner/few-runner.iml" filepath="$PROJECT_DIR$/few-runner/few-runner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/few-sample/few-sample.iml" filepath="$PROJECT_DIR$/few-sample/few-sample.iml" />
     </modules>
+  </component>
+  <component name="ProjectResources">
+    <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
@@ -53,6 +111,24 @@
     <mapping directory="" vcs="" />
   </component>
   <component name="libraryTable">
+    <library name="bcel-tomcat">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/bcel-tomcat/bcel-tomcat.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/lib/bcel-tomcat/bcel-tomcat-src.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="catalina">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-6.0.33/lib/catalina.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-6.0.33/apache-tomcat-6.0.33-src.zip!/apache-tomcat-6.0.33-src/java" />
+      </SOURCES>
+    </library>
     <library name="commons-fileupload">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/lib/commons-fileupload-1.2.2/commons-fileupload-1.2.2.jar!/" />
@@ -80,12 +156,53 @@
         <root url="jar://$PROJECT_DIR$/lib/freemarker-2.3.18/src.zip!/" />
       </SOURCES>
     </library>
+    <library name="junit">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/junit-4.8.1/junit-4.8.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="mail">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/javamail-1.4.4/mail.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="mybatis">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/mybatis-3.0.6/mybatis-3.0.6.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/lib/mybatis-3.0.6/mybatis-3.0.6-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="postgres">
+      <CLASSES />
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/lib/postgresql/postgresql-9.0-801.jdbc4.jar!/" />
+      </SOURCES>
+    </library>
     <library name="servlet-api">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/lib/servlet-api/servlet-api.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
+    </library>
+    <library name="tomcat-embedded">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-6.0.33/lib/annotations-api.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-6.0.33/lib/tomcat-coyote.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-6.0.33/bin/tomcat-juli.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-6.0.33/apache-tomcat-6.0.33-src.zip!/apache-tomcat-6.0.33-src/java" />
+      </SOURCES>
     </library>
   </component>
 </project>
