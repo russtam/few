@@ -122,11 +122,11 @@
     </library>
     <library name="catalina">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-6.0.33/lib/catalina.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-embed-6.0.33/catalina.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-6.0.33/apache-tomcat-6.0.33-src.zip!/apache-tomcat-6.0.33-src/java" />
+        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-6.0.33-src/apache-tomcat-6.0.33-src.zip!/apache-tomcat-6.0.33-src/java" />
       </SOURCES>
     </library>
     <library name="commons-fileupload">
@@ -188,20 +188,22 @@
     </library>
     <library name="servlet-api">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/servlet-api/servlet-api.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
-    <library name="tomcat-embedded">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-6.0.33/lib/annotations-api.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-6.0.33/lib/tomcat-coyote.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-6.0.33/bin/tomcat-juli.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-embed-6.0.33/servlet-api.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-6.0.33/apache-tomcat-6.0.33-src.zip!/apache-tomcat-6.0.33-src/java" />
+        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-6.0.33-src/apache-tomcat-6.0.33-src.zip!/apache-tomcat-6.0.33-src/java" />
+      </SOURCES>
+    </library>
+    <library name="tomcat-embedded">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-embed-6.0.33/annotations-api.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-embed-6.0.33/tomcat-coyote.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-embed-6.0.33/tomcat-juli.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-6.0.33-src/apache-tomcat-6.0.33-src.zip!/apache-tomcat-6.0.33-src/java" />
       </SOURCES>
     </library>
   </component>
