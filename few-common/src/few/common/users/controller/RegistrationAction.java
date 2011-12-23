@@ -24,16 +24,20 @@ public class RegistrationAction {
     private final static AccountService account = AccountService.get();
 
     @ActionMethod(_default = true)
+    public ActionResponse _default() {
+        if( Context.get().isSignedIn() )
+            return ActionResponse.redirect("user_profile");
+        return ActionResponse._default();
+    }
+
+    @ActionMethod()
     public ActionResponse service(
-            @RequestParameter(name = "registration", required = false) String registration,
             @RequestParameter(name = "email") String email,
             @RequestParameter(name = "login") String login,
             @RequestParameter(name = "name") String name,
             @RequestParameter(name = "password") String password,
             @RequestParameter(name = "password1") String password1
     ) throws ServletException, IOException {
-        if( registration == null )
-            return ActionResponse._default();
 
         if( Utils.isNull(email) ) {
             Context.get().addMessage(new Message(Message.ERROR, "email", "Заполните поле email"));

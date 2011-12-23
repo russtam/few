@@ -19,11 +19,6 @@ import java.io.IOException;
 @ActionClass(action = "login")
 public class LoginAction {
 
-    public static final String ERROR_KEY = "error";
-    public static final int BAD_LOGIN_PASSWORD = 1;
-    public static final int NOT_ACTIVATED = 2;
-    public static final int BLOCKED = 3;
-
     public static final String USER_ID_SESSION_KEY = "id";
 
     private final static UserService users = UserService.get();
@@ -46,19 +41,16 @@ public class LoginAction {
     ) throws IOException {
         SimpleUser user = users.selectUserBySimpleAuth(login, password);
         if( user == null ) {
-            return ActionResponse.redirect(
-                    new MyURL(false, "/login").p(ERROR_KEY, String.valueOf(BAD_LOGIN_PASSWORD))
-            );
+            Context.get().addMessage(new Message(Message.ERROR, "Неправильный логин или пароль."));
+            return ActionResponse.redirect(new MyURL(false, "/login"));
         }
         if( user.status_id == SimpleUser.NOT_ACTIVE) {
-            return ActionResponse.redirect(
-                    new MyURL(false, "/login").p(ERROR_KEY, String.valueOf(NOT_ACTIVATED))
-            );
+            Context.get().addMessage(new Message(Message.ERROR, "Аккаунт не активирован. Проверьте почту."));
+            return ActionResponse.redirect(new MyURL(false, "/login"));
         }
         if( user.status_id == SimpleUser.BLOCKED) {
-            return ActionResponse.redirect(
-                    new MyURL(false, "/login").p(ERROR_KEY, String.valueOf(BLOCKED))
-            );
+            Context.get().addMessage(new Message(Message.ERROR, "Пользователь заблокирован. Обратитесь к администратору сайта."));
+            return ActionResponse.redirect(new MyURL(false, "/login"));
         }
         if( user.status_id == SimpleUser.ACTIVE ) {
             session.setAttribute(USER_ID_SESSION_KEY, user.user_id);

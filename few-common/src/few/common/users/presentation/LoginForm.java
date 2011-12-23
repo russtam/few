@@ -15,12 +15,7 @@ import few.utils.Utils;
  */
 @ModelBean(name = "loginForm")
 public class LoginForm {
-    public Integer errorKey;
     public String loginUrl;
-
-    public Integer getErrorKey() {
-        return errorKey;
-    }
 
     public String getLoginUrl() {
         return loginUrl;
@@ -32,9 +27,6 @@ public class LoginForm {
         if( Context.get().getRequest().getParameter("redirect") != null )
             mu.p("redirect", Context.get().getRequest().getParameter("redirect"));
         ret.loginUrl = mu.toString();
-        String error = Context.get().getRequest().getParameter(LoginAction.ERROR_KEY);
-        if( Utils.isNotNull(error) )
-            ret.errorKey = Integer.valueOf(error);
 
         return ret;
     }

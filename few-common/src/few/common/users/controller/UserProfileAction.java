@@ -22,25 +22,44 @@ public class UserProfileAction {
     UserService userService = UserService.get();
 
     @ActionMethod(_default = true)
-    public ActionResponse service(
-            @RequestParameter(name = "name") String name,
-            @RequestParameter(name = "old_password") String old_password,
-            @RequestParameter(name = "password") String password,
-            @RequestParameter(name = "password1") String password1
+    public ActionResponse _default() {
+        if( Context.get().isSignedIn() )
+            return ActionResponse._default();
+        else
+            return ActionResponse.redirect("login");
+    }
 
+    @ActionMethod()
+    public void changeEMail(
+            @RequestParameter(name = "email") String email
     ) throws ServletException, IOException {
-        if( !Context.get().isSignedIn() ) {
-            return ActionResponse.view("login");
-        }
-
         int user_id = Integer.valueOf(Context.get().getUserID());
-        SimpleUser simpleUser = userService.selectUser(user_id);
+
+        if( Utils.isNotNull(email) ) {
+            userService.updateEMail(user_id, email);
+            Context.get().addMessage(new Message(Message.INFO, "email", "e-mail изменён" ));
+        }
+    }
+
+    @ActionMethod()
+    public void changeDisplayName(
+            @RequestParameter(name = "name") String name
+    ) throws ServletException, IOException {
+        int user_id = Integer.valueOf(Context.get().getUserID());
 
         if( Utils.isNotNull(name) ) {
-            // TODO : validate
             userService.updateDisplayName(user_id, name);
             Context.get().addMessage(new Message(Message.INFO, "display_name", "Имя пользователя изменено" ));
         }
+    }
+
+    @ActionMethod()
+    public void changePassword(
+            @RequestParameter(name = "old_password") String old_password,
+            @RequestParameter(name = "password") String password,
+            @RequestParameter(name = "password1") String password1
+    ) throws ServletException, IOException {
+        int user_id = Integer.valueOf(Context.get().getUserID());
 
         if( Utils.isNotNull(password) || Utils.isNotNull(password1) ) {
             boolean old_password_corrent = true;
@@ -58,7 +77,5 @@ public class UserProfileAction {
                 Context.get().addMessage(new Message(Message.ERROR, "password", "Пароли не совпадают" ));
             }
         }
-
-        return ActionResponse.view("user_profile");
     }
 }

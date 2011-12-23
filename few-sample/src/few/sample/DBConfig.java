@@ -12,7 +12,7 @@ import few.common.DataConfigProvider;
 public class DBConfig implements DataConfigProvider{
 
     Conf conf = new Conf(
-            "localhost", "5432", "drgn", "drgn", "drgn"
+            "localhost", "5432", "sample", "sample", "sample"
     );
 
     public Conf getConfig(Class clazz) {

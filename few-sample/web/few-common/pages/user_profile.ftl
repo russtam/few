@@ -7,10 +7,20 @@
     <#if userInfo.signedIn>
         Здравствуйте ${userInfo.displayName}! <br/>
 
-        Ваш логин: ${fullUserInfo.login} <br/>
-        Ваш e-mail: ${fullUserInfo.email} <br/>
+        Ваш логин: ${userInfo.login} <br/>
         <br/>
-        <@common.show_messages source="drgn"/>
+        <@common.show_messages source="all"/>
+
+        <@common.show_messages source="email"/>
+        <form action="/user_profile" method="POST">
+            <table>
+                <tr>
+                    <td>Ваш e-mail: </td>
+                    <td><input type="text" name="email" value="${userInfo.email}"/></td>
+                </tr>
+            </table>
+            <input type="submit" value="Сменить e-mail">
+        </form>
 
         <@common.show_messages source="display_name"/>
         <form action="/user_profile" method="POST">
@@ -22,7 +32,6 @@
             </table>
             <input type="submit" value="Сменить отображаемое имя">
         </form>
-        <br/>
 
         <@common.show_messages source="password"/>
         <form action="/user_profile" method="post" autocomplete="off">

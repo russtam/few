@@ -20,7 +20,7 @@ public class UserServiceTest extends TestCase {
     }
 
     public void test1() {
-        System.out.println(Utils.produceSHA1fromPassword("admin", "1Q2w3e4r"));
+        System.out.println(Utils.produceSHA1fromPassword("admin", "admin"));
     }
 
     public String getTestLogin() {

@@ -85,7 +85,12 @@
     <update id="updateSimpleUser" >
         update users.users
         set
+        <if test="display_name != null ">
             display_name = #{display_name}
+        </if>
+        <if test="email != null ">
+            email = #{email}
+        </if>
         where users.users.id = #{user_id}
     </update>
 

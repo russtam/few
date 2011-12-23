@@ -18,10 +18,25 @@ import java.util.Set;
  */
 @ModelBean(name = "userInfo")
 public class UserInfo {
-    public boolean signedIn;
-    public Integer userId;
-    public String displayName;
-    public Set<String> roles;
+    private boolean signedIn;
+    private Integer userId;
+    private String displayName;
+    private String login;
+    private String email;
+    private Set<String> roles;
+
+    public UserInfo(Integer userId, String login, String displayName, String email, Set<String> roles) {
+        this.signedIn = true;
+        this.userId = userId;
+        this.displayName = displayName;
+        this.login = login;
+        this.email = email;
+        this.roles = roles;
+    }
+
+    public UserInfo() {
+        this.signedIn = false;
+    }
 
     public boolean isSignedIn() {
         return signedIn;
@@ -41,19 +56,26 @@ public class UserInfo {
         return false;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     private final static UserService users = UserService.get();
     public static UserInfo build() {
-        UserInfo ret = new UserInfo();
         Integer user_id = (Integer) Context.get().getSession().getAttribute(LoginAction.USER_ID_SESSION_KEY);
-        ret.signedIn =  Context.get().isSignedIn();
         if( user_id != null ) {
             SimpleUser user = users.selectUser(user_id);
-            ret.displayName = user.display_name;
-            ret.roles = new HashSet<String>();
-            ret.roles = user.roles;
+            String login = users.selectLoginByUserID(user.user_id);
+            return new UserInfo(
+                    user_id, login, user.display_name, user.email, user.roles
+            );
+        } else {
+            return new UserInfo();
         }
-
-        return ret;
     }
 
 }

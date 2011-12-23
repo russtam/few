@@ -100,6 +100,14 @@ public class UserService extends BaseMyBatisServiceImpl {
         session().commit();
     }
 
+    public void updateEMail(int user_id, String email) {
+        session().update("updateSimpleUser", new MapBuilder()
+                .add("user_id", user_id)
+                .add("email", email)
+        );
+        session().commit();
+    }
+
     public void activateUser(int user_id) {
         session().update("updateUserStatus", new MapBuilder()
                 .add("user_id", user_id)
@@ -133,4 +141,5 @@ public class UserService extends BaseMyBatisServiceImpl {
             session.close();
         }
     }
+
 }

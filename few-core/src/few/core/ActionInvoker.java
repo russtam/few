@@ -92,7 +92,7 @@ public class ActionInvoker {
 
                 String value = request.getParameter(param.name());
                 if( value == null && param.required() ) {
-                    throw new IllegalArgumentException("no required parameter '" + param.name() + "' in request");
+                    throw new IllegalArgumentException("no required parameter '" + param.name() + "' in request, class - " + method.getDeclaringClass().getName());
                 } if( value != null ) {
                     ret[i] = valueOf(value, type);
                 }

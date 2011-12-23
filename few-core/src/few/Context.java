@@ -90,6 +90,8 @@ public class Context {
 
     private Set<String> userRoles;
     public boolean isUserInRole(String role) {
+        if( !isSignedIn() )
+            return false;
         if( userRoles == null ) {
             userRoles = credentials.getRoles(request);
         }
