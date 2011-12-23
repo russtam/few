@@ -1,6 +1,6 @@
 <#--        THIS IS THE COMMON PAGE TEMPLATE        -->
 <#--        LOAD ALL COMMON MACROS HERE             -->
-<#include "../few-common/pages/message.ftl">
+<#include "../few-common/pages/messages.ftl">
 
 
 <#macro page title>
@@ -8,8 +8,7 @@
 <head>
     <title>${title?html}</title>
     <meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/common.css" />
-    <script type="text/javascript" src="/static/js/jquery-1.7.js"></script>
+
 </head>
 <body>
 

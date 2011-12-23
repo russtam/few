@@ -1,10 +1,10 @@
-<#include "message.ftl">
+<#include "messages.ftl">
 
 <#macro login>
 
     <form action="${loginForm.loginUrl}" method="POST">
 
-        <@common.show_messages source="all"/>
+        <@common.messages/>
         <table>
             <tr>
                 <td>Логин: </td>

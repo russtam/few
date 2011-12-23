@@ -1,7 +1,6 @@
-+- open-source - треба сделать версионность и билды, прописать лицензию
++- open-source - сделать версионность и билды, прописать лицензию
 + tomcat embedded
-
-+- базовая библиотека для FEW - логин и прочее.
++ базовая библиотека для FEW - логин и прочее.
 
 мониторинг -
     состояния памяти, GC, JIT, health-status
@@ -19,11 +18,10 @@
 сборка maven'ом
 
 логирование + в БД
-message bundles
+message bundles, локализация
 переименовывание страницы - сейчас ПЦ. routing, генерация url'ов
 
 обкатать использование in-memory db для меняющихся/временных данных (sessions)
-тесты производительности - Java(JSP, JSP-EL, JSF, FTL, XSLT, Velocity), PHP, PHP-Smarty, Perl
-    --> выложить
+сравнительные тесты производительности - Java(JSP, JSP-EL, FTL), PHP, Smarty, Perl, NodeJS ?
 
 no session + защититься от кражи sessionId

@@ -1,4 +1,4 @@
-<#macro show_messages source>
+<#macro messages source="all">
 
     <#if messages.containsKey("${source}")>
 

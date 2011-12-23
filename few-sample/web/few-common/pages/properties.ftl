@@ -1,4 +1,4 @@
-<#include "message.ftl">
+<#include "messages.ftl">
 
 <#macro new_row>
     <tr id="prop_">

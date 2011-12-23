@@ -1,17 +1,16 @@
-<#include "message.ftl">
+<#include "messages.ftl">
 
 <#macro user_profile>
 
-    <@common.show_messages source="all"/>
+    <@common.messages/>
 
     <#if userInfo.signedIn>
         Здравствуйте ${userInfo.displayName}! <br/>
 
         Ваш логин: ${userInfo.login} <br/>
         <br/>
-        <@common.show_messages source="all"/>
 
-        <@common.show_messages source="email"/>
+        <@common.messages source="email"/>
         <form action="/user_profile" method="POST">
             <table>
                 <tr>
@@ -22,7 +21,7 @@
             <input type="submit" value="Сменить e-mail">
         </form>
 
-        <@common.show_messages source="display_name"/>
+        <@common.messages source="display_name"/>
         <form action="/user_profile" method="POST">
             <table>
                 <tr>
@@ -33,13 +32,13 @@
             <input type="submit" value="Сменить отображаемое имя">
         </form>
 
-        <@common.show_messages source="password"/>
+        <@common.messages source="password"/>
         <form action="/user_profile" method="post" autocomplete="off">
             <table>
                 <tr>
                     <td>Старый пароль: </td>
                     <td><input type="password" name="old_password" /></td>
-                    <td><@common.show_messages source="old_password"/></td>
+                    <td><@common.messages source="old_password"/></td>
                 <tr>
                     <td>Новый пароль: </td>
                     <td><input type="password" name="password" /></td>

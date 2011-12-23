@@ -1,8 +1,8 @@
-<#include "message.ftl">
+<#include "messages.ftl">
 
 <#macro restore_password>
 
-    <@common.show_messages source="all"/>
+    <@common.messages/>
 
     <form action="/restore_password" method="POST" autocomplete="off">
 
