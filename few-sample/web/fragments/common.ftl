@@ -28,7 +28,6 @@
     </table>
 
     <hr/>
-        <#--<#include "navigation_top.ftl">-->
         Navigation
     <hr>
     </div>
