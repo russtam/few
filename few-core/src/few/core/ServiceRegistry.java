@@ -77,8 +77,10 @@ public class ServiceRegistry {
                 cl = defaultClasses.get(clazz);
                 if( cl != null )
                     log.warning("use default impl " + cl.getName() + " for service " + clazz.getName());
-                else
-                    throw new IllegalStateException("no impl registered for service " + clazz.getName());
+                else {
+                    log.severe("no impl registered for service " + clazz.getName() + ", return null;");
+                    return null;
+                }
             }
             try {
                 impl = cl.newInstance();
