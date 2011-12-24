@@ -25,6 +25,22 @@
         </element>
       </root>
     </artifact>
+    <artifact type="exploded-war" build-on-make="true" name="few-tiny-sample:war exploded">
+      <output-path>$PROJECT_DIR$/out/artifacts/few_tiny_sample_war_exploded</output-path>
+      <root id="root">
+        <element id="directory" name="WEB-INF">
+          <element id="directory" name="classes">
+            <element id="module-output" name="few-tiny-sample" />
+            <element id="module-output" name="few-core" />
+          </element>
+          <element id="directory" name="lib">
+            <element id="library" level="project" name="freemarker" />
+            <element id="library" level="project" name="bcel-tomcat" />
+          </element>
+        </element>
+        <element id="javaee-facet-resources" facet="few-tiny-sample/web/Web" />
+      </root>
+    </artifact>
   </component>
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
@@ -99,6 +115,7 @@
       <module fileurl="file://$PROJECT_DIR$/few-core/few-core.iml" filepath="$PROJECT_DIR$/few-core/few-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/few-runner/few-runner.iml" filepath="$PROJECT_DIR$/few-runner/few-runner.iml" />
       <module fileurl="file://$PROJECT_DIR$/few-sample/few-sample.iml" filepath="$PROJECT_DIR$/few-sample/few-sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/few-tiny-sample/few-tiny-sample.iml" filepath="$PROJECT_DIR$/few-tiny-sample/few-tiny-sample.iml" />
     </modules>
   </component>
   <component name="ProjectResources">
