@@ -54,7 +54,7 @@ public class Alone {
 
         // create host
         // String appBase = new File(catalinaHome, "webapps").getAbsolutePath();
-        Host localHost = container.createHost("localHost", new File("target").getAbsolutePath());
+        Host localHost = container.createHost("localHost", new File("").getAbsolutePath());
         localHost.addChild(context);
 
         // create engine
