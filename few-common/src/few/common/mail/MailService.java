@@ -1,13 +1,16 @@
 package few.common.mail;
 
-import few.common.properties.Props;
+import few.common.PropKeys;
 import few.core.ServiceRegistry;
+import few.services.Configuration;
 import few.services.FreemarkerService;
+import few.utils.Utils;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.security.Security;
+import java.util.Iterator;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,6 +34,7 @@ public class MailService {
 // ======================================================
 
     FreemarkerService freemarker = ServiceRegistry.get(FreemarkerService.class);
+    Configuration configuration = ServiceRegistry.get(Configuration.class);
 
     public boolean sendEmailSimple(String email,
                                 MailTemplate mailTemplate) {
@@ -47,7 +51,7 @@ public class MailService {
 
             return true;
         } catch (Throwable e) {
-            log.log(Level.SEVERE, "can not send email to " + email + " through " + Props.SMTP_HOST.getString() + ":" + Props.SMTP_PORT.getString(), e);
+            log.log(Level.SEVERE, "can not send email to " + email, e);
             return false;
         }
     }
@@ -55,26 +59,36 @@ public class MailService {
     static {
         Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
     }
+
     private void sendEmailSimple(String email,
                                 String subject,
                                 String content, String contentType ) throws Exception {
         Properties props = new Properties();
-        props.put("mail.smtp.host", Props.SMTP_HOST.getString());
-        props.put("mail.smtp.port", Props.SMTP_PORT.getString());
+
+        for (Iterator<String> i = configuration.propertyNames().iterator(); i.hasNext(); ) {
+            String prop = i.next();
+            if( prop.startsWith("mail.") ) {
+                props.put(prop, configuration.getProperty(prop));
+            }
+        }
 
         Session session = Session.getInstance(props);
 
-        session.setDebug(true);
+        String debug = configuration.getProperty("mail.debug.enable");
+        session.setDebug("true".equals(debug));
 
         Message msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress(Props.MAILS_FROM.getString()));
+        msg.setFrom(new InternetAddress(configuration.getProperty(PropKeys.MAILS_SENDER_EMAIL)));
         msg.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
         msg.setSubject(subject);
         msg.setContent(content, contentType);
 
+        String user = configuration.getProperty("mail.smtp.user");
+        String pass = configuration.getProperty("mail.smtp.password");
+
         Transport t = session.getTransport("smtp");
-        if( Props.SMTP_USER.exists() )
-            t.connect(Props.SMTP_USER.getString(), Props.SMTP_PASSWORD.getString());
+        if( Utils.isNotNull(user) )
+            t.connect(user, pass);
         else
             t.connect();
 
@@ -82,11 +96,13 @@ public class MailService {
                 new InternetAddress(email)
             }
         );
-        if( Props.MAIL_COPY.exists() ) {
+        if(Utils.isNotNull(configuration.getProperty(PropKeys.MAILS_COPY_EMAIL))) {
             msg.setSubject( "Копия от (" + msg.getRecipients(Message.RecipientType.TO)[0].toString()+ ") - " + msg.getSubject() );
             msg.setRecipient( Message.RecipientType.TO, new InternetAddress(email) );
             t.sendMessage(msg, new Address[]{
-                    new InternetAddress(Props.MAIL_COPY.getString())
+                    new InternetAddress(
+                        configuration.getProperty(PropKeys.MAILS_COPY_EMAIL)
+                    )
             }
             );
         }

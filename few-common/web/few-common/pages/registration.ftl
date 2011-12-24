@@ -23,7 +23,7 @@
 
                     <input type="text" name="email" value="${email}"/>
                     <span style="color: red;font-weight: bold;">*</span> </td>
-                <td><@common.messages source="email"/></td>
+                <td><@common.show_messages source="email"/></td>
             <tr>
                 <td>Введите логин: </td>
                 <td>
@@ -34,7 +34,7 @@
                     </#if>
                     <input type="text" name="login" value="${login}"/>
                 </td>
-                <td><@common.messages source="login"/></td>
+                <td><@common.show_messages source="login"/></td>
             <tr>
                 <td>Введите ваше имя: </td>
                 <td>
@@ -45,14 +45,14 @@
                     </#if>
                     <input type="text" name="name" value="${name}"/>
                 </td>
-                <td><@common.messages source="name"/></td>
+                <td><@common.show_messages source="name"/></td>
             <tr>
                 <td>Введите пароль: </td>
                 <td><input type="password" name="password"/></td>
             <tr>
                 <td>Повторите пароль: </td>
                 <td><input type="password" name="password1"/></td>
-                <td><@common.messages source="password"/></td>
+                <td><@common.show_messages source="password"/></td>
             </tr>
         </table>
 

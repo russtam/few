@@ -24,4 +24,8 @@ public class Initializer {
 
     }
 
+    public static void fini() {
+        ServiceRegistry.shutdown();
+    }
+
 }

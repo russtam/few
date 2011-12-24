@@ -2,8 +2,12 @@ package few.impl;
 
 import few.services.Configuration;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.Properties;
+import java.net.URL;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,14 +18,60 @@ import java.util.Properties;
  */
 public class DefaultConfigurationImpl implements Configuration {
 
-    Properties properties;
+    volatile Properties properties;
+    volatile Collection<String> propertyNames;
 
     public DefaultConfigurationImpl() {
+        this("few-default.properties");
+    }
+    public DefaultConfigurationImpl(String config) {
+        this.config = config;
+        URL u = Thread.currentThread().getContextClassLoader().getResource(config);
+        if( u != null && new File(u.getFile()).exists() ) {
+            this.configFile = new File(u.getFile());
+            this.autocheckTimer = new Timer("DefaultConfigurationImpl autocheckTimer");
+            this.autocheckTimer.schedule(new ConfigAutocheck(), 1000, 1000 );
+        }
+        load();
+    }
+
+    private String config;
+    private File configFile;
+    private long lm;
+    private Timer autocheckTimer;
+
+    public void destroy() {
+        autocheckTimer.cancel();
+    }
+
+    class ConfigAutocheck extends TimerTask {
+
+        public void run() {
+            if( configFile.lastModified() != lm ) {
+                load();
+            }
+        }
+    }
+
+    private void load() {
         try {
-            properties = new Properties();
-            properties.load( this.getClass().getClassLoader().getResourceAsStream("few-default.properties") );
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            Properties properties = new Properties();
+            properties.load(
+                    Thread.currentThread().getContextClassLoader().getResourceAsStream(config)
+            );
+            Collection<String> propertyNames = new LinkedList<String>();
+            Enumeration e = properties.propertyNames();
+            while (e.hasMoreElements()) {
+                propertyNames.add((String) e.nextElement());
+            }
+
+            this.properties = properties;
+            this.propertyNames = Collections.unmodifiableCollection(propertyNames);
+
+            if( configFile != null )
+                lm = configFile.lastModified();
+        } catch(IOException e) {
+            log.log(Level.SEVERE, "", e);
         }
     }
 
@@ -29,4 +79,10 @@ public class DefaultConfigurationImpl implements Configuration {
         return properties.getProperty(key);
     }
 
+    public Collection<String> propertyNames() {
+        return propertyNames;
+    }
+
+
+    Logger log = Logger.getLogger(DefaultConfigurationImpl.class.getName());
 }

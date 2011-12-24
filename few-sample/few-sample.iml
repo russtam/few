@@ -21,6 +21,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="few-core" />
     <orderEntry type="module" module-name="few-common" />
+    <orderEntry type="module" module-name="few-runner" scope="RUNTIME" />
     <orderEntry type="library" name="servlet-api" level="project" />
   </component>
 </module>

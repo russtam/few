@@ -1,6 +1,8 @@
 package few.sample;
 
 import few.common.DataConfigProvider;
+import few.core.ServiceRegistry;
+import few.services.Configuration;
 
 /**
  * Created by IntelliJ IDEA.
@@ -11,8 +13,13 @@ import few.common.DataConfigProvider;
  */
 public class DBConfig implements DataConfigProvider{
 
+    Configuration cfg = ServiceRegistry.get(Configuration.class);
     Conf conf = new Conf(
-            "localhost", "5432", "sample", "sample", "sample"
+            cfg.getProperty("sample_db.ip"),
+            cfg.getProperty("sample_db.port"),
+            cfg.getProperty("sample_db.dbname"),
+            cfg.getProperty("sample_db.user"),
+            cfg.getProperty("sample_db.password")
     );
 
     public Conf getConfig(Class clazz) {

@@ -1,7 +1,9 @@
 package few.common.users.mail;
 
+import few.common.PropKeys;
 import few.common.mail.MailTemplate;
-import few.common.properties.Props;
+import few.core.ServiceRegistry;
+import few.services.Configuration;
 
 /**
  * Created by IntelliJ IDEA.
@@ -17,11 +19,12 @@ public class RegistrationWithActivationMail extends MailTemplate {
     public static final String PASSWORD = "password";
     public static final String ACTIVATION_LINK = "link";
 
-    public static final String TITLE = "Регистрация на " + Props.SITE_NAME.getString();
-    public static final String TEMPLATE = "/mail-templates/registration_with_activation.ftl";
+    public static final String TEMPLATE = "/few-common/mail-templates/registration_with_activation.ftl";
+    private static final Configuration conf = ServiceRegistry.get(Configuration.class);
 
     public RegistrationWithActivationMail(String displayName, String login, String password, String link) {
-        super(TITLE, TEMPLATE);
+        super(  "Регистрация на " + conf.getProperty(PropKeys.MAILS_SITE_NAME),
+                TEMPLATE);
         map.put(DISPLAY_NAME, displayName);
         map.put(LOGIN, login);
         map.put(PASSWORD, password);

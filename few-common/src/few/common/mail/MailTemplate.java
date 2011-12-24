@@ -1,6 +1,8 @@
 package few.common.mail;
 
-import few.common.properties.Props;
+import few.common.PropKeys;
+import few.core.ServiceRegistry;
+import few.services.Configuration;
 
 import java.util.HashMap;
 
@@ -16,10 +18,13 @@ public abstract class MailTemplate {
     protected HashMap<String, Object> map = new HashMap<String, Object>();
     private String subject;
     private String template;
+    protected String site_name;
+    private static Configuration conf = ServiceRegistry.get(Configuration.class);
     protected MailTemplate(String subject, String template) {
         this.subject = subject;
         this.template = template;
-        map.put("site", Props.SITE_NAME.getString());
+        this.site_name = conf.getProperty(PropKeys.MAILS_SITE_NAME);
+        map.put("site", site_name);
     }
 
     public String getSubject() {

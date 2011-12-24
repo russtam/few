@@ -2,9 +2,9 @@
 
 <#macro restore_password>
 
-    <@common.messages/>
+    <@common.show_messages/>
 
-    <form action="/restore_password" method="POST" autocomplete="off">
+    <form action="/restore_password" method="POST" >
 
 
         <table>

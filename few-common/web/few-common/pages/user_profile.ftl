@@ -2,7 +2,7 @@
 
 <#macro user_profile>
 
-    <@common.messages/>
+    <@common.show_messages/>
 
     <#if userInfo.signedIn>
         Здравствуйте ${userInfo.displayName}! <br/>
@@ -10,7 +10,7 @@
         Ваш логин: ${userInfo.login} <br/>
         <br/>
 
-        <@common.messages source="email"/>
+        <@common.show_messages source="email"/>
         <form action="/user_profile" method="POST">
             <table>
                 <tr>
@@ -21,7 +21,7 @@
             <input type="submit" value="Сменить e-mail">
         </form>
 
-        <@common.messages source="display_name"/>
+        <@common.show_messages source="display_name"/>
         <form action="/user_profile" method="POST">
             <table>
                 <tr>
@@ -32,13 +32,13 @@
             <input type="submit" value="Сменить отображаемое имя">
         </form>
 
-        <@common.messages source="password"/>
+        <@common.show_messages source="password"/>
         <form action="/user_profile" method="post" autocomplete="off">
             <table>
                 <tr>
                     <td>Старый пароль: </td>
                     <td><input type="password" name="old_password" /></td>
-                    <td><@common.messages source="old_password"/></td>
+                    <td><@common.show_messages source="old_password"/></td>
                 <tr>
                     <td>Новый пароль: </td>
                     <td><input type="password" name="password" /></td>

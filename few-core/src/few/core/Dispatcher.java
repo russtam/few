@@ -159,6 +159,6 @@ public class Dispatcher implements Filter{
     }
 
     public void destroy() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        Initializer.fini();
     }
 }

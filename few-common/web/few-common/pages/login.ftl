@@ -4,7 +4,7 @@
 
     <form action="${loginForm.loginUrl}" method="POST">
 
-        <@common.messages/>
+        <@common.show_messages/>
         <table>
             <tr>
                 <td>Логин: </td>

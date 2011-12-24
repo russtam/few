@@ -2,6 +2,7 @@ package few.sample;
 
 import few.common.users.service.CredentialsImpl;
 import few.core.ServiceRegistry;
+import few.impl.DefaultConfigurationImpl;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -15,6 +16,7 @@ import javax.servlet.ServletContextListener;
  */
 public class Initializer implements ServletContextListener{
     public void contextInitialized(ServletContextEvent servletContextEvent) {
+        ServiceRegistry.registerService(new DefaultConfigurationImpl("few-sample.properties"));
         ServiceRegistry.registerService(DBConfig.class);
         ServiceRegistry.registerService(CredentialsImpl.class);
     }

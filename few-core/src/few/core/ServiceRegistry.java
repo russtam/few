@@ -1,7 +1,9 @@
 package few.core;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.*;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -90,6 +92,25 @@ public class ServiceRegistry {
         }
 
         return (T) impl;
+    }
+
+    static public void shutdown() {
+        synchronized (serviceClasses) {
+            Collection instances = serviceInstances.values();
+            for (Iterator iterator = instances.iterator(); iterator.hasNext(); ) {
+                Object o = iterator.next();
+                try {
+                    Method m = o.getClass().getMethod("destroy");
+                    if( m != null ) {
+                        m.invoke(o);
+                    }
+                } catch (NoSuchMethodException e) {
+                } catch (Exception e) {
+                    log.log(Level.SEVERE, "", e);
+                }
+            }
+
+        }
     }
 
     static private Logger log = Logger.getLogger(ServiceRegistry.class.getName());

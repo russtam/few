@@ -1,6 +1,8 @@
 package few.services;
 
 
+import java.util.Collection;
+
 /**
  * Created by IntelliJ IDEA.
  * User: gerbylev
@@ -17,5 +19,7 @@ public interface Configuration {
 
 
     String getProperty(String key);
+
+    Collection<String> propertyNames();
 
 }
