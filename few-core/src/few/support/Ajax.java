@@ -28,6 +28,6 @@ public class Ajax implements TemplateBooleanModel {
     }
 
     public boolean getAsBoolean() throws TemplateModelException {
-        return false;
+        return this.value;
     }
 }
