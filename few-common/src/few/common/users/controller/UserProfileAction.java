@@ -36,7 +36,9 @@ public class UserProfileAction {
         int user_id = Integer.valueOf(Context.get().getUserID());
 
         if( Utils.isNotNull(email) ) {
-            userService.updateEMail(user_id, email);
+            SimpleUser user = userService.selectUser(user_id);
+            user.email = email;
+            userService.updateSimpleUser(user);
             Context.get().addMessage(new Message(Message.INFO, "email", "e-mail изменён" ));
         }
     }
@@ -48,7 +50,9 @@ public class UserProfileAction {
         int user_id = Integer.valueOf(Context.get().getUserID());
 
         if( Utils.isNotNull(name) ) {
-            userService.updateDisplayName(user_id, name);
+            SimpleUser user = userService.selectUser(user_id);
+            user.display_name = name;
+            userService.updateSimpleUser(user);
             Context.get().addMessage(new Message(Message.INFO, "display_name", "Имя пользователя изменено" ));
         }
     }

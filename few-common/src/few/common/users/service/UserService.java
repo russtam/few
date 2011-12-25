@@ -6,6 +6,9 @@ import few.utils.MapBuilder;
 import few.utils.Utils;
 import org.apache.ibatis.session.SqlSession;
 
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * User: gerbylev
@@ -50,13 +53,29 @@ public class UserService extends BaseMyBatisServiceImpl {
             );
     }
 
+    public List<SimpleUser> selectUsers() {
+        return
+            session().selectList("selectSimpleUser", new HashMap());
+    }
+
+    public List<SimpleUser> selectUsersByRole(String roleName) {
+        return
+            session().selectList("selectSimpleUser", new MapBuilder()
+                    .add("display_role", roleName));
+    }
+
+    public List<String> selectDisplayRoles() {
+        return
+            session().selectList("selectDisplayRoles");
+    }
+
     public Integer createNewUser(String display_name, String email, String role, String login, String password, boolean active) {
         SqlSession session = sqlMapper.openSession();
         try {
             int user_id = (Integer)session.selectOne("select_uid");
 
             session.insert("insertSimpleUser", new MapBuilder()
-                    .add("user_id", user_id)
+                    .add("id", user_id)
                     .add("display_name", display_name)
                     .add("role_id", role)
                     .add("email", email)
@@ -92,18 +111,21 @@ public class UserService extends BaseMyBatisServiceImpl {
         session().commit();
     }
 
-    public void updateDisplayName(int user_id, String display_name) {
+    public void updateSimpleUser(SimpleUser user) {
         session().update("updateSimpleUser", new MapBuilder()
-                .add("user_id", user_id)
-                .add("display_name", display_name)
+                .add("user_id", user.user_id)
+                .add("email", user.email)
+                .add("display_name", user.display_name)
+                .add("display_role", user.display_role)
+                .add("status_id", user.status_id)
         );
         session().commit();
     }
 
-    public void updateEMail(int user_id, String email) {
-        session().update("updateSimpleUser", new MapBuilder()
+    public void updateLogin(Integer user_id, String login) {
+        session().update("updateSimpleUserLogin", new MapBuilder()
                 .add("user_id", user_id)
-                .add("email", email)
+                .add("login", login)
         );
         session().commit();
     }
@@ -141,5 +163,4 @@ public class UserService extends BaseMyBatisServiceImpl {
             session.close();
         }
     }
-
 }

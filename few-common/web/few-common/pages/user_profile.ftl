@@ -4,8 +4,8 @@
 
     <@common.show_messages/>
 
-    <#if userInfo.signedIn>
-        Здравствуйте ${userInfo.displayName}! <br/>
+    <#if userInfo.signed_in>
+        Здравствуйте ${userInfo.display_name}! <br/>
 
         Ваш логин: ${userInfo.login} <br/>
         <br/>
@@ -26,7 +26,7 @@
             <table>
                 <tr>
                     <td>Ваше имя: </td>
-                    <td><input type="text" name="name" value="${userInfo.displayName}"/></td>
+                    <td><input type="text" name="name" value="${userInfo.display_name}"/></td>
                 </tr>
             </table>
             <input type="submit" value="Сменить отображаемое имя">

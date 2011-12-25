@@ -2,6 +2,13 @@
 + tomcat embedded
 + базовая библиотека для FEW - логин и прочее.
 
+Restriction on modelBeans
+Closing ThreadLocal session
+naming of - pages, beans, macroses
+naming of packages
+
+activity log
+
 мониторинг -
     состояния памяти, GC, JIT, health-status
     health'ы scheduler'ов, http-connector'ов и т.п.

@@ -15,7 +15,7 @@ import few.utils.Utils;
  */
 @ModelBean(name = "loginForm")
 public class LoginForm {
-    public String loginUrl;
+    private String loginUrl;
 
     public String getLoginUrl() {
         return loginUrl;

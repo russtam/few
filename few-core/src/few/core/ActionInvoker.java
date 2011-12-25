@@ -94,7 +94,11 @@ public class ActionInvoker {
                 if( value == null && param.required() ) {
                     throw new IllegalArgumentException("no required parameter '" + param.name() + "' in request, class - " + method.getDeclaringClass().getName());
                 } if( value != null ) {
-                    ret[i] = valueOf(value, type);
+                    if( type == Boolean.class && (value.equals("on") || value.equals("off")) ) {
+                        ret[i] = value.equals("on");
+                    }
+                    else
+                        ret[i] = valueOf(value, type);
                 }
 
             }

@@ -28,7 +28,11 @@
     </table>
 
     <hr/>
-        Navigation
+        <#if userInfo.isUserInRole("admin")>
+            <a href="/user_list">user_list</a>
+        <#else >
+            Navigation
+        </#if>
     <hr>
     </div>
 
