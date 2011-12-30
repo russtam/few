@@ -5,7 +5,9 @@ import few.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Enumeration;
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,9 +21,13 @@ import java.io.IOException;
 public class LogoutAction {
 
     @ActionMethod(_default = true)
-    public ActionResponse service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public ActionResponse service(HttpSession session) throws ServletException, IOException {
 
-        request.getSession().removeAttribute(LoginAction.USER_ID_SESSION_KEY);
+        Enumeration<String> e = session.getAttributeNames();
+        while (e.hasMoreElements()) {
+            String s = e.nextElement();
+            session.removeAttribute(s);
+        }
 
         return ActionResponse.redirect(new MyURL(false, "/"));
     }
