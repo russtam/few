@@ -28,12 +28,6 @@
 
 <#macro user_list_>
 
-    <link rel="stylesheet"
-          href="/static/site_jui.css" /> <#--http://datatables.net/media/css/site_jui.ccss-->
-
-    <script type="text/javascript"
-            src="/static/jquery.dataTables.js"></script> <#--http://datatables.net/release-datatables/media/js/jquery.dataTables.js-->
-
     <script type="text/javascript">
         $(document).ready(function() {
             $('#users_table').dataTable();
