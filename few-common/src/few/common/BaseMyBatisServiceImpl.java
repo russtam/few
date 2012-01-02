@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
@@ -78,9 +79,14 @@ public abstract class BaseMyBatisServiceImpl {
         }
     }
 
-    public void onThreadStop() {
-        closeSession();
+    private static LinkedList<BaseMyBatisServiceImpl> instances = new LinkedList<BaseMyBatisServiceImpl>();
+    {
+        instances.add(this);
     }
-
+    public static void onThreadStop() {
+        for (BaseMyBatisServiceImpl instance : instances) {
+            instance.closeSession();
+        }
+    }
 
 }
