@@ -3,6 +3,7 @@ package few.core;
 import few.ActionResponse;
 import few.Context;
 import few.RequestParameter;
+import few.RequestParameters;
 import few.support.MultipartRequest;
 import org.apache.commons.fileupload.FileItem;
 
@@ -12,6 +13,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -100,8 +102,32 @@ public class ActionInvoker {
                     else
                         ret[i] = valueOf(value, type);
                 }
+            } else
+            if( annotations.length > 0 && annotations[0].annotationType() == RequestParameters.class ) {
+                if( type != Map.class ) {
+                    throw new IllegalArgumentException("a type of action parameter annotated with RequestParameters should be Map<String, String>");
+                }
+                // 1. remember declared parameters
+                HashSet<String> declared = new HashSet<String>();
+                for (Annotation[] an : method.getParameterAnnotations()) {
+                    if( an.length == 1 && an[0].annotationType() == RequestParameter.class) {
+                        RequestParameter rp = (RequestParameter) an[0];
+                        declared.add(rp.name());
+                    }
+                }
 
+                // 2. fill Map
+                HashMap<String, String> map = new HashMap<String, String>();
+                for (Object o : request.getParameterMap().entrySet()) {
+                    Map.Entry<String, String[]> entry = (Map.Entry<String, String[]>) o;
+                    if( !declared.contains(entry.getKey())) {
+                        if( entry.getValue().length > 0)
+                            map.put(entry.getKey(), entry.getValue()[0]);
+                    }
+                }
+                ret[i] = map;
             }
+
         }
 
         return ret;
