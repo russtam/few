@@ -71,7 +71,7 @@ public abstract class BaseMyBatisServiceImpl {
 
     private ThreadLocal<SqlSession> localSession = new ThreadLocal<SqlSession>();
 
-    protected void closeSession() {
+    public void closeSession() {
         SqlSession session = localSession.get();
         if( session != null ) {
             session.close();
