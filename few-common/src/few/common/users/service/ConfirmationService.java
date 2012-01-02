@@ -28,7 +28,7 @@ public class ConfirmationService extends BaseMyBatisServiceImpl {
 
 
     public void doCleanup() {
-        session().delete("cleanupConfirmations");
+        session().delete("few.common.cleanupConfirmations");
         session().commit();
     }
 
@@ -46,7 +46,7 @@ public class ConfirmationService extends BaseMyBatisServiceImpl {
         ac.parameters = p.toString();
         ac.expire_time = new Date(System.currentTimeMillis() + timeout);
 
-        session().insert("insertConfirmation",ac);
+        session().insert("few.common.insertConfirmation",ac);
         session().commit();
 
         return ac.key;
@@ -55,10 +55,10 @@ public class ConfirmationService extends BaseMyBatisServiceImpl {
 
     public String[] useConfirmationKey(String key) {
 
-        String s = (String) session().selectOne("selectConfirmation", key);
+        String s = (String) session().selectOne("few.common.selectConfirmation", key);
         if( s == null )
             return null;
-        session().delete("deleteConfirmation", key);
+        session().delete("few.common.deleteConfirmation", key);
         session().commit();
 
         StringTokenizer stringTokenizer = new StringTokenizer(s);

@@ -43,7 +43,7 @@ public abstract class BaseMyBatisServiceImpl {
 
         Reader resource = null;
         try {
-            resource = Resources.getResourceAsReader(BaseMyBatisServiceImpl.class.getClassLoader(), sql_conf);
+            resource = Resources.getResourceAsReader(Thread.currentThread().getContextClassLoader(), sql_conf);
         } catch (IOException e) {
             throw new Error("can not read " + sql_conf, e);
         }
