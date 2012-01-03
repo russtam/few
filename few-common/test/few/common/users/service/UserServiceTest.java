@@ -21,10 +21,10 @@ import java.util.List;
  * Time: 20:35
  * To change this template use File | Settings | File Templates.
  */
-public class UserServiceTest extends TestCase {
+public class UserServiceTest extends BaseTest {
 
     private List<Integer> createdUsersId = new ArrayList<Integer>();
-    private UserService users;
+    private UserService users = UserService.get();
 
     private final String displayName = "displayName";
     private final String email = "my.name@some.org";
@@ -32,14 +32,6 @@ public class UserServiceTest extends TestCase {
     private final String login = "my.login";
     private final String pwd = "pwd";
     private final boolean active = true;
-
-    static {
-        ServiceRegistry.registerService(new DBConfig());
-    }
-
-    protected void setUp() throws Exception {
-        users = UserService.get();
-    }
 
     public void tearDown() throws Exception {
         for (Integer userId : createdUsersId) {
@@ -214,7 +206,7 @@ public class UserServiceTest extends TestCase {
 
     private static class DBConfig implements DataConfigProvider {
         public DataConfigProvider.Conf getConfig(Class clazz) {
-            return new Conf("localhost", "5432", "sample", "postgres", "password123");
+            return new Conf("localhost", "5432", "sample", "sample", "sample");
         }
     }
 }
