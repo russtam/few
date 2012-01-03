@@ -45,5 +45,18 @@ public class SimpleUser {
         return roles;
     }
 
+    @Override public boolean equals(Object o){
+        if(o == this) {
+            return true;
+        }
+        if(!(o instanceof SimpleUser)) {
+            return false;
+        }
+        SimpleUser user = (SimpleUser)o;
+        return user.user_id == user_id;
+    }
 
+    @Override public int hashCode() {
+        return user_id;
+    }
 }
