@@ -212,91 +212,9 @@ public class UserServiceTest extends TestCase {
                 && user1.getUser_id() == user2.getUser_id();
     }
 
-
-//    public void testUpdate() {
-//        ZingwaSimpleUser newUser = fillNewUser();
-//        String login = getTestLogin();
-//        String password = getTestPassword();
-//        try {
-//            zingwa.createUserSimple(newUser, login, password);
-//            ZingwaSimpleUser user = zingwa.selectSimpleUser(newUser.id);
-//
-//            user.image_link = "new link";
-//            user.display_name = "new name";
-//            zingwa.updateSimpleUser(user);
-//
-//            ZingwaSimpleUser user2 = zingwa.selectSimpleUser(user.id);
-//            assertEquals(user.image_link, user2.image_link);
-//            assertEquals(user.display_name, user2.display_name);
-//
-//            zingwa.updateSimpleUserPassword(user.id, "new password");
-//
-//            Long uid = zingwa.selectUserBySimpleAuth(login, password);
-//            assertNull(uid);
-//
-//            uid = zingwa.selectUserBySimpleAuth(login, "new password");
-//            assertEquals((Long)user.id, uid);
-//
-//            zingwa.updateSimpleUserPasswordByLogin(login, "new password2");
-//
-//            uid = zingwa.selectUserBySimpleAuth(login, "new password2");
-//            assertNotNull(uid);
-//
-//        } finally {
-//            zingwa.deleteUser(newUser.id);
-//        }
-//
-//    }
-//
-//    public void testExternalUserCRD() {
-//        ZingwaSimpleUser newUser = fillNewUser();
-//        String ext_uid = getTestLogin();
-//        String code = "test.com";
-//
-//        Long uid = zingwa.createUserExternal(newUser, ext_uid, code);
-//        assertEquals(uid, (Long) newUser.id);
-//
-//        uid = zingwa.selectUserByExternalID(ext_uid, code);
-//
-//        assertNotNull(uid);
-//        assertEquals((Long)newUser.id, uid);
-//
-//        zingwa.deleteUser(uid);
-//
-//        uid = zingwa.selectUserByExternalID(ext_uid, code);
-//        assertNull(uid);
-//
-//        newUser = zingwa.selectSimpleUser(newUser.id);
-//        assertNull(newUser);
-//
-//        zingwa.deletePortal(code);
-//
-//    }
-//
-//    public void testCheckLogin() {
-//        ZingwaSimpleUser newUser = fillNewUser();
-//        String login = getTestLogin();
-//        String password = getTestPassword();
-//        try {
-//            assertTrue(zingwa.getLoginStatus(login));
-//
-//            zingwa.createUserSimple(newUser, login, password);
-//
-//            assertFalse(zingwa.getLoginStatus(login));
-//
-//            zingwa.deleteUser(newUser.id);
-//
-//            assertTrue(zingwa.getLoginStatus(login));
-//        } finally {
-//            zingwa.deleteUser(newUser.id);
-//        }
-//
-//    }
-
-  private static class DBConfig implements DataConfigProvider {
-    public DataConfigProvider.Conf getConfig(Class clazz) {
-      return new Conf("localhost", "5432", "sample", "postgres", "password123");
+    private static class DBConfig implements DataConfigProvider {
+        public DataConfigProvider.Conf getConfig(Class clazz) {
+            return new Conf("localhost", "5432", "sample", "postgres", "password123");
+        }
     }
-  }
-
 }
