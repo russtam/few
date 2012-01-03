@@ -26,12 +26,12 @@ public class UserServiceTest extends TestCase {
     private List<Integer> createdUsersId = new ArrayList<Integer>();
     private UserService users;
 
-    final String displayName = "displayName";
-    final String email = "my.name@some.org";
-    final String role = "user";
-    final String login = "my.login";
-    final String pwd = "pwd";
-    final boolean active = true;
+    private final String displayName = "displayName";
+    private final String email = "my.name@some.org";
+    private final String role = "user";
+    private final String login = "my.login";
+    private final String pwd = "pwd";
+    private final boolean active = true;
 
     static {
         ServiceRegistry.registerService(new DBConfig());
@@ -60,24 +60,17 @@ public class UserServiceTest extends TestCase {
     }
 
     public void test_created_user_has_fields_passed_to_create_method() {
-        Integer userId = createUser(displayName, email, role, login, pwd, active);
-        SimpleUser user = users.selectUser(userId);
+        SimpleUser user = createAndSelectUser();
         assertEquals(displayName, user.getDisplay_name());
         assertEquals(email, user.getEmail());
         assertTrue(user.getRoles().contains(role));
         assertEquals(active ? 1 : 0, user.getStatus_id());
     }
 
-    private Integer createUser(String displayName, String email, String role, String login, String pwd, boolean active) {
-        Integer userId = users.createNewUser(displayName, email, role, login, pwd, active);
-        createdUsersId.add(userId);
-        return userId;
-    }
-
     public void test_deleted_user_cannot_be_selected() {
-        Integer userId = createUser(displayName, email, role, login, pwd, active);
-        users.deleteUser(userId);
-        assertNull(users.selectUser(userId));
+        SimpleUser user = createAndSelectUser();
+        users.deleteUser(user.user_id);
+        assertNull(users.selectUser(user.user_id));
     }
 
     public void test_user_with_updated_login_has_same_fields() {
@@ -104,29 +97,25 @@ public class UserServiceTest extends TestCase {
     }
 
     public void test_select_user_by_simple_authorization() {
-        Integer userId = createUser(displayName, email, role, login, pwd, active);
-        SimpleUser user_selected_by_id = users.selectUser(userId);
+        SimpleUser user_selected_by_id = createAndSelectUser();
         SimpleUser user_selected_by_simple_auth = users.selectUserBySimpleAuth(login, pwd);
         assertTrue(users_has_same_fields(user_selected_by_id, user_selected_by_simple_auth));
     }
 
     public void test_select_user_by_login() {
-        Integer userId = createUser(displayName, email, role, login, pwd, active);
-        SimpleUser user_selected_by_id = users.selectUser(userId);
+        SimpleUser user_selected_by_id = createAndSelectUser();
         SimpleUser user_selected_by_login = users.selectUserByLogin(login);
-        assertTrue(users_has_same_fields(user_selected_by_id , user_selected_by_login));
+        assertTrue(users_has_same_fields(user_selected_by_id, user_selected_by_login));
     }
 
     public void test_select_user_by_email() {
-        Integer userId = createUser(displayName, email, role, login, pwd, active);
-        SimpleUser user_selected_by_id = users.selectUser(userId);
+        SimpleUser user_selected_by_id = createAndSelectUser();
         SimpleUser user_selected_by_email = users.selectUserByEMail(email);
         assertTrue(users_has_same_fields(user_selected_by_id, user_selected_by_email));
     }
 
     public void test_select_users() {
-        Integer userId = createUser(displayName, email, role, login, pwd, active);
-        SimpleUser user = users.selectUser(userId);
+        SimpleUser user = createAndSelectUser();
         List<SimpleUser> simpleUsersList = users.selectUsers();
         assertTrue(simpleUsersList.contains(user));
     }
@@ -139,39 +128,41 @@ public class UserServiceTest extends TestCase {
     }
 
     public void test_select_users_by_role() {
-        int userId = createUser(displayName, email, role, login, pwd, active);
-        SimpleUser user = users.selectUser(userId);
+        SimpleUser user = createAndSelectUser();
         assertTrue(users.selectUsersByRole(role).contains(user));
     }
 
     public void test_update_simple_user() {
-        Integer userId = createUser(displayName, email, role, login, pwd, active);
-        SimpleUser user = users.selectUser(userId);
+        SimpleUser user = createAndSelectUser();
         user.display_name = "new_name";
         user.email = "new_email";
         users.updateSimpleUser(user);
-        SimpleUser user_after_update = users.selectUser(userId);
+        SimpleUser user_after_update = users.selectUser(user.user_id);
         assertEquals("new_name", user_after_update.getDisplay_name());
         assertEquals("new_email", user_after_update.getEmail());
     }
 
     public void test_select_login_by_user_id() {
-        Integer userId = createUser(displayName, email, role, login, pwd, active);
-        SimpleUser user = users.selectUser(userId);
-        SimpleUser user_selected_by_login = users.selectUserByLogin(users.selectLoginByUserID(userId));
+        SimpleUser user = createAndSelectUser();
+        SimpleUser user_selected_by_login = users.selectUserByLogin(users.selectLoginByUserID(user.user_id));
         assertTrue(users_has_same_fields(user, user_selected_by_login));
     }
 
     public void test_select_login_by_email() {
-        Integer userId = createUser(displayName, email, role, login, pwd, active);
-        SimpleUser user = users.selectUser(userId);
+        SimpleUser user = createAndSelectUser();
         SimpleUser user_selected_by_login = users.selectUserByLogin(users.selectLoginByEMail(email));
         assertTrue(users_has_same_fields(user, user_selected_by_login));
     }
 
-    public SimpleUser getTestUser() {
-        Integer id = users.createNewUser("TEST USER", "email", "user", getTestLogin(), getTestPassword(), true);
-        return users.selectUser(id);
+    private SimpleUser createAndSelectUser() {
+        Integer userId = createUser(displayName, email, role, login, pwd, active);
+        return users.selectUser(userId);
+    }
+
+    private Integer createUser(String displayName, String email, String role, String login, String pwd, boolean active) {
+        Integer userId = users.createNewUser(displayName, email, role, login, pwd, active);
+        createdUsersId.add(userId);
+        return userId;
     }
 
     public void testSimpleUserCRD() {
