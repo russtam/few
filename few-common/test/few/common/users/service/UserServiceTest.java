@@ -1,5 +1,6 @@
 package few.common.users.service;
 
+import com.sun.org.apache.xpath.internal.operations.Equals;
 import few.common.DataConfigProvider;
 import few.common.users.persistence.SimpleUser;
 import few.core.ServiceRegistry;
@@ -84,7 +85,7 @@ public class UserServiceTest extends TestCase {
         users.updateLogin(userId, "new_login");
         SimpleUser user_selected_by_login = users.selectUserByLogin("new_login");
         SimpleUser user_selected_by_id = users.selectUser(userId);
-        assertEquals(user_selected_by_login, user_selected_by_id);
+        assertTrue(users_has_same_fields(user_selected_by_login, user_selected_by_id));
     }
 
     public void test_user_with_updated_password_has_same_fields() {
@@ -92,7 +93,7 @@ public class UserServiceTest extends TestCase {
         users.updateUserPassword(login, "new_pwd");
         SimpleUser user = users.selectUser(userId);
         SimpleUser same_user_with_new_pwd = users.selectUserBySimpleAuth(login, "new_pwd");
-        assertEquals(user, same_user_with_new_pwd);
+        assertTrue(users_has_same_fields(user, same_user_with_new_pwd));
     }
 
     public void test_activated_user_has_active_status() {
@@ -106,21 +107,21 @@ public class UserServiceTest extends TestCase {
         Integer userId = createUser(displayName, email, role, login, pwd, active);
         SimpleUser user_selected_by_id = users.selectUser(userId);
         SimpleUser user_selected_by_simple_auth = users.selectUserBySimpleAuth(login, pwd);
-        assertEquals(user_selected_by_id, user_selected_by_simple_auth);
+        assertTrue(users_has_same_fields(user_selected_by_id, user_selected_by_simple_auth));
     }
 
     public void test_select_user_by_login() {
         Integer userId = createUser(displayName, email, role, login, pwd, active);
         SimpleUser user_selected_by_id = users.selectUser(userId);
         SimpleUser user_selected_by_login = users.selectUserByLogin(login);
-        assertEquals(user_selected_by_id , user_selected_by_login);
+        assertTrue(users_has_same_fields(user_selected_by_id , user_selected_by_login));
     }
 
     public void test_select_user_by_email() {
         Integer userId = createUser(displayName, email, role, login, pwd, active);
         SimpleUser user_selected_by_id = users.selectUser(userId);
         SimpleUser user_selected_by_email = users.selectUserByEMail(email);
-        assertEquals(user_selected_by_id, user_selected_by_email);
+        assertTrue(users_has_same_fields(user_selected_by_id, user_selected_by_email));
     }
 
     public void test_select_users() {
@@ -135,6 +136,12 @@ public class UserServiceTest extends TestCase {
         createUser(displayName, email, role, login, pwd, active);
         int number_of_users_after_insert = users.selectUsers().size();
         assertEquals(number_of_users_before_insert + 1, number_of_users_after_insert);
+    }
+
+    public void test_select_users_by_role() {
+        int userId = createUser(displayName, email, role, login, pwd, active);
+        SimpleUser user = users.selectUser(userId);
+        assertTrue(users.selectUsersByRole(role).contains(user));
     }
 
     public void test_update_simple_user() {
@@ -152,14 +159,14 @@ public class UserServiceTest extends TestCase {
         Integer userId = createUser(displayName, email, role, login, pwd, active);
         SimpleUser user = users.selectUser(userId);
         SimpleUser user_selected_by_login = users.selectUserByLogin(users.selectLoginByUserID(userId));
-        assertEquals(user, user_selected_by_login);
+        assertTrue(users_has_same_fields(user, user_selected_by_login));
     }
 
     public void test_select_login_by_email() {
         Integer userId = createUser(displayName, email, role, login, pwd, active);
         SimpleUser user = users.selectUser(userId);
         SimpleUser user_selected_by_login = users.selectUserByLogin(users.selectLoginByEMail(email));
-        assertEquals(user, user_selected_by_login);
+        assertTrue(users_has_same_fields(user, user_selected_by_login));
     }
 
     public SimpleUser getTestUser() {
@@ -199,6 +206,21 @@ public class UserServiceTest extends TestCase {
         }
 
     }
+
+    public boolean users_has_same_fields(Object o1, Object o2){
+        if(!((o1 instanceof SimpleUser) && (o2 instanceof SimpleUser))) {
+            return false;
+        }
+        SimpleUser user1 = (SimpleUser)o1;
+        SimpleUser user2 = (SimpleUser)o2;
+        return user1.getDisplay_name().equals(user2.getDisplay_name())
+                && user1.getDisplay_role().equals(user2.getDisplay_role())
+                && user1.getEmail().equals(user2.getEmail())
+                && user1.getRoles().equals(user2.getRoles())
+                && user1.getStatus_id() == user2.getStatus_id()
+                && user1.getUser_id() == user2.getUser_id();
+    }
+
 
 //    public void testUpdate() {
 //        ZingwaSimpleUser newUser = fillNewUser();

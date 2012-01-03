@@ -21,8 +21,6 @@ public class SimpleUser {
     public String display_role;
     public Set<String> roles;
 
-    private volatile int hashcode;
-
     public int getUser_id() {
         return user_id;
     }
@@ -55,25 +53,10 @@ public class SimpleUser {
             return false;
         }
         SimpleUser user = (SimpleUser)o;
-        return user.display_name.equals(display_name)
-                && user.display_role.equals(display_role)
-                && user.email.equals(email)
-                && user.roles.equals(roles)
-                && user.status_id == status_id
-                && user.user_id == user_id;
+        return user.user_id == user_id;
     }
 
     @Override public int hashCode() {
-        int result = hashcode;
-        if(result == 0) {
-            result = 17;
-            result = 31 * result + display_name.hashCode();
-            result = 31 * result + email.hashCode();
-            result = 31 * result + roles.hashCode();
-            result = 31 * result + status_id;
-            result = 31 * result + user_id;
-            hashcode = result;
-        }
-        return result;
+        return user_id;
     }
 }
