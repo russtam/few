@@ -20,7 +20,6 @@
             <element id="library" level="project" name="freemarker" />
             <element id="library" level="project" name="mail" />
             <element id="library" level="project" name="mybatis" />
-            <element id="library" level="project" name="postgres" />
           </element>
         </element>
         <element id="javaee-facet-resources" facet="few-common/web/Web" />
@@ -220,11 +219,11 @@
       </SOURCES>
     </library>
     <library name="postgres">
-      <CLASSES />
-      <JAVADOC />
-      <SOURCES>
+      <CLASSES>
         <root url="jar://$PROJECT_DIR$/lib/postgresql/postgresql-9.0-801.jdbc4.jar!/" />
-      </SOURCES>
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
     </library>
     <library name="servlet-api">
       <CLASSES>
