@@ -1,9 +1,6 @@
 package few.utils;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
@@ -140,4 +137,24 @@ public class Utils {
         }
         return str.toString();
     }
+
+    public static byte[] readBytesFromStream(InputStream is) throws IOException {
+
+        ByteArrayOutputStream bais = new ByteArrayOutputStream();
+        try {
+          byte[] byteChunk = new byte[4096]; // Or whatever size you want to read in at a time.
+          int n;
+
+          while ( (n = is.read(byteChunk)) > 0 ) {
+            bais.write(byteChunk, 0, n);
+          }
+        }
+        finally {
+          if (is != null) { is.close(); }
+        }
+        byte[] ret =  bais.toByteArray();
+        bais.close();
+        return ret;
+    }
+
 }

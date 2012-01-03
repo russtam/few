@@ -99,8 +99,18 @@ public class ActionInvoker {
                     if( type == Boolean.class && (value.equals("on") || value.equals("off")) ) {
                         ret[i] = value.equals("on");
                     }
-                    else
-                        ret[i] = valueOf(value, type);
+                    else {
+                        if( !type.isArray() )
+                            ret[i] = valueOf(value, type);
+                        else {
+                            String[] values = request.getParameterValues(param.name());
+                            Object[] o = new Object[values.length];
+                            for (int j = 0; j < values.length; j++) {
+                                o[j] = valueOf(values[j], type.getComponentType());
+                            }
+                            ret[i] = o;
+                        }
+                    }
                 }
             } else
             if( annotations.length > 0 && annotations[0].annotationType() == RequestParameters.class ) {
