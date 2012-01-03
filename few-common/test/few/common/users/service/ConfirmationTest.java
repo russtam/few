@@ -1,5 +1,7 @@
 package few.common.users.service;
 
+import few.common.DataConfigProvider;
+import few.core.ServiceRegistry;
 import junit.framework.TestCase;
 import org.junit.BeforeClass;
 
@@ -11,16 +13,13 @@ import org.junit.BeforeClass;
  * To change this template use File | Settings | File Templates.
  */
 
-public class ConfirmationTest extends TestCase {
-    ConfirmationService sa;
+public class ConfirmationTest extends BaseTest {
+    ConfirmationService sa = ConfirmationService.get();
 
-    @BeforeClass
-    protected void setUp() throws Exception {
-    }
 
     public void testCD() {
 
-        String key = sa.createConfirmationKey(new String[]{"p1"}, ConfirmationService.ONE_HOUR_TIMEOUT);
+        String key = sa.createConfirmationKey(new String[]{"p1"}, ConfirmationService.ONE_HOUR_TIMEOUT*2);
         assertNotNull(key);
 
         String params[] = sa.useConfirmationKey(key);
@@ -32,7 +31,7 @@ public class ConfirmationTest extends TestCase {
 
     public void testCD2() {
 
-        String key = sa.createConfirmationKey(new String[]{"login", "password"}, ConfirmationService.ONE_HOUR_TIMEOUT);
+        String key = sa.createConfirmationKey(new String[]{"login", "password"}, ConfirmationService.ONE_HOUR_TIMEOUT*2);
         assertNotNull(key);
 
         String params[] = sa.useConfirmationKey(key);
