@@ -71,31 +71,27 @@ public class UserService extends BaseMyBatisServiceImpl {
     }
 
     public Integer createNewUser(String display_name, String email, String role, String login, String password, boolean active) {
-        SqlSession session = session();//sqlMapper.openSession();
-        try {
-            int user_id = (Integer)session.selectOne("select_uid");
+        SqlSession session = session();
+        int user_id = (Integer)session.selectOne("select_uid");
 
-            session.insert("insertSimpleUser", new MapBuilder()
-                    .add("id", user_id)
-                    .add("display_name", display_name)
-                    .add("role_id", role)
-                    .add("email", email)
-                    .add("status_id", active ? 1 : 0)
-                    .add("registration_time", Utils.curDate())
-            );
+        session.insert("insertSimpleUser", new MapBuilder()
+                .add("id", user_id)
+                .add("display_name", display_name)
+                .add("role_id", role)
+                .add("email", email)
+                .add("status_id", active ? 1 : 0)
+                .add("registration_time", Utils.curDate())
+        );
 
-            session.insert("insertLoginPassword", new MapBuilder()
-                    .add("user_id",     user_id)
-                    .add("login",       login)
-                    .add("password",    Utils.produceSHA1fromPassword(login, password))
-            );
+        session.insert("insertLoginPassword", new MapBuilder()
+                .add("user_id",     user_id)
+                .add("login",       login)
+                .add("password",    Utils.produceSHA1fromPassword(login, password))
+        );
 
-            session.commit();
+        session.commit();
 
-            return user_id;
-        } finally {
-//            session.close();
-        }
+        return user_id;
     }
 
     public void deleteUser(int user_id) {
@@ -147,22 +143,10 @@ public class UserService extends BaseMyBatisServiceImpl {
 
 
     public String selectLoginByUserID(Integer user_id) {
-//        SqlSession session = sqlMapper.openSession();
-        try {
             return (String) session().selectOne("selectLoginByUserID", user_id);
-
-        } finally {
-//            session.close();
-        }
     }
 
     public String selectLoginByEMail(String email) {
-//        SqlSession session = sqlMapper.openSession();
-        try {
             return (String) session().selectOne("selectLoginByEMail", email);
-
-        } finally {
-//            session.close();
-        }
     }
 }
