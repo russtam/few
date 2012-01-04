@@ -203,10 +203,4 @@ public class UserServiceTest extends BaseTest {
                 && user1.getStatus_id() == user2.getStatus_id()
                 && user1.getUser_id() == user2.getUser_id();
     }
-
-    private static class DBConfig implements DataConfigProvider {
-        public DataConfigProvider.Conf getConfig(Class clazz) {
-            return new Conf("localhost", "5432", "sample", "sample", "sample");
-        }
-    }
 }
