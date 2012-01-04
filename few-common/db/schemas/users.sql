@@ -83,6 +83,17 @@ CREATE TABLE status (
 
 
 --
+-- Name: user_profile; Type: TABLE; Schema: users; Owner: -; Tablespace: 
+--
+
+CREATE TABLE user_profile (
+    user_id integer NOT NULL,
+    field_id character varying(20) NOT NULL,
+    value character varying
+);
+
+
+--
 -- Name: users; Type: TABLE; Schema: users; Owner: -; Tablespace: 
 --
 
@@ -167,11 +178,26 @@ CREATE INDEX roles_idx ON roles USING btree (id);
 
 
 --
+-- Name: user_profile_idx; Type: INDEX; Schema: users; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX user_profile_idx ON user_profile USING btree (user_id, field_id);
+
+
+--
 -- Name: simple_auth_data_fk; Type: FK CONSTRAINT; Schema: users; Owner: -
 --
 
 ALTER TABLE ONLY simple_auth_data
     ADD CONSTRAINT simple_auth_data_fk FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
+
+
+--
+-- Name: user_profile_fk; Type: FK CONSTRAINT; Schema: users; Owner: -
+--
+
+ALTER TABLE ONLY user_profile
+    ADD CONSTRAINT user_profile_fk FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
 
 
 --

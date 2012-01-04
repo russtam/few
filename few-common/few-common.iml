@@ -28,7 +28,7 @@
     <orderEntry type="library" name="mybatis" level="project" />
     <orderEntry type="library" scope="TEST" name="junit" level="project" />
     <orderEntry type="library" name="mail" level="project" />
-    <orderEntry type="library" name="postgres" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="postgres" level="project" />
   </component>
 </module>
 
