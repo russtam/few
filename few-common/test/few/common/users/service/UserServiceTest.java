@@ -1,17 +1,9 @@
 package few.common.users.service;
 
-import com.sun.org.apache.xpath.internal.operations.Equals;
-import few.common.DataConfigProvider;
 import few.common.users.persistence.SimpleUser;
-import few.core.ServiceRegistry;
 import few.utils.Utils;
-import junit.framework.TestCase;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 /**
