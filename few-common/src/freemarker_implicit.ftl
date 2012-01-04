@@ -1,5 +1,6 @@
 [#ftl]
 [#-- @implicitly included --]
+[#-- @ftlvariable name="userList" type="few.common.users.presentation.UserList" --]
 [#-- @ftlvariable name="user_profile_fields" type="few.common.users.presentation.UserProfileFields" --]
 [#-- @ftlvariable name="user_roles" type="few.common.users.presentation.UserRoles" --]
 [#-- @ftlvariable name="user_list" type="few.common.users.presentation.UserList" --]

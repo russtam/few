@@ -1,12 +1,16 @@
 package few.common.users.controller;
 
 import few.*;
+import few.common.users.persistence.CustomField;
 import few.common.users.persistence.SimpleUser;
+import few.common.users.service.UserProfileService;
 import few.common.users.service.UserService;
 import few.utils.Utils;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -82,4 +86,19 @@ public class UserProfileAction {
             }
         }
     }
+
+    @ActionMethod
+    public void updateProfile(
+            @RequestParameter(name = "profile") String action,
+            @RequestParameters Map<String, String> fields
+    ) {
+        List<CustomField> profile = UserProfileService.get().validateProfile(fields);
+        if( profile == null ) {
+            Context.get().addMessage( new Message(Message.ERROR, "Вы некорректно заполнили поля формы.") );
+            return ;
+        }
+        SimpleUser user = userService.selectUser(Integer.parseInt(Context.get().getUserID()));
+        userService.updateSimpleUser(user, profile);
+    }
+
 }
