@@ -10,6 +10,7 @@ import org.apache.commons.fileupload.FileItem;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -104,7 +105,7 @@ public class ActionInvoker {
                             ret[i] = valueOf(value, type);
                         else {
                             String[] values = request.getParameterValues(param.name());
-                            Object[] o = new Object[values.length];
+                            Object[] o = (Object[]) Array.newInstance(type.getComponentType(), values.length);
                             for (int j = 0; j < values.length; j++) {
                                 o[j] = valueOf(values[j], type.getComponentType());
                             }
