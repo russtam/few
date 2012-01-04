@@ -122,6 +122,10 @@ public class UserServiceTest extends BaseTest {
         assertTrue(users.selectUsersByRole(role).contains(user));
     }
 
+    public void test_select_display_roles() {
+        assertNotNull(users.selectDisplayRoles());
+    }
+
     public void test_update_simple_user() {
         SimpleUser user = createAndSelectUser();
         user.display_name = "new_name";
