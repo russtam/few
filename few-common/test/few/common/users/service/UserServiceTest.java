@@ -1,17 +1,9 @@
 package few.common.users.service;
 
-import com.sun.org.apache.xpath.internal.operations.Equals;
-import few.common.DataConfigProvider;
 import few.common.users.persistence.SimpleUser;
-import few.core.ServiceRegistry;
 import few.utils.Utils;
-import junit.framework.TestCase;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -33,9 +25,15 @@ public class UserServiceTest extends BaseTest {
     private final String pwd = "pwd";
     private final boolean active = true;
 
-    public void tearDown() throws Exception {
-        for (Integer userId : createdUsersId) {
-            users.deleteUser(userId);
+    protected void setUp() throws Exception {
+        users = UserService.get();
+        removeAllUsers();
+    }
+
+    private void removeAllUsers () {
+        List<SimpleUser> usersForDelete = users.selectUsers();
+        for (SimpleUser user : usersForDelete) {
+            users.deleteUser(user.getUser_id());
         }
     }
 
@@ -202,11 +200,5 @@ public class UserServiceTest extends BaseTest {
                 && user1.getRoles().equals(user2.getRoles())
                 && user1.getStatus_id() == user2.getStatus_id()
                 && user1.getUser_id() == user2.getUser_id();
-    }
-
-    private static class DBConfig implements DataConfigProvider {
-        public DataConfigProvider.Conf getConfig(Class clazz) {
-            return new Conf("localhost", "5432", "sample", "sample", "sample");
-        }
     }
 }
