@@ -2,6 +2,7 @@ package few.common.users.service;
 
 import com.sun.org.apache.xpath.internal.operations.Equals;
 import few.common.DataConfigProvider;
+import few.common.users.persistence.CustomField;
 import few.common.users.persistence.SimpleUser;
 import few.core.ServiceRegistry;
 import few.utils.Utils;
@@ -10,9 +11,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -152,7 +151,7 @@ public class UserServiceTest extends BaseTest {
     }
 
     private Integer createUser(String displayName, String email, String role, String login, String pwd, boolean active) {
-        Integer userId = users.createNewUser(displayName, email, role, login, pwd, active);
+        Integer userId = users.createNewUser(displayName, email, role, login, pwd, active, Collections.<CustomField>emptyList());
         createdUsersId.add(userId);
         return userId;
     }
@@ -161,7 +160,7 @@ public class UserServiceTest extends BaseTest {
         String login = getTestLogin();
         String password = getTestPassword();
         try {
-            Integer uid = users.createNewUser("TEST USER", "email", "user", login, password, true);
+            Integer uid = users.createNewUser("TEST USER", "email", "user", login, password, true, Collections.<CustomField>emptyList());
             assertNotNull(uid);
 
             uid = users.selectUserBySimpleAuth(login, password).user_id;

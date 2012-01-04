@@ -45,7 +45,7 @@
     </select>
 
     <resultMap id="SimpleUserMap" type="few.common.users.persistence.SimpleUser">
-        <result property="user_id" column="user_id"/>
+        <id property="user_id" column="user_id"/>
         <result property="status_id" column="status_id"/>
         <result property="display_name" column="display_name"/>
         <result property="email" column="email"/>
@@ -140,6 +140,31 @@
             id = #{id}
     </update>
 
-
+    <select id="selectUserProfile" resultType="few.common.users.persistence.CustomField" parameterType="int">
+        select p.field_id, p.value
+        from users.user_profile p
+        where p.user_id = #{id}
+    </select>
+    <insert id="insertUserProfileField" >
+        INSERT INTO users.user_profile
+          ( user_id, field_id, value )
+        VALUES
+          ( #{user_id}, #{field_id}, #{value} );
+    </insert>
+    <update id="updateUserProfileField">
+        UPDATE
+          users.user_profile
+        SET
+          value = #{value}
+        WHERE  user_id = #{user_id} and field_id = #{field_id}
+    </update>
+    <delete id="deleteUserProfileField">
+        DELETE FROM users.user_profile
+        WHERE  user_id = #{user_id} and field_id = #{field_id}
+    </delete>
+    <delete id="deleteUserProfile" parameterType="int">
+        DELETE FROM users.user_profile
+        WHERE  user_id = #{id}
+    </delete>
 
 </mapper>

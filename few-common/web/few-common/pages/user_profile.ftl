@@ -50,6 +50,14 @@
             <input type="submit" value="Сменить пароль">
         </form>
 
+        <table>
+            <#list user_profile_fields as f>
+            <tr>
+                <td><span title="${f.hint!""}">${f.displayName}</span>
+                <td><input type="text" name="${f.field_id}" title="${f.hint!""}" placeholder="${f.hint!""}" value="${userInfo.field(f.field_id)!""}"/></td>
+                <td><@common.show_messages source="${f.field_id}"/></td>
+            </#list>
+        </table>
 
     </#if>
 

@@ -1,7 +1,9 @@
 package few.common.users.controller;
 
 import few.*;
+import few.common.users.persistence.CustomField;
 import few.common.users.service.AccountService;
+import few.common.users.service.UserProfileService;
 import few.common.users.service.UserService;
 import few.utils.Utils;
 
@@ -9,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,7 +40,9 @@ public class RegistrationAction {
             @RequestParameter(name = "login") String login,
             @RequestParameter(name = "name") String name,
             @RequestParameter(name = "password") String password,
-            @RequestParameter(name = "password1") String password1
+            @RequestParameter(name = "password1") String password1,
+            @RequestParameters Map<String, String> fields
+
     ) throws ServletException, IOException {
 
         if( Utils.isNull(email) ) {
@@ -76,10 +82,12 @@ public class RegistrationAction {
             }
         }
 
+        List<CustomField> profile = UserProfileService.get().validateProfile(fields);
+
         if( Utils.isNull(password) ) {
-            account.registerUserSendPassword(email, name, login);
+            account.registerUserSendPassword(email, name, login, profile);
         } else {
-            account.registerUserWithActivation(email, name, login, password);
+            account.registerUserWithActivation(email, name, login, password, profile);
         }
 
         Context.get().addMessage(new Message(Message.INFO, "all", "Аккаунт успешно создан, проверьте почту." ));

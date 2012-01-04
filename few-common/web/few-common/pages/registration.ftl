@@ -56,6 +56,15 @@
             </tr>
         </table>
 
+        <table>
+            <#list user_profile_fields as f>
+            <tr>
+                <td><span title="${f.hint!""}">${f.displayName}</span>
+                <td><input title="${f.hint!""}" placeholder="${f.hint!""}" type="text" name="${f.field_id}"/></td>
+                <td><@common.show_messages source="${f.field_id}"/></td>
+            </#list>
+        </table>
+
         <input type="hidden" name="registration"/>
         <input type="submit" value="Зарегистрироваться"/>
 

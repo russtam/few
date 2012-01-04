@@ -19,6 +19,7 @@ public class Initializer implements ServletContextListener{
         ServiceRegistry.registerService(new DefaultConfigurationImpl("few-sample.properties"));
         ServiceRegistry.registerService(DBConfig.class);
         ServiceRegistry.registerService(CredentialsImpl.class);
+        ServiceRegistry.registerService(CustomUserProfile.class);
     }
 
     public void contextDestroyed(ServletContextEvent servletContextEvent) {

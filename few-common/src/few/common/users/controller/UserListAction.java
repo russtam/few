@@ -3,10 +3,16 @@ package few.common.users.controller;
 import few.*;
 import few.common.mail.MailService;
 import few.common.users.mail.RegistrationWithPasswordMail;
+import few.common.users.persistence.CustomField;
 import few.common.users.persistence.SimpleUser;
 import few.common.users.service.AccountService;
+import few.common.users.service.UserProfileService;
 import few.common.users.service.UserService;
 import few.utils.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -76,7 +82,8 @@ public class UserListAction {
             @RequestParameter(name = "display_name") String display_name,
             @RequestParameter(name = "email") String email,
             @RequestParameter(name = "status") Integer status,
-            @RequestParameter(name = "display_role") String display_role
+            @RequestParameter(name = "display_role") String display_role,
+            @RequestParameters Map<String, String> fields
     ) {
         SimpleUser user = userService.selectUser(user_id);
 
@@ -84,7 +91,12 @@ public class UserListAction {
         user.email = email;
         user.status_id = status;
         user.display_role = display_role;
-        userService.updateSimpleUser(user);
+        List<CustomField> profile = UserProfileService.get().validateProfile(fields);
+        if( profile == null ) {
+            Context.get().addMessage( new Message(Message.ERROR, "Вы некорректно заполнили поля формы.") );
+            return here(user_id);
+        }
+        userService.updateSimpleUser(user, profile);
 
         Context.get().addMessage( new Message(Message.INFO, "Профиль обновлён.") );
 
@@ -102,6 +114,7 @@ public class UserListAction {
         return here(user_id);
     }
 
+    UserProfileService profileService = UserProfileService.get();
     @ActionMethod
     public ActionResponse add(
             @RequestParameter(name = "add") String fake,
@@ -110,12 +123,15 @@ public class UserListAction {
             @RequestParameter(name = "display_name") String display_name,
             @RequestParameter(name = "email") String email,
             @RequestParameter(name = "active") Boolean active,
-            @RequestParameter(name = "display_role") String display_role
+            @RequestParameter(name = "display_role") String display_role,
+            @RequestParameters Map<String, String> fields
     ) {
         Context.get().addMessage( new Message(Message.INFO, "Пользователь создан.") );
 
+        List<CustomField> list = profileService.validateProfile(fields);
+
         String password = Utils.generateNewPassword();
-        Integer user_id = userService.createNewUser(display_name, email, display_role, login, password, active);
+        Integer user_id = userService.createNewUser(display_name, email, display_role, login, password, active, list);
 
         RegistrationWithPasswordMail tpl = new RegistrationWithPasswordMail( display_name, login, password);
         mailService.sendEmailSimple(email, tpl);

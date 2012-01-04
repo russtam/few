@@ -1,6 +1,7 @@
 package few.common.users.service;
 
 import few.common.BaseMyBatisServiceImpl;
+import few.common.users.persistence.CustomField;
 import few.common.users.persistence.SimpleUser;
 import few.utils.MapBuilder;
 import few.utils.Utils;
@@ -70,7 +71,8 @@ public class UserService extends BaseMyBatisServiceImpl {
             session().selectList("few.common.selectDisplayRoles");
     }
 
-    public Integer createNewUser(String display_name, String email, String role, String login, String password, boolean active) {
+    public Integer createNewUser(String display_name, String email, String role, String login, String password, boolean active,
+        List<CustomField> profile) {
         SqlSession session = session();
         int user_id = (Integer)session.selectOne("select_uid");
 
@@ -88,6 +90,11 @@ public class UserService extends BaseMyBatisServiceImpl {
                 .add("login",       login)
                 .add("password",    Utils.produceSHA1fromPassword(login, password))
         );
+
+        for (CustomField cf : profile) {
+            session().insert("insertUserProfileField",
+                    new MapBuilder().add("user_id",user_id).add("field_id",cf.field_id).add("value",cf.value));
+        }
 
         session.commit();
 
@@ -116,6 +123,25 @@ public class UserService extends BaseMyBatisServiceImpl {
                 .add("display_role", user.display_role)
                 .add("status_id", user.status_id)
         );
+
+        session().commit();
+    }
+
+    public void updateSimpleUser(SimpleUser user, List<CustomField> profile) {
+        session().update("few.common.updateSimpleUser", new MapBuilder()
+                .add("user_id", user.user_id)
+                .add("email", user.email)
+                .add("display_name", user.display_name)
+                .add("display_role", user.display_role)
+                .add("status_id", user.status_id)
+        );
+
+        session().delete("deleteUserProfile", user.user_id);
+        for (CustomField cf : profile) {
+            session().insert("insertUserProfileField",
+                    new MapBuilder().add("user_id",user.user_id).add("field_id",cf.field_id).add("value",cf.value));
+        }
+
         session().commit();
     }
 
@@ -147,6 +173,10 @@ public class UserService extends BaseMyBatisServiceImpl {
     }
 
     public String selectLoginByEMail(String email) {
-            return (String) session().selectOne("selectLoginByEMail", email);
+        return (String) session().selectOne("selectLoginByEMail", email);
+    }
+
+    public List<CustomField> selectUserProfile(Integer user_id) {
+        return session().selectList("selectUserProfile", user_id);
     }
 }

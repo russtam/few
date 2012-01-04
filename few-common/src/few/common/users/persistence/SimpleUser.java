@@ -1,5 +1,6 @@
 package few.common.users.persistence;
 
+import java.util.List;
 import java.util.Set;
 
 /**

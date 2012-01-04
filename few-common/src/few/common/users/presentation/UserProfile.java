@@ -3,9 +3,11 @@ package few.common.users.presentation;
 import few.ModelBean;
 import few.RequestParameter;
 import few.Restriction;
+import few.common.users.persistence.CustomField;
 import few.common.users.persistence.SimpleUser;
 import few.common.users.service.UserService;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -21,8 +23,8 @@ public class UserProfile extends UserInfo{
 
     private Integer status;
 
-    private UserProfile(Integer userId, Integer status, String login, String displayName, String email, String display_role, Set<String> roles) {
-        super(userId, login, displayName, email, display_role, roles);
+    private UserProfile(Integer userId, Integer status, String login, String displayName, String email, String display_role, Set<String> roles, List<CustomField> profile) {
+        super(userId, login, displayName, email, display_role, roles, profile);
         this.status = status;
     }
 
@@ -37,8 +39,9 @@ public class UserProfile extends UserInfo{
         SimpleUser user = users.selectUser(user_id);
         if( user != null ) {
             String login = users.selectLoginByUserID(user.user_id);
+            List<CustomField> profile = users.selectUserProfile(user.user_id);
             return new UserProfile(
-                    user_id, user.status_id, login, user.display_name, user.email, user.display_role, user.roles
+                    user_id, user.status_id, login, user.display_name, user.email, user.display_role, user.roles, profile
             );
         } else {
             return null;

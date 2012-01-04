@@ -3,9 +3,14 @@ package few.common.users.presentation;
 import few.Context;
 import few.ModelBean;
 import few.common.users.controller.LoginAction;
+import few.common.users.persistence.CustomField;
 import few.common.users.persistence.SimpleUser;
+import few.common.users.service.UserProfileService;
 import few.common.users.service.UserService;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -24,8 +29,9 @@ public class UserInfo {
     private String email;
     private String display_role;
     private Set<String> roles;
+    private Map<String, String> profile;
 
-    public UserInfo(Integer userId, String login, String displayName, String email, String display_role, Set<String> roles) {
+    public UserInfo(Integer userId, String login, String displayName, String email, String display_role, Set<String> roles, List<CustomField> fields) {
         this.signed_in = true;
         this.user_id = userId;
         this.display_name = displayName;
@@ -33,6 +39,10 @@ public class UserInfo {
         this.email = email;
         this.display_role = display_role;
         this.roles = roles;
+        this.profile = new HashMap<String, String>();
+        for (CustomField field : fields) {
+            profile.put(field.field_id, field.value);
+        }
     }
 
     public UserInfo() {
@@ -69,14 +79,27 @@ public class UserInfo {
         return display_role;
     }
 
+    public Map<String, String> getProfile() {
+        return profile;
+    }
+
+    public String field(String id) {
+        String val = profile.get(id);
+        if( val != null )
+            return customProfile.getCustomFields().get(id).format( profile.get(id) );
+        return null;
+    }
+
+    private final static UserProfileService customProfile = UserProfileService.get();
     private final static UserService users = UserService.get();
     public static UserInfo build() {
         Integer user_id = (Integer) Context.get().getSession().getAttribute(LoginAction.USER_ID_SESSION_KEY);
         if( user_id != null ) {
             SimpleUser user = users.selectUser(user_id);
             String login = users.selectLoginByUserID(user.user_id);
+            List<CustomField> profile = users.selectUserProfile(user.user_id);
             return new UserInfo(
-                    user_id, login, user.display_name, user.email, user.display_role, user.roles
+                    user_id, login, user.display_name, user.email, user.display_role, user.roles, profile
             );
         } else {
             return new UserInfo();

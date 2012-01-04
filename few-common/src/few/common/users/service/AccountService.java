@@ -5,8 +5,11 @@ import few.common.mail.MailService;
 import few.common.users.mail.RegistrationWithActivationMail;
 import few.common.users.mail.RegistrationWithPasswordMail;
 import few.common.users.mail.RestorePasswordMail;
+import few.common.users.persistence.CustomField;
 import few.common.users.persistence.SimpleUser;
 import few.utils.Utils;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,18 +34,18 @@ public class AccountService {
     ConfirmationService confirmationService = ConfirmationService.get();
     public static final String DEFAULT_ROLE = "user";
 
-    public boolean registerUserSendPassword(String email, String display_name, String login) {
+    public boolean registerUserSendPassword(String email, String display_name, String login, List<CustomField> profile) {
         String password = Utils.generateNewPassword();
 
-        Integer user_id = userService.createNewUser(display_name, email, DEFAULT_ROLE, login, password, true);
+        Integer user_id = userService.createNewUser(display_name, email, DEFAULT_ROLE, login, password, true, profile);
 
         RegistrationWithPasswordMail tpl = new RegistrationWithPasswordMail( display_name, login, password);
         return mailService.sendEmailSimple(email, tpl);
     }
 
-    public boolean registerUserWithActivation(String email, String display_name, String login, String password) {
+    public boolean registerUserWithActivation(String email, String display_name, String login, String password, List<CustomField> profile) {
 
-        Integer user_id = userService.createNewUser(display_name, email, DEFAULT_ROLE, login, password, false);
+        Integer user_id = userService.createNewUser(display_name, email, DEFAULT_ROLE, login, password, false, profile);
 
         String secureKey = confirmationService.createConfirmationKey(new String[]{user_id.toString()}, ConfirmationService.ONE_DAY_TIMEOUT);
         String link = new MyURL("/login").p("key", secureKey).toString();
