@@ -25,9 +25,15 @@ public class UserServiceTest extends BaseTest {
     private final String pwd = "pwd";
     private final boolean active = true;
 
-    public void tearDown() throws Exception {
-        for (Integer userId : createdUsersId) {
-            users.deleteUser(userId);
+    protected void setUp() throws Exception {
+        users = UserService.get();
+        removeAllUsers();
+    }
+
+    private void removeAllUsers () {
+        List<SimpleUser> usersForDelete = users.selectUsers();
+        for (SimpleUser user : usersForDelete) {
+            users.deleteUser(user.getUser_id());
         }
     }
 
