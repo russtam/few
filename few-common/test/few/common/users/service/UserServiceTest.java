@@ -73,6 +73,12 @@ public class UserServiceTest extends BaseTest {
         assertTrue(users_has_same_fields(user_selected_by_login, user_selected_by_id));
     }
 
+    public void test_update_last_login() {
+        Integer userId = createUser(displayName, email, role, login, pwd, active);
+        users.updateLastLogin(userId);
+        assertNotNull(users.selectUser(userId));
+    }
+
     public void test_user_with_updated_password_has_same_fields() {
         Integer userId = createUser(displayName, email, role, login, pwd, active);
         users.updateUserPassword(login, "new_pwd");
