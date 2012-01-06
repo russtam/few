@@ -145,6 +145,16 @@ public class UserService extends BaseMyBatisServiceImpl {
         session().commit();
     }
 
+    public void updateUserProfile(int user_id, List<CustomField> profile) {
+        session().delete("deleteUserProfile", user_id);
+        for (CustomField cf : profile) {
+            session().insert("insertUserProfileField",
+                    new MapBuilder().add("user_id",user_id).add("field_id",cf.field_id).add("value",cf.value));
+        }
+
+        session().commit();
+    }
+
     public void updateLogin(Integer user_id, String login) {
         session().update("few.common.updateSimpleUserLogin", new MapBuilder()
                 .add("user_id", user_id)

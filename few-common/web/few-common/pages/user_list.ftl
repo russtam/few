@@ -43,6 +43,11 @@
                 <td style="width: 100px">display name</td>
                 <td style="width: 100px">status</td>
                 <td style="width: 100px">role</td>
+                <#list user_profile_fields as f>
+                <#if f.displayInUserList>
+                    <td><span title="${f.hint!""}">${f.displayName}</span>
+                </#if>
+                </#list>
             </tr>
         </thead>
         <tbody>
@@ -52,6 +57,11 @@
                     <td>${u.display_name}</td>
                     <td><@status u.status_id/></td>
                     <td>${u.display_role}</td>
+                    <#list user_profile_fields as f>
+                    <#if f.displayInUserList>
+                        <td>${userInfo.field(f.field_id)!""}
+                    </#if>
+                    </#list>
                 </tr>
             </#list>
         </tbody>

@@ -19,6 +19,7 @@ public interface CustomUserProfile {
         private String field_id;
         private boolean required;
         private String displayName;
+        private boolean displayInProfile;
         private boolean displayInUserList;
         private String hint;
 
@@ -36,11 +37,12 @@ public interface CustomUserProfile {
             this.displayName = displayName;
         }
 
-        public CustomField(String fieldId, String displayName, boolean required, String hint, boolean displayInUserList) {
+        public CustomField(String fieldId, String displayName, boolean required, String hint, boolean displayInProfile, boolean displayInUserList) {
             this.field_id = fieldId;
             this.required = required;
             this.displayName = displayName;
             this.displayInUserList = displayInUserList;
+            this.displayInProfile = displayInProfile;
             this.hint = hint;
         }
 
@@ -64,6 +66,9 @@ public interface CustomUserProfile {
             return hint;
         }
 
+        public boolean isDisplayInProfile() {
+            return displayInProfile;
+        }
     }
 
 }

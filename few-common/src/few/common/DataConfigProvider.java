@@ -23,6 +23,8 @@ public interface DataConfigProvider {
             this.user = user;
             this.password = password;
         }
+
+
     }
 
     Conf getConfig(Class clazz);
