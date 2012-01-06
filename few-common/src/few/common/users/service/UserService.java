@@ -175,6 +175,7 @@ public class UserService extends BaseMyBatisServiceImpl {
         session().update("few.common.updateLastLogin", new MapBuilder()
                 .add("user_id", user_id)
         );
+        session().commit();
     }
 
 
