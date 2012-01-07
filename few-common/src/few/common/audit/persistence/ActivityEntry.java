@@ -26,10 +26,12 @@ public class ActivityEntry {
     }
 
     public ActivityEntry(Integer level, String type, String text) {
-        this(Integer.valueOf(Context.get().getUserID()), level, type, text);
+        this(null, level, type, text);
+        if( Context.get() != null && Context.get().getRequest().getSession(false) != null && Context.get().getUserID() != null )
+            user_id = Integer.valueOf(Context.get().getUserID());
     }
 
-    public ActivityEntry(int user_id, Integer level, String type, String text) {
+    public ActivityEntry(Integer user_id, Integer level, String type, String text) {
         this.level = level;
         this.type = type;
         this.text = text;
