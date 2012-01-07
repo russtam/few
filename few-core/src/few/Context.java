@@ -48,7 +48,7 @@ public class Context {
 
     private Credentials credentials = ServiceRegistry.get(Credentials.class);
 
-    private Context(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext, DispatcherMap config) {
+    protected Context(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext, DispatcherMap config) {
         this.request = request;
         this.response = response;
         this.servletContext = servletContext;

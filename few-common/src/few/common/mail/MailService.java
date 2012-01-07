@@ -60,9 +60,9 @@ public class MailService {
         Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
     }
 
-    private void sendEmailSimple(String email,
+    public void sendEmailSimple(String email,
                                 String subject,
-                                String content, String contentType ) throws Exception {
+                                String content, String contentType) throws Exception {
         Properties props = new Properties();
 
         for (Iterator<String> i = configuration.propertyNames().iterator(); i.hasNext(); ) {

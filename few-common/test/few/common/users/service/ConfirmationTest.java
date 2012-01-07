@@ -1,9 +1,6 @@
 package few.common.users.service;
 
-import few.common.DataConfigProvider;
-import few.core.ServiceRegistry;
-import junit.framework.TestCase;
-import org.junit.BeforeClass;
+import few.common.BaseTest;
 
 /**
  * Created by IntelliJ IDEA.

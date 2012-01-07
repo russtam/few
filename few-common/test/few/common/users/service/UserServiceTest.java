@@ -1,5 +1,6 @@
 package few.common.users.service;
 
+import few.common.BaseTest;
 import few.common.users.persistence.CustomField;
 import few.common.users.persistence.SimpleUser;
 import few.utils.Utils;

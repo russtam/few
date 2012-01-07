@@ -18,7 +18,7 @@ public class CustomUserProfile implements few.common.CustomUserProfile{
         fields = new LinkedList<CustomField>();
 
         fields.add(
-                new CustomField("sex",          "Пол", true, "М/Ж", true) {
+                new CustomField("sex",          "Пол", true, "М/Ж", true, true) {
                     @Override
                     public boolean validate(String v) {
                         return v.equals("М") || v.equals("Ж");

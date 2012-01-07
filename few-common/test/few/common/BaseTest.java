@@ -1,4 +1,4 @@
-package few.common.users.service;
+package few.common;
 
 import few.common.DataConfigProvider;
 import few.core.ServiceRegistry;

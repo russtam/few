@@ -140,11 +140,22 @@
             id = #{id}
     </update>
 
-    <select id="selectUserProfile" resultType="few.common.users.persistence.CustomField" parameterType="int">
-        select p.field_id, p.value
-        from users.user_profile p
-        where p.user_id = #{id}
+    <select id="selectUserProfile" resultType="few.common.users.persistence.UserProfile" resultMap="UserProfileMap">
+        select u.id as user_id, p.field_id, p.value
+        from users.users u
+        left join users.user_profile p on u.id = p.user_id
+        <if test="id != null">
+            where p.user_id = #{id}
+        </if>
     </select>
+    <resultMap id="UserProfileMap" type="few.common.users.persistence.UserProfile">
+        <result property="user_id" column="user_id"/>
+        <collection property="fieldsList" javaType="java.util.LinkedList" ofType="few.common.users.persistence.CustomField">
+            <result property="field_id" column="field_id"/>
+            <result property="value" column="value"/>
+        </collection>
+    </resultMap>
+
     <insert id="insertUserProfileField" >
         INSERT INTO users.user_profile
           ( user_id, field_id, value )

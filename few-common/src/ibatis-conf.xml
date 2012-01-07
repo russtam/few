@@ -18,5 +18,6 @@
     <mappers>
         <mapper resource="few/common/users/persistence/Users.xml"/>
         <mapper resource="few/common/users/persistence/Confirmations.xml"/>
+        <mapper resource="few/common/cms/persistence/CMS.xml"/>
     </mappers>
 </configuration>

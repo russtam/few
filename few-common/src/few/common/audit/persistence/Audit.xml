@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="">
+
+    <insert id="insertActivity">
+        INSERT INTO common.activity_log
+          ( user_id, level, type, text, "timestamp" )
+        VALUES
+          ( #{user_id}, #{level}, #{type}, #{text}, now() );
+    </insert>
+
+    <select id="selectActivities" resultType="drgn.data.cms.model.ActivityEntry">
+        SELECT l.*, u.display_name, r.role
+        FROM common.activity_log l
+        LEFT JOIN users.users u ON l.user_id = u.id
+        LEFT JOIN users.roles r ON u.role_id = r.id
+    </select>
+
+
+</mapper>

@@ -59,7 +59,7 @@
                     <td>${u.display_role}</td>
                     <#list user_profile_fields as f>
                     <#if f.displayInUserList>
-                        <td>${userInfo.field(f.field_id)!""}
+                        <td>${u.profile.get(f.field_id)!"--"}
                     </#if>
                     </#list>
                 </tr>

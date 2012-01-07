@@ -3,6 +3,7 @@ package few.common.users.service;
 import few.common.BaseMyBatisServiceImpl;
 import few.common.users.persistence.CustomField;
 import few.common.users.persistence.SimpleUser;
+import few.common.users.persistence.UserProfile;
 import few.utils.MapBuilder;
 import few.utils.Utils;
 import org.apache.ibatis.session.SqlSession;
@@ -187,7 +188,11 @@ public class UserService extends BaseMyBatisServiceImpl {
         return (String) session().selectOne("selectLoginByEMail", email);
     }
 
-    public List<CustomField> selectUserProfile(Integer user_id) {
-        return session().selectList("selectUserProfile", user_id);
+    public UserProfile selectUserProfile(Integer user_id) {
+        return (UserProfile) session().selectOne("selectUserProfile",
+                new MapBuilder().add("id", user_id));
+    }
+    public List<UserProfile> selectUserProfiles() {
+        return session().selectList("selectUserProfile");
     }
 }

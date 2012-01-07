@@ -1,7 +1,8 @@
 package few.common.users.persistence;
 
-import java.util.List;
-import java.util.Set;
+import few.common.users.service.UserService;
+
+import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -45,6 +46,21 @@ public class SimpleUser {
     public Set<String> getRoles() {
         return roles;
     }
+
+    Map<String, String> profile;
+    UserService users = UserService.get();
+    // TODO : kill this code
+    public Map<String, String> getProfile() {
+        if( profile == null ) {
+            UserProfile p = users.selectUserProfile(user_id);
+            if( p != null)
+                profile = p.getFieldsMap();
+            else
+                profile = Collections.emptyMap();
+        }
+        return profile;
+    }
+
 
     @Override public boolean equals(Object o){
         if(o == this) {
