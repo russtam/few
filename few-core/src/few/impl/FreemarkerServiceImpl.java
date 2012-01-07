@@ -3,16 +3,14 @@ package few.impl;
 import few.Context;
 import few.core.ServiceRegistry;
 import few.services.FreemarkerService;
+import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.ObjectWrapper;
 import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
 
 import javax.servlet.ServletContext;
-import java.io.File;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.io.*;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -91,6 +89,33 @@ public class FreemarkerServiceImpl implements FreemarkerService {
         }
     }
 
+    public String processStringTemplate(final String template, Object parameters) {
+        try {
+            StringWriter sw = new StringWriter();
+            Configuration tmp = (Configuration) cfg.clone();
+            tmp.setTemplateLoader(new TemplateLoader() {
+                public Object findTemplateSource(String name) {
+                    return 1;
+                }
+                public long getLastModified(Object templateSource) {
+                    return System.currentTimeMillis();
+                }
+                public Reader getReader(Object templateSource, String encoding) {
+                    return new StringReader(template);
+                }
+                public void closeTemplateSource(Object templateSource) { }
+            });
+
+            Template t = tmp.getTemplate("");
+            t.process(parameters, sw);
+            tmp.clearTemplateCache();
+            return sw.toString();
+        } catch (Exception e) {
+            log.log(Level.SEVERE, "", e);
+        }
+        return "";
+    }
+
     public String processTemplate(String template) {
         StringWriter sw = new StringWriter();
         processTemplate(template, sw);
@@ -102,6 +127,7 @@ public class FreemarkerServiceImpl implements FreemarkerService {
         processTemplate(template, sw, parameters);
         return sw.toString();
     }
+
 
     Logger log = Logger.getLogger(FreemarkerServiceImpl.class.getName());
 }

@@ -1,5 +1,7 @@
 [#ftl]
 [#-- @implicitly included --]
+[#-- @ftlvariable name="news_store" type="few.common.cms.presentation.NewsStore" --]
+[#-- @ftlvariable name="texts_store" type="few.common.cms.presentation.TextsStore" --]
 [#-- @ftlvariable name="userList" type="few.common.users.presentation.UserList" --]
 [#-- @ftlvariable name="user_profile_fields" type="few.common.users.presentation.UserProfileFields" --]
 [#-- @ftlvariable name="user_roles" type="few.common.users.presentation.UserRoles" --]

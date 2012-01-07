@@ -21,6 +21,18 @@ public class SimpleText {
         this.text = text;
     }
 
+    public String getCat_id() {
+        return cat_id;
+    }
+
+    public String getText_id() {
+        return text_id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -33,6 +33,38 @@ public class News {
         author_user_id = Integer.valueOf(Context.get().getUserID());
     }
 
+    public String getFeed_id() {
+        return feed_id;
+    }
+
+    public Integer getNews_id() {
+        return news_id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public Integer getAuthor_user_id() {
+        return author_user_id;
+    }
+
+    public String getAuthor_display_name() {
+        return author_display_name;
+    }
+
+    public Date getCreation_time() {
+        return creation_time;
+    }
+
+    public Date getModification_time() {
+        return modification_time;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

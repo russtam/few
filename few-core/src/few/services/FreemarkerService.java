@@ -14,6 +14,8 @@ public interface FreemarkerService {
 
     void processTemplate(String template, Writer writer, Object parameters);
 
+    String processStringTemplate(String code, Object parameters);
+
     String processTemplate(String template);
 
     String processTemplate(String template, Object parameters);

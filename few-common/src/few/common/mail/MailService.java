@@ -1,6 +1,8 @@
 package few.common.mail;
 
 import few.common.PropKeys;
+import few.common.cms.persistence.SimpleText;
+import few.common.cms.service.CMSService;
 import few.core.ServiceRegistry;
 import few.services.Configuration;
 import few.services.FreemarkerService;
@@ -35,6 +37,24 @@ public class MailService {
 
     FreemarkerService freemarker = ServiceRegistry.get(FreemarkerService.class);
     Configuration configuration = ServiceRegistry.get(Configuration.class);
+    CMSService cmsService = CMSService.get();
+    public String processTempate(MailTemplate mailTemplate) {
+
+        String path = mailTemplate.getTemplate();
+        if( path.startsWith("/mail-templates/") && path.endsWith(".ftl") ) {
+            path = path.substring("/mail-templates/".length(), path.length() - ".ftl".length());
+
+            // TODO : it needs to more deeper integration MailService with CMS.
+            SimpleText text = cmsService.selectSimpleText("mails", path);
+            if( text != null ) {
+                return freemarker.processStringTemplate(text.text, mailTemplate.getParameters());
+            }
+        }
+
+        return freemarker.processTemplate(
+                mailTemplate.getTemplate(),
+                mailTemplate.getParameters());
+    }
 
     public boolean sendEmailSimple(String email,
                                 MailTemplate mailTemplate) {
@@ -42,10 +62,7 @@ public class MailService {
         try {
             log.info("send email '" + mailTemplate.getSubject() + "'(" + mailTemplate.getTemplate() + ") to " + email);
 
-            String content =
-                    freemarker.processTemplate(
-                            mailTemplate.getTemplate(),
-                            mailTemplate.getParameters());
+            String content = processTempate(mailTemplate);
 
             sendEmailSimple(email, mailTemplate.getSubject(), content, mailTemplate.getContentType());
 
@@ -60,7 +77,7 @@ public class MailService {
         Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
     }
 
-    public void sendEmailSimple(String email,
+    private void sendEmailSimple(String email,
                                 String subject,
                                 String content, String contentType) throws Exception {
         Properties props = new Properties();
