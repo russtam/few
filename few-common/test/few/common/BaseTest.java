@@ -6,6 +6,7 @@ import few.services.Credentials;
 import junit.framework.TestCase;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Set;
 
 /**
@@ -22,6 +23,10 @@ public class BaseTest extends TestCase {
 
         ServiceRegistry.registerService(new Credentials() {
             public String getUserID(HttpServletRequest request) {
+                return "1";
+            }
+
+            public String getUserID(HttpSession session) {
                 return "1";
             }
 

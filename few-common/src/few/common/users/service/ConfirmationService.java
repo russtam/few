@@ -29,6 +29,7 @@ public class ConfirmationService extends BaseMyBatisServiceImpl {
 
     public void doCleanup() {
         session().delete("few.common.cleanupConfirmations");
+        session().delete("few.common.cleanupUsers");
         session().commit();
     }
 

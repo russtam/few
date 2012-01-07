@@ -4,6 +4,7 @@ import few.common.users.controller.LoginAction;
 import few.services.Credentials;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Collections;
 import java.util.Set;
 
@@ -16,7 +17,11 @@ import java.util.Set;
  */
 public class CredentialsImpl implements Credentials{
     public String getUserID(HttpServletRequest request) {
-        Integer id = (Integer) request.getSession().getAttribute(LoginAction.USER_ID_SESSION_KEY);
+        return getUserID(request.getSession());
+    }
+
+    public String getUserID(HttpSession session) {
+        Integer id = (Integer) session.getAttribute(LoginAction.USER_ID_SESSION_KEY);
         if( id != null )
             return String.valueOf(id);
         return null;

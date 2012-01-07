@@ -126,9 +126,11 @@ public class AuditAndLogFilter implements Filter, ServletContextListener, HttpSe
         try {
             if( se.getSession().isNew() ) {
                 AuditService.get().insertActivity(
+                        Integer.valueOf(credentials.getUserID(se.getSession())),
                         AuditKeys.NORMAL, AuditKeys.CREATE_SESSION, se.getSession().getId());
             } else {
                 AuditService.get().insertActivity(
+                        Integer.valueOf(credentials.getUserID(se.getSession())),
                         AuditKeys.MINOR, AuditKeys.RESTORE_SESSION, se.getSession().getId());
             }
         } finally {

@@ -33,4 +33,9 @@
             s.expire_time &lt; now()
     </delete>
 
+    <delete id="cleanupUsers">
+        delete from users.users u
+        where u.status_id = 0 and u.last_login_time is null and (u.registration_time + interval '1 day') > now()
+    </delete>
+
 </mapper>

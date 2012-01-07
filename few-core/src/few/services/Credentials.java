@@ -1,6 +1,7 @@
 package few.services;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Set;
 
 /**
@@ -13,6 +14,8 @@ import java.util.Set;
 public interface Credentials {
 
     String getUserID(HttpServletRequest request);
+
+    String getUserID(HttpSession session);
 
     boolean isSignedIn(HttpServletRequest request);
 
