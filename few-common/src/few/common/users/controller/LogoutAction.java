@@ -25,15 +25,14 @@ public class LogoutAction {
     public static AuditService auditService = AuditService.get();
     @ActionMethod(_default = true)
     public ActionResponse service(HttpSession session) throws ServletException, IOException {
+        auditService.insertActivity(
+                AuditKeys.NORMAL, AuditKeys.LOGOUT, "");
 
         Enumeration<String> e = session.getAttributeNames();
         while (e.hasMoreElements()) {
             String s = e.nextElement();
             session.removeAttribute(s);
         }
-        auditService.insertActivity(
-                AuditKeys.NORMAL, AuditKeys.LOGOUT, "");
-
 
         return ActionResponse.redirect(new MyURL(false, "/"));
     }

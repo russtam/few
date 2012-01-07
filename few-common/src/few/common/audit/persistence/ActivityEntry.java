@@ -30,7 +30,7 @@ public class ActivityEntry {
         this.type = type;
         this.text = text;
 
-        if( Context.get() != null && Context.get().getUserID() != null )
+        if( Context.get() != null && Context.get().getRequest().getSession(false) != null && Context.get().getUserID() != null )
             user_id = Integer.valueOf(Context.get().getUserID());
         timestamp = System.currentTimeMillis();
     }

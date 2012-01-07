@@ -58,14 +58,15 @@
 
         <table>
             <#list user_profile_fields as f>
+            <#if f.displayInProfile>
             <tr>
                 <td><span title="${f.hint!""}">${f.displayName}</span>
                 <td><input title="${f.hint!""}" placeholder="${f.hint!""}" type="text" name="${f.field_id}"/></td>
                 <td><@common.show_messages source="${f.field_id}"/></td>
+            </#if>
             </#list>
         </table>
 
-        <input type="hidden" name="registration"/>
         <input type="submit" value="Зарегистрироваться"/>
 
     </form>

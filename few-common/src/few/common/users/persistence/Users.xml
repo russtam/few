@@ -145,7 +145,7 @@
         from users.users u
         left join users.user_profile p on u.id = p.user_id
         <if test="id != null">
-            where p.user_id = #{id}
+            where u.id = #{id}
         </if>
     </select>
     <resultMap id="UserProfileMap" type="few.common.users.persistence.UserProfile">

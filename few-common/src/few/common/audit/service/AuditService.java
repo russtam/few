@@ -23,6 +23,16 @@ public class AuditService extends BaseMyBatisServiceImpl {
     private AuditService() {
     }
 
+    public void insertActivity(String type, String text) {
+        insertActivity(AuditKeys.NORMAL, type, text);
+    }
+    public void insertActivity(String type) {
+        insertActivity(AuditKeys.NORMAL, type, "");
+    }
+    public void insertActivity(Integer level, String type) {
+        insertActivity(level, type, "");
+    }
+
     public void insertActivity(Integer level, String type, String text) {
         ActivityEntry ae = new ActivityEntry(level, type, text);
         session().insert("few.common.insertActivity", ae );

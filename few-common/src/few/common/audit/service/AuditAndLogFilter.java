@@ -83,7 +83,7 @@ public class AuditAndLogFilter implements Filter, ServletContextListener, HttpSe
     static class ResponseForLogWrapper extends HttpServletResponseWrapper {
 
         private long start_time = System.currentTimeMillis();
-        private int status;
+        private int status = 200;
 
         public ResponseForLogWrapper(HttpServletResponse response) {
             super(response);

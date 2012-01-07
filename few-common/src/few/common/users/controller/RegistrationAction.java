@@ -86,6 +86,10 @@ public class RegistrationAction {
         }
 
         List<CustomField> profile = UserProfileService.get().validateProfile(fields);
+        if( profile == null ) {
+            Context.get().addMessage(new Message(Message.ERROR, "all", "Некорректно заполнен профиль." ));
+            return ActionResponse._default();
+        }
 
         if( Utils.isNull(password) ) {
             account.registerUserSendPassword(email, name, login, profile);
