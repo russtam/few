@@ -152,7 +152,7 @@ public class Dispatcher implements Filter{
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         String uri = ((HttpServletRequest)request).getRequestURI();
-        if( uri.startsWith(BASE_RESOURCE_PATH) || uri.startsWith("/favicon.ico")) {
+        if( uri.startsWith(BASE_RESOURCE_PATH) || uri.equals("/favicon.ico") || uri.equals("/robots.txt")) {
             filterChain.doFilter(request, response);
         } else
             service((HttpServletRequest)request, (HttpServletResponse) response);
