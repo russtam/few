@@ -123,15 +123,19 @@ public class AuditAndLogFilter implements Filter, ServletContextListener, HttpSe
 
     // a bit of audit...
     public void sessionCreated(HttpSessionEvent se) {
+        if( credentials == null ) {
+            credentials = ServiceRegistry.get(Credentials.class);
+        }
         try {
             if( se.getSession().isNew() ) {
                 AuditService.get().insertActivity(
                         Integer.valueOf(credentials.getUserID(se.getSession())),
                         AuditKeys.NORMAL, AuditKeys.CREATE_SESSION, se.getSession().getId());
             } else {
+                String user_id = credentials.getUserID(se.getSession());
+                Integer uid = user_id != null ? Integer.valueOf(user_id) : null;
                 AuditService.get().insertActivity(
-                        Integer.valueOf(credentials.getUserID(se.getSession())),
-                        AuditKeys.MINOR, AuditKeys.RESTORE_SESSION, se.getSession().getId());
+                        uid, AuditKeys.MINOR, AuditKeys.RESTORE_SESSION, se.getSession().getId());
             }
         } finally {
             AuditService.get().closeSession();
