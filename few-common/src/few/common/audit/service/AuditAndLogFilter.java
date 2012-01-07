@@ -33,7 +33,7 @@ public class AuditAndLogFilter implements Filter, ServletContextListener, HttpSe
         ResponseForLogWrapper resp = new ResponseForLogWrapper((HttpServletResponse) response);
 
         try {
-            chain.doFilter(request, response);
+            chain.doFilter(request, resp);
             try {
                 log((HttpServletRequest)request, resp, resp.getStatus());
             } catch(Throwable t) {
@@ -121,8 +121,13 @@ public class AuditAndLogFilter implements Filter, ServletContextListener, HttpSe
     // a bit of audit...
     public void sessionCreated(HttpSessionEvent se) {
         try {
-            AuditService.get().insertActivity(
-                    AuditKeys.NORMAL, AuditKeys.CREATE_SESSION, se.getSession().getId());
+            if( se.getSession().isNew() ) {
+                AuditService.get().insertActivity(
+                        AuditKeys.NORMAL, AuditKeys.CREATE_SESSION, se.getSession().getId());
+            } else {
+                AuditService.get().insertActivity(
+                        AuditKeys.MINOR, AuditKeys.RESTORE_SESSION, se.getSession().getId());
+            }
         } finally {
             AuditService.get().closeSession();
         }

@@ -21,6 +21,7 @@ public class AuditKeys {
     public static final String ERROR_REQUEST_PROCESSING = "few.common.error";
 
     public static final String CREATE_SESSION = "few.common.create_session";
+    public static final String RESTORE_SESSION = "few.common.restore_session";
     public static final String REGISTRATION = "few.common.registration";
     public static final String ACTIVATION = "few.common.activation";
     public static final String LOGIN = "few.common.login";
@@ -35,4 +36,6 @@ public class AuditKeys {
     public static final String USER_UPDATE = "few.users.update";
     public static final String USER_ADD = "few.users.add";
     public static final String USER_NEW_PASSWORD = "few.users.new_password";
+
+    public static final String CLEAR_ACTIVITES = "few.common.clear_activities";
 }

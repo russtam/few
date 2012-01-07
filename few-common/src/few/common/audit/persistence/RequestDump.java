@@ -22,4 +22,48 @@ public class RequestDump {
 
     public String session_id;
     public String user_id;
+
+    public String getUri() {
+        return uri;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public int getResponse_code() {
+        return response_code;
+    }
+
+    public int getProcessing_time() {
+        return processing_time;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public String getRemote_address() {
+        return remote_address;
+    }
+
+    public String getRemote_host() {
+        return remote_host;
+    }
+
+    public String getReferer() {
+        return referer;
+    }
+
+    public String getSession_id() {
+        return session_id;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public Date getTime() {
+        return new Date(timestamp);
+    }
 }

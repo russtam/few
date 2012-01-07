@@ -13,12 +13,15 @@
     </insert>
 
     <select id="selectActivities" resultType="few.common.audit.persistence.ActivityEntry">
-        SELECT l.*, u.display_name, r.role
+        SELECT l.*, u.display_name, u.role_id as role
         FROM common.activity_log l
         LEFT JOIN users.users u ON l.user_id = u.id
-        LEFT JOIN users.roles r ON u.role_id = r.id
+        ORDER BY l."timestamp" DESC
     </select>
 
+    <delete id="clearActivities">
+        delete from common.activity_log;
+    </delete>
 
     <insert id="insertRequestDump" parameterType="few.common.audit.persistence.RequestDump">
         INSERT INTO common.access_log (
@@ -32,6 +35,12 @@
 
     <select id="selectRequestDump" resultType="few.common.audit.persistence.RequestDump">
         select * from common.access_log
+        order by "timestamp" desc
     </select>
+
+    <delete id="clearAccess">
+        delete from common.access_log;
+    </delete>
+
 
 </mapper>

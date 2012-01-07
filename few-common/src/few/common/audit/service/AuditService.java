@@ -43,6 +43,11 @@ public class AuditService extends BaseMyBatisServiceImpl {
         return session().selectList("few.common.selectActivities", null);
     }
 
+    public void clearActivities() {
+        session().delete("few.common.clearActivities");
+        session().commit();
+    }
+
 
     public void insertRequestDump(RequestDump requestDump) {
         session().insert("few.common.insertRequestDump", requestDump);
@@ -51,5 +56,10 @@ public class AuditService extends BaseMyBatisServiceImpl {
 
     public List<RequestDump> selectRequestDump() {
         return session().selectList("few.common.selectRequestDump");
+    }
+
+    public void clearAccessLog() {
+        session().delete("few.common.clearAccess");
+        session().commit();
     }
 }

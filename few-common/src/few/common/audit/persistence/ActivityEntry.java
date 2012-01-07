@@ -34,4 +34,37 @@ public class ActivityEntry {
             user_id = Integer.valueOf(Context.get().getUserID());
         timestamp = System.currentTimeMillis();
     }
+
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public String getDisplay_name() {
+        return display_name;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public Date getTime() {
+        return new Date(timestamp);
+    }
+
 }
