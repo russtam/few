@@ -17,7 +17,6 @@ public class RequestDump {
     public long timestamp;
 
     public String remote_address;
-    public String remote_host;
     public String referer;
 
     public String session_id;
@@ -45,10 +44,6 @@ public class RequestDump {
 
     public String getRemote_address() {
         return remote_address;
-    }
-
-    public String getRemote_host() {
-        return remote_host;
     }
 
     public String getReferer() {

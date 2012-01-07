@@ -42,7 +42,6 @@ public class AuditServiceTest extends BaseTest{
         d.timestamp = System.currentTimeMillis();
 
         d.remote_address = "127.0.0.1";
-        d.remote_host = "localhost";
         d.referer = "google.com";
 
         d.session_id = "asda123asd";

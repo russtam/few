@@ -25,10 +25,10 @@
 
     <insert id="insertRequestDump" parameterType="few.common.audit.persistence.RequestDump">
         INSERT INTO common.access_log (
-          uri, method, response_code, processing_time, "timestamp", remote_address, remote_host,
+          uri, method, response_code, processing_time, "timestamp", remote_address,
           referer, session_id, user_id )
         VALUES (
-          #{uri}, #{method}, #{response_code}, #{processing_time}, #{timestamp}, #{remote_address}, #{remote_host},
+          #{uri}, #{method}, #{response_code}, #{processing_time}, #{timestamp}, #{remote_address},
           #{referer}, #{session_id}, #{user_id}
         );
     </insert>

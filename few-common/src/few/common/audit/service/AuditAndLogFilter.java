@@ -67,8 +67,11 @@ public class AuditAndLogFilter implements Filter, ServletContextListener, HttpSe
         dump.processing_time = (int) (System.currentTimeMillis() - response.getStart_time());
         dump.timestamp = response.getStart_time();
 
-        dump.remote_address = request.getRemoteAddr();
-        dump.remote_host = request.getRemoteHost();
+        if( request.getRemoteAddr().equals("127.0.0.1") && request.getHeader("X-Real-IP") != null )
+            dump.remote_address = request.getHeader("X-Real-IP");
+        else
+            dump.remote_address = request.getRemoteAddr();
+
         dump.referer = request.getHeader("referer");
 
         dump.session_id = request.getRequestedSessionId();
