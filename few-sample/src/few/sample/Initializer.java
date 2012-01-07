@@ -1,5 +1,7 @@
 package few.sample;
 
+import few.common.audit.service.AuditKeys;
+import few.common.audit.service.AuditService;
 import few.common.users.service.CredentialsImpl;
 import few.core.ServiceRegistry;
 import few.impl.DefaultConfigurationImpl;
@@ -20,9 +22,9 @@ public class Initializer implements ServletContextListener{
         ServiceRegistry.registerService(DBConfig.class);
         ServiceRegistry.registerService(CredentialsImpl.class);
         ServiceRegistry.registerService(CustomUserProfile.class);
+
     }
 
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
-
     }
 }

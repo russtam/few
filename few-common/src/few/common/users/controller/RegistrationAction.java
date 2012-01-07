@@ -1,6 +1,8 @@
 package few.common.users.controller;
 
 import few.*;
+import few.common.audit.service.AuditKeys;
+import few.common.audit.service.AuditService;
 import few.common.users.persistence.CustomField;
 import few.common.users.service.AccountService;
 import few.common.users.service.UserProfileService;
@@ -24,8 +26,9 @@ import java.util.Map;
 @ActionClass(action = "registration")
 public class RegistrationAction {
 
-    private final static UserService users = UserService.get();
-    private final static AccountService account = AccountService.get();
+    private static UserService users = UserService.get();
+    private static AccountService account = AccountService.get();
+    private static AuditService auditService = AuditService.get();
 
     @ActionMethod(_default = true)
     public ActionResponse _default() {
@@ -89,6 +92,8 @@ public class RegistrationAction {
         } else {
             account.registerUserWithActivation(email, name, login, password, profile);
         }
+        auditService.insertActivity(
+                AuditKeys.NORMAL, AuditKeys.REGISTRATION, email);
 
         Context.get().addMessage(new Message(Message.INFO, "all", "Аккаунт успешно создан, проверьте почту." ));
 

@@ -2,6 +2,7 @@ package few.common.audit.service;
 
 import few.common.BaseMyBatisServiceImpl;
 import few.common.audit.persistence.ActivityEntry;
+import few.common.audit.persistence.RequestDump;
 import few.utils.MapBuilder;
 
 import java.util.List;
@@ -22,20 +23,23 @@ public class AuditService extends BaseMyBatisServiceImpl {
     private AuditService() {
     }
 
-    public void insertActivity(Integer user_id, Integer level, String type, String text) {
-        session().insert("insertActivity", new MapBuilder()
-                .add("user_id", user_id)
-                .add("level", level)
-                .add("type", type)
-                .add("text", text)
-                );
+    public void insertActivity(Integer level, String type, String text) {
+        ActivityEntry ae = new ActivityEntry(level, type, text);
+        session().insert("few.common.insertActivity", ae );
         session().commit();
     }
 
     public List<ActivityEntry> selectActivities() {
-        return session().selectList("selectActivities", null);
+        return session().selectList("few.common.selectActivities", null);
     }
 
 
+    public void insertRequestDump(RequestDump requestDump) {
+        session().insert("few.common.insertRequestDump", requestDump);
+        session().commit();
+    }
 
+    public List<RequestDump> selectRequestDump() {
+        return session().selectList("few.common.selectRequestDump");
+    }
 }

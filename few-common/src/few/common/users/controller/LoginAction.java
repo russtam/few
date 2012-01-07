@@ -1,6 +1,8 @@
 package few.common.users.controller;
 
 import few.*;
+import few.common.audit.service.AuditKeys;
+import few.common.audit.service.AuditService;
 import few.common.users.persistence.SimpleUser;
 import few.common.users.service.AccountService;
 import few.common.users.service.UserService;
@@ -21,7 +23,8 @@ public class LoginAction {
 
     public static final String USER_ID_SESSION_KEY = "id";
 
-    private final static UserService users = UserService.get();
+    private static UserService users = UserService.get();
+    private static AuditService auditService = AuditService.get();
 
     @ActionMethod(_default = true)
     public ActionResponse render() {
@@ -42,19 +45,28 @@ public class LoginAction {
         SimpleUser user = users.selectUserBySimpleAuth(login, password);
         if( user == null ) {
             Context.get().addMessage(new Message(Message.ERROR, "Неправильный логин или пароль."));
+            auditService.insertActivity(
+                    AuditKeys.NORMAL, AuditKeys.BAD_LOGIN, login);
             return ActionResponse.redirect(new MyURL(false, "/login"));
         }
         if( user.status_id == SimpleUser.NOT_ACTIVE) {
             Context.get().addMessage(new Message(Message.ERROR, "Аккаунт не активирован. Проверьте почту."));
+            auditService.insertActivity(
+                    AuditKeys.NORMAL, AuditKeys.BAD_LOGIN, login);
             return ActionResponse.redirect(new MyURL(false, "/login"));
         }
         if( user.status_id == SimpleUser.BLOCKED) {
             Context.get().addMessage(new Message(Message.ERROR, "Пользователь заблокирован. Обратитесь к администратору сайта."));
+            auditService.insertActivity(
+                    AuditKeys.NORMAL, AuditKeys.BAD_LOGIN, login);
             return ActionResponse.redirect(new MyURL(false, "/login"));
         }
         if( user.status_id == SimpleUser.ACTIVE ) {
             session.setAttribute(USER_ID_SESSION_KEY, user.user_id);
             users.updateLastLogin(user.user_id);
+            auditService.insertActivity(
+                    AuditKeys.NORMAL, AuditKeys.LOGIN, login);
+
             if(Utils.isNull(redirect))
                 return ActionResponse.redirect(
                         new MyURL(false, "/")
@@ -76,6 +88,8 @@ public class LoginAction {
         if( user_id != null ) {
             Context.get().addMessage(new Message(Message.INFO, "Ваш аккаунт успешно подтверждён."));
             session.setAttribute(USER_ID_SESSION_KEY, user_id);
+            auditService.insertActivity(
+                    AuditKeys.NORMAL, AuditKeys.ACTIVATION, "");
             return ActionResponse.redirect("user_profile");
         } else {
             Context.get().addMessage(new Message(Message.INFO, "Ссылка устарела."));

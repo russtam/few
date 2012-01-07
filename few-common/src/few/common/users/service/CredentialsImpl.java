@@ -16,7 +16,10 @@ import java.util.Set;
  */
 public class CredentialsImpl implements Credentials{
     public String getUserID(HttpServletRequest request) {
-        return String.valueOf( (Integer) request.getSession().getAttribute(LoginAction.USER_ID_SESSION_KEY) );
+        Integer id = (Integer) request.getSession().getAttribute(LoginAction.USER_ID_SESSION_KEY);
+        if( id != null )
+            return String.valueOf(id);
+        return null;
     }
 
     public boolean isSignedIn(HttpServletRequest request) {

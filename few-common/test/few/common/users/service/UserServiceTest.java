@@ -28,8 +28,12 @@ public class UserServiceTest extends BaseTest {
     private final String pwd = "pwd";
     private final boolean active = true;
 
-    protected void setUp() throws Exception {
+    public void setUp() throws Exception {
         users = UserService.get();
+        super.setUp();
+    }
+
+    public void tearDown() throws Exception {
         removeAllUsers();
     }
 

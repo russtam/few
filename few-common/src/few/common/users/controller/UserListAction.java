@@ -1,6 +1,8 @@
 package few.common.users.controller;
 
 import few.*;
+import few.common.audit.service.AuditKeys;
+import few.common.audit.service.AuditService;
 import few.common.mail.MailService;
 import few.common.users.mail.RegistrationWithPasswordMail;
 import few.common.users.persistence.CustomField;
@@ -31,6 +33,7 @@ public class UserListAction {
 
     private UserService userService = UserService.get();
     private MailService mailService = MailService.get();
+    private AuditService auditService = AuditService.get();
 
     @ActionMethod
     public ActionResponse delete(
@@ -38,6 +41,7 @@ public class UserListAction {
             @RequestParameter(name = "delete") String fake) {
 
         userService.deleteUser(user_id);
+        auditService.insertActivity(AuditKeys.NORMAL, AuditKeys.USER_DELETE, String.valueOf(user_id));
 
         return ActionResponse.redirect("user_list");
     }
@@ -52,6 +56,7 @@ public class UserListAction {
         userService.updateSimpleUser(user);
 
         Context.get().addMessage( new Message(Message.INFO, "Пользователь заблокирован.") );
+        auditService.insertActivity(AuditKeys.NORMAL, AuditKeys.USER_DISABLE, String.valueOf(user_id));
 
         return here(user_id);
     }
@@ -68,6 +73,7 @@ public class UserListAction {
         SimpleUser user = userService.selectUser(user_id);
         user.status_id = 1;
         userService.updateSimpleUser(user);
+        auditService.insertActivity(AuditKeys.NORMAL, AuditKeys.USER_ACTIVATE, String.valueOf(user_id));
 
         Context.get().addMessage( new Message(Message.INFO, "Пользователь активирован.") );
         return here(user_id);
@@ -111,6 +117,7 @@ public class UserListAction {
                 );
             }
         }
+        auditService.insertActivity(AuditKeys.NORMAL, AuditKeys.USER_UPDATE, String.valueOf(user_id));
         return here(user_id);
     }
 
@@ -140,6 +147,7 @@ public class UserListAction {
                 new Message(Message.WARNING, "Новый пароль выслан на email.")
         );
 
+        auditService.insertActivity(AuditKeys.NORMAL, AuditKeys.USER_ADD, String.valueOf(user_id));
         return here(user_id);
     }
 
@@ -165,6 +173,7 @@ public class UserListAction {
         mailService.sendEmailSimple(user.email, tpl);
 
         Context.get().addMessage( new Message(Message.INFO, "Новый пароль выслан пользователю.") );
+        auditService.insertActivity(AuditKeys.NORMAL, AuditKeys.USER_NEW_PASSWORD, String.valueOf(user_id));
         return here(user_id);
     }
 

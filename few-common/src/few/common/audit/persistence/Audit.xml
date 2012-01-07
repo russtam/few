@@ -3,21 +3,35 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="">
+<mapper namespace="few.common">
 
-    <insert id="insertActivity">
+    <insert id="insertActivity" parameterType="few.common.audit.persistence.ActivityEntry">
         INSERT INTO common.activity_log
           ( user_id, level, type, text, "timestamp" )
         VALUES
-          ( #{user_id}, #{level}, #{type}, #{text}, now() );
+          ( #{user_id}, #{level}, #{type}, #{text}, #{timestamp} );
     </insert>
 
-    <select id="selectActivities" resultType="drgn.data.cms.model.ActivityEntry">
+    <select id="selectActivities" resultType="few.common.audit.persistence.ActivityEntry">
         SELECT l.*, u.display_name, r.role
         FROM common.activity_log l
         LEFT JOIN users.users u ON l.user_id = u.id
         LEFT JOIN users.roles r ON u.role_id = r.id
     </select>
 
+
+    <insert id="insertRequestDump" parameterType="few.common.audit.persistence.RequestDump">
+        INSERT INTO common.access_log (
+          uri, method, response_code, processing_time, "timestamp", remote_address, remote_host,
+          referer, session_id, user_id )
+        VALUES (
+          #{uri}, #{method}, #{response_code}, #{processing_time}, #{timestamp}, #{remote_address}, #{remote_host},
+          #{referer}, #{session_id}, #{user_id}
+        );
+    </insert>
+
+    <select id="selectRequestDump" resultType="few.common.audit.persistence.RequestDump">
+        select * from common.access_log
+    </select>
 
 </mapper>

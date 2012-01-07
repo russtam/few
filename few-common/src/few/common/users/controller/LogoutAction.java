@@ -1,6 +1,8 @@
 package few.common.users.controller;
 
 import few.*;
+import few.common.audit.service.AuditKeys;
+import few.common.audit.service.AuditService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import java.util.Enumeration;
 @Restriction(roles = "user")
 public class LogoutAction {
 
+    public static AuditService auditService = AuditService.get();
     @ActionMethod(_default = true)
     public ActionResponse service(HttpSession session) throws ServletException, IOException {
 
@@ -28,6 +31,9 @@ public class LogoutAction {
             String s = e.nextElement();
             session.removeAttribute(s);
         }
+        auditService.insertActivity(
+                AuditKeys.NORMAL, AuditKeys.LOGOUT, "");
+
 
         return ActionResponse.redirect(new MyURL(false, "/"));
     }
