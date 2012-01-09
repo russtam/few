@@ -26,6 +26,7 @@
     <orderEntry type="library" scope="TEST" name="junit" level="project" />
     <orderEntry type="library" name="mail" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="postgres" level="project" />
+    <orderEntry type="library" name="freemarker" level="project" />
   </component>
 </module>
 

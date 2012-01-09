@@ -1,5 +1,7 @@
 [#ftl]
 [#-- @implicitly included --]
+[#-- @ftlvariable name="model_beans" type="few.common.dispatcher_view.presentation.ViewModelBeans" --]
+[#-- @ftlvariable name="actions" type="few.common.dispatcher_view.presentation.ViewActions" --]
 [#-- @ftlvariable name="news_store" type="few.common.cms.presentation.NewsStore" --]
 [#-- @ftlvariable name="texts_store" type="few.common.cms.presentation.TextsStore" --]
 [#-- @ftlvariable name="userList" type="few.common.users.presentation.UserList" --]

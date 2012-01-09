@@ -25,6 +25,26 @@ public class DispatcherMap {
         String unauthorized_redirect;
         ActionMethodDescription defaultMethod;
         List<ActionMethodDescription> methods = new LinkedList<ActionMethodDescription>();
+
+        public String getName() {
+            return name;
+        }
+
+        public String[] getAuthorized_roles() {
+            return authorized_roles;
+        }
+
+        public String getUnauthorized_redirect() {
+            return unauthorized_redirect;
+        }
+
+        public ActionMethodDescription getDefaultMethod() {
+            return defaultMethod;
+        }
+
+        public List<ActionMethodDescription> getMethods() {
+            return methods;
+        }
     }
 
     public static class ActionMethodDescription {
@@ -33,18 +53,52 @@ public class DispatcherMap {
         String[] authorized_roles;
         String unauthorized_redirect;
         List<String> parameters = new LinkedList<String>();
+
+        public Method getMethod() {
+            return method;
+        }
+
+        public String[] getAuthorized_roles() {
+            return authorized_roles;
+        }
+
+        public String getUnauthorized_redirect() {
+            return unauthorized_redirect;
+        }
+
+        public List<String> getParameters() {
+            return parameters;
+        }
     }
 
     public static class ModelBeanDescription {
         String name;
         Class clazz;
         Method method;
+
+        public String getName() {
+            return name;
+        }
+
+        public Class getClazz() {
+            return clazz;
+        }
+
+        public Method getMethod() {
+            return method;
+        }
+    }
+
+    private static DispatcherMap instance;
+    public static DispatcherMap get() {
+        return instance;
     }
 
     public static DispatcherMap build(ServletContext context, ClassLoader classLoader) {
         DispatcherMap ret = new DispatcherMap();
         try {
             ret._build(context, classLoader);
+            instance = ret;
             return ret;
         } catch (Exception e) {
             throw new Error(e);
@@ -117,15 +171,7 @@ public class DispatcherMap {
                 Restriction restriction = m.getAnnotation(Restriction.class);
                 if( restriction == null )
                     restriction = rc;
-                String action;
-                if(am.action().equals(ActionMethod.INHERITED) ) {
-                    if( ac == null ) {
-                        log.severe("you sould use ActionClass annotation or action parameter in ActionMethod. Class " + clazz.getName() + ", Method " + m.getName());
-                        continue;
-                    }
-                    action = ac.action();
-                } else
-                    action = am.action();
+                String action = ac.action();
 
                 ActionDescription ad = actions.get(action);
                 if( ad == null ) {

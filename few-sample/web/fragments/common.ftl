@@ -30,6 +30,7 @@
     <hr/>
         <#if userInfo.isUserInRole("admin")>
             <a href="/user_list">user_list</a>
+            <a href="/dispatcher">dispatcher</a>
         <#else >
             Navigation
         </#if>
