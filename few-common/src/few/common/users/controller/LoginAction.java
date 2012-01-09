@@ -65,7 +65,7 @@ public class LoginAction {
             session.setAttribute(USER_ID_SESSION_KEY, user.user_id);
             users.updateLastLogin(user.user_id);
             auditService.insertActivity(
-                    AuditKeys.NORMAL, AuditKeys.LOGIN, login);
+                    AuditKeys.NORMAL, AuditKeys.LOGIN, "");
 
             if(Utils.isNull(redirect))
                 return ActionResponse.redirect(
