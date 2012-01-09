@@ -31,6 +31,8 @@
         <#if userInfo.isUserInRole("admin")>
             <a href="/user_list">user_list</a>
             <a href="/dispatcher">dispatcher</a>
+            <a href="/activity_log">activity_log</a>
+            <a href="/access_log">access_log</a>
         <#else >
             Navigation
         </#if>
