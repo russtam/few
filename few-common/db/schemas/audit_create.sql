@@ -5,7 +5,6 @@ CREATE TABLE common.access_log (
   processing_time INTEGER NOT NULL, 
   "timestamp" BIGINT NOT NULL, 
   remote_address VARCHAR(40) NOT NULL, 
-  remote_host VARCHAR(40) NOT NULL, 
   referer VARCHAR(256), 
   session_id VARCHAR(40), 
   user_id VARCHAR(20)
