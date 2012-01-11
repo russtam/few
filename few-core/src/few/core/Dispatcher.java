@@ -3,7 +3,8 @@ package few.core;
 import few.ActionResponse;
 import few.Context;
 import few.MyURL;
-import few.support.FreemarkerService;
+import few.impl.FreemarkerServiceImpl;
+import few.services.FreemarkerService;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -28,9 +29,11 @@ public class Dispatcher implements Filter{
     ServletContext servletContext;
     DispatcherMap config;
     DispatcherSelector selector;
+    FreemarkerService freemarker;
     public void init(FilterConfig filterConfig) throws ServletException {
         servletContext = filterConfig.getServletContext();
-        FreemarkerService.get().initFreemarker(servletContext);
+        Initializer.init(servletContext);
+        freemarker = ServiceRegistry.get(FreemarkerService.class);
         config = DispatcherMap.build(servletContext, Thread.currentThread().getContextClassLoader());
         selector = new DispatcherSelector(config);
     }
@@ -144,18 +147,18 @@ public class Dispatcher implements Filter{
         response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, post-check=0, pre-check=0");
         response.setHeader("Pragma", "no-cache");
 
-        FreemarkerService.get().processTemplate(template, response.getWriter());
+        freemarker.processTemplate(template, response.getWriter());
     }
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         String uri = ((HttpServletRequest)request).getRequestURI();
-        if( uri.startsWith(BASE_RESOURCE_PATH) || uri.startsWith("/favicon.ico")) {
+        if( uri.startsWith(BASE_RESOURCE_PATH) || uri.equals("/favicon.ico") || uri.equals("/robots.txt")) {
             filterChain.doFilter(request, response);
         } else
             service((HttpServletRequest)request, (HttpServletResponse) response);
     }
 
     public void destroy() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        Initializer.fini();
     }
 }

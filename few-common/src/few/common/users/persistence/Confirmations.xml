@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="few.common">
+
+    <insert id="insertConfirmation" parameterType="few.common.users.persistence.Confirmation">
+        insert into users.secure_actions
+            (key, parameters,expire_time)
+        values
+            ( #{key}, #{parameters}, #{expire_time} )
+    </insert>
+
+    <select id="selectConfirmation" resultType="String" parameterType="String">
+        select s.parameters
+        from users.secure_actions s
+        where
+            s.key = #{id} and
+            s.expire_time &gt; now()
+    </select>
+
+    <delete id="deleteConfirmation" parameterType="String">
+        delete
+        from users.secure_actions s
+        where s.key = #{id}
+    </delete>
+
+    <delete id="cleanupConfirmations">
+        delete
+        from users.secure_actions s
+        where
+            s.expire_time &lt; now()
+    </delete>
+
+    <delete id="cleanupUsers">
+        delete from users.users u
+        where u.status_id = 0 and u.last_login_time is null and (u.registration_time + interval '1 day') > now()
+    </delete>
+
+</mapper>

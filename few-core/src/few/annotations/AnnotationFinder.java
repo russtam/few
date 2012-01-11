@@ -47,12 +47,14 @@ public class AnnotationFinder {
         // 1. scan WEB-INF/classes folder
         String u = context.getRealPath("/WEB-INF/classes");
         File f = new File(u);
-        scanClassesFolder(f);
+        if( f.exists() )
+            scanClassesFolder(f);
 
         // 2. scan WEB-INF/lib folder
         u = context.getRealPath("/WEB-INF/lib");
         f = new File(u);
-        scanLibFolder(f);
+        if( f.exists() )
+            scanLibFolder(f);
 
 
         return annotations;

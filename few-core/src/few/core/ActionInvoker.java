@@ -3,15 +3,18 @@ package few.core;
 import few.ActionResponse;
 import few.Context;
 import few.RequestParameter;
+import few.RequestParameters;
 import few.support.MultipartRequest;
 import org.apache.commons.fileupload.FileItem;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -92,12 +95,50 @@ public class ActionInvoker {
 
                 String value = request.getParameter(param.name());
                 if( value == null && param.required() ) {
-                    throw new IllegalArgumentException("no required parameter '" + param.name() + "' in request");
+                    throw new IllegalArgumentException("no required parameter '" + param.name() + "' in request, class - " + method.getDeclaringClass().getName());
                 } if( value != null ) {
-                    ret[i] = valueOf(value, type);
+                    if( type == Boolean.class && (value.equals("on") || value.equals("off")) ) {
+                        ret[i] = value.equals("on");
+                    }
+                    else {
+                        if( !type.isArray() )
+                            ret[i] = valueOf(value, type);
+                        else {
+                            String[] values = request.getParameterValues(param.name());
+                            Object[] o = (Object[]) Array.newInstance(type.getComponentType(), values.length);
+                            for (int j = 0; j < values.length; j++) {
+                                o[j] = valueOf(values[j], type.getComponentType());
+                            }
+                            ret[i] = o;
+                        }
+                    }
+                }
+            } else
+            if( annotations.length > 0 && annotations[0].annotationType() == RequestParameters.class ) {
+                if( type != Map.class ) {
+                    throw new IllegalArgumentException("a type of action parameter annotated with RequestParameters should be Map<String, String>");
+                }
+                // 1. remember declared parameters
+                HashSet<String> declared = new HashSet<String>();
+                for (Annotation[] an : method.getParameterAnnotations()) {
+                    if( an.length == 1 && an[0].annotationType() == RequestParameter.class) {
+                        RequestParameter rp = (RequestParameter) an[0];
+                        declared.add(rp.name());
+                    }
                 }
 
+                // 2. fill Map
+                HashMap<String, String> map = new HashMap<String, String>();
+                for (Object o : request.getParameterMap().entrySet()) {
+                    Map.Entry<String, String[]> entry = (Map.Entry<String, String[]>) o;
+                    if( !declared.contains(entry.getKey())) {
+                        if( entry.getValue().length > 0)
+                            map.put(entry.getKey(), entry.getValue()[0]);
+                    }
+                }
+                ret[i] = map;
             }
+
         }
 
         return ret;

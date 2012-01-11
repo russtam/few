@@ -48,6 +48,14 @@ public class ActionResponse {
             return new ActionResponse(REDIRECT, "/" + where);
     }
 
+    public static ActionResponse referer() {
+        String referer = Context.get().getRequest().getHeader("referer");
+        if( referer != null )
+            return new ActionResponse(REDIRECT, referer);
+        else
+            return new ActionResponse(REDIRECT, "/");
+    }
+
     public static ActionResponse redirect(String where) {
         return new ActionResponse(REDIRECT, where);
     }

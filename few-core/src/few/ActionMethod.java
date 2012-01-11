@@ -17,7 +17,6 @@ import java.lang.annotation.Target;
 public @interface ActionMethod {
     public static final String INHERITED = "INHERITED";
 
-    public abstract String action() default INHERITED;
     public abstract boolean _default() default false;
 
 //    public abstract boolean dispatchByParameters() default true;

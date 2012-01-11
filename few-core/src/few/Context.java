@@ -2,8 +2,8 @@ package few;
 
 import few.core.DispatcherMap;
 import few.core.LazyDataModel;
-import few.needed.Credentials;
-import few.needed.OuterFactory;
+import few.core.ServiceRegistry;
+import few.services.Credentials;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -46,9 +46,9 @@ public class Context {
     private Map<String, List<Message>> messages;
     private LazyDataModel model;
 
-    private Credentials credentials = OuterFactory.get().getCredentials();
+    private Credentials credentials = ServiceRegistry.get(Credentials.class);
 
-    private Context(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext, DispatcherMap config) {
+    protected Context(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext, DispatcherMap config) {
         this.request = request;
         this.response = response;
         this.servletContext = servletContext;
@@ -90,6 +90,8 @@ public class Context {
 
     private Set<String> userRoles;
     public boolean isUserInRole(String role) {
+        if( !isSignedIn() )
+            return false;
         if( userRoles == null ) {
             userRoles = credentials.getRoles(request);
         }
