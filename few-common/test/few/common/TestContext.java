@@ -21,6 +21,7 @@ import java.util.Set;
  * Time: 13:52
  * To change this template use File | Settings | File Templates.
  */
+@SuppressWarnings(value = "deprecation")
 public class TestContext extends Context{
 
     public static void set() {
@@ -38,6 +39,7 @@ public class TestContext extends Context{
                 new DispatcherMap());
     }
 
+    @SuppressWarnings(value = "deprecation")
     public static class TestHttpServletRequest implements HttpServletRequest {
         TestHttpSession session = new TestHttpSession();
 
@@ -99,6 +101,7 @@ public class TestContext extends Context{
         public int getLocalPort() {return 0;}
     }
 
+    @SuppressWarnings(value = "deprecation")
     public static class TestHttpServletResponse implements HttpServletResponse{
 
         public void addCookie(Cookie cookie) {}
@@ -135,6 +138,7 @@ public class TestContext extends Context{
         public Locale getLocale() {return null;}
     }
 
+    @SuppressWarnings(value = "deprecation")
     public static class TestServletContext implements ServletContext {
         public ServletContext getContext(String uripath) {return null;}
         public String getContextPath() {return null;}
@@ -163,6 +167,7 @@ public class TestContext extends Context{
         public String getServletContextName() {return null;}
     }
 
+    @SuppressWarnings(value = "deprecation")
     public static class TestHttpSession implements HttpSession {
         public long getCreationTime() {return 0;}
         public String getId() {return null;}
@@ -170,6 +175,7 @@ public class TestContext extends Context{
         public ServletContext getServletContext() {return null;}
         public void setMaxInactiveInterval(int interval) {}
         public int getMaxInactiveInterval() {return 0;}
+        @SuppressWarnings(value = "deprecation")
         public HttpSessionContext getSessionContext() {return null;}
         public Object getAttribute(String name) {return null;}
         public Object getValue(String name) {return null;}
