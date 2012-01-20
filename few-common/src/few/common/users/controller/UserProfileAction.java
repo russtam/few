@@ -96,7 +96,7 @@ public class UserProfileAction {
     @ActionMethod
     public void updateProfile(
             @RequestParameter(name = "profile") String action,
-            @RequestParameters Map<String, String> fields
+            @RequestParameters Map<String, String[]> fields
     ) {
         List<CustomField> profile = UserProfileService.get().validateProfile(fields);
         if( profile == null ) {

@@ -89,7 +89,7 @@ public class UserListAction {
             @RequestParameter(name = "email") String email,
             @RequestParameter(name = "status") Integer status,
             @RequestParameter(name = "display_role") String display_role,
-            @RequestParameters Map<String, String> fields
+            @RequestParameters Map<String, String[]> fields
     ) {
         SimpleUser user = userService.selectUser(user_id);
 
@@ -131,7 +131,7 @@ public class UserListAction {
             @RequestParameter(name = "email") String email,
             @RequestParameter(name = "active") Boolean active,
             @RequestParameter(name = "display_role") String display_role,
-            @RequestParameters Map<String, String> fields
+            @RequestParameters Map<String, String[]> fields
     ) {
         Context.get().addMessage( new Message(Message.INFO, "Пользователь создан.") );
 

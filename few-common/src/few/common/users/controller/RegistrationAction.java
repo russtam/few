@@ -44,7 +44,7 @@ public class RegistrationAction {
             @RequestParameter(name = "name") String name,
             @RequestParameter(name = "password") String password,
             @RequestParameter(name = "password1") String password1,
-            @RequestParameters Map<String, String> fields
+            @RequestParameters Map<String, String[]> fields
 
     ) throws ServletException, IOException {
 

@@ -35,19 +35,19 @@ public class UserProfileService {
         customFieldMap = Collections.unmodifiableMap(customFieldMap);
     }
 
-    public List<CustomField> validateProfile(Map<String, String> fields) {
+    public List<CustomField> validateProfile(Map<String, String[]> fields) {
         if( userProfile == null && !fields.isEmpty() )
             return null;
 
         List<CustomField> list = new ArrayList<CustomField>(fields.size());
-        for (Map.Entry<String, String> entry : fields.entrySet()) {
+        for (Map.Entry<String, String[]> entry : fields.entrySet()) {
             CustomUserProfile.CustomField f = getCustomFields().get(entry.getKey());
             if( f == null )
                 return null;
-            if( !f.validate(entry.getValue()) )
+            if( !f.validate(entry.getValue()[0]) )
                 return null;
 
-            list.add(new CustomField(entry.getKey(), entry.getValue()));
+            list.add(new CustomField(entry.getKey(), entry.getValue()[0]));
         }
         return list;
     }
