@@ -19,39 +19,34 @@ import java.util.logging.Logger;
  */
 public class DispatcherMap {
 
-    public static class ActionDescription {
+    public static class ControllerDesc {
         String name;
-        String[] authorized_roles;
-        String unauthorized_redirect;
-        ActionMethodDescription defaultMethod;
-        List<ActionMethodDescription> methods = new LinkedList<ActionMethodDescription>();
+        String permission;
+        Object instance;
+        List<ActionDescription> methods = new LinkedList<ActionDescription>();
 
         public String getName() {
             return name;
         }
 
-        public String[] getAuthorized_roles() {
-            return authorized_roles;
+        public String getPermission() {
+            return permission;
         }
 
-        public String getUnauthorized_redirect() {
-            return unauthorized_redirect;
+        public Object getInstance() {
+            return instance;
         }
 
-        public ActionMethodDescription getDefaultMethod() {
-            return defaultMethod;
-        }
-
-        public List<ActionMethodDescription> getMethods() {
+        public List<ActionDescription> getMethods() {
             return methods;
         }
     }
 
-    public static class ActionMethodDescription {
-        Object instance;
+    public static class ActionDescription {
+        ControllerDesc ctrl;
+        String name;
         Method method;
-        String[] authorized_roles;
-        String unauthorized_redirect;
+        String permission;
         List<String> parameters = new LinkedList<String>();
 
         public Method getMethod() {
