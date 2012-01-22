@@ -26,15 +26,6 @@ public class LoginAction {
     private static UserService users = UserService.get();
     private static AuditService auditService = AuditService.get();
 
-    @Action(_default = true)
-    public ActionResponse render() {
-        if( Context.get().isSignedIn() ) {
-            return ActionResponse.redirect("user_profile");
-        } else {
-            return ActionResponse._default();
-        }
-    }
-
     @Action()
     public ActionResponse login(
             @RequestParameter(name = "login") String login,

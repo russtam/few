@@ -13,7 +13,7 @@ import java.util.List;
  * Time: 3:45
  * To change this template use File | Settings | File Templates.
  */
-@ModelBean(name = "user_roles")
+@ModelBean(name = "user_roles", permission = "admin")
 public class UserRoles extends ListWrapper<String> {
 
 

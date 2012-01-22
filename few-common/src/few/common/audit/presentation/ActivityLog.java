@@ -14,7 +14,7 @@ import java.util.List;
  * Time: 22:39
  * To change this template use File | Settings | File Templates.
  */
-@ModelBean(name = "activity_log")
+@ModelBean(name = "activity_log", permission = "admin")
 public class ActivityLog extends ListWrapper<ActivityEntry>{
 
 

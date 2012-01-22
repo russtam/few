@@ -11,12 +11,8 @@ import few.common.cms.service.CMSService;
  * Time: 14:30
  * To change this template use File | Settings | File Templates.
  */
-@Controller(name = "simple_text_admin")
+@Controller(name = "simple_text_admin", permission = "cms-admin")
 public class SimpleTextController {
-
-    @Action( _default = true)
-    public void render() {
-    }
 
     CMSService cmsService = CMSService.get();
     @Action

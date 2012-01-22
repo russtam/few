@@ -11,7 +11,7 @@
         <br/>
 
         <@common.show_messages source="email"/>
-        <form action="/user_profile" method="POST">
+        <form action="/user_profile.changeEMail" method="POST">
             <table>
                 <tr>
                     <td>Ваш e-mail: </td>
@@ -22,7 +22,7 @@
         </form>
 
         <@common.show_messages source="display_name"/>
-        <form action="/user_profile" method="POST">
+        <form action="/user_profile.changeDisplayName" method="POST">
             <table>
                 <tr>
                     <td>Ваше имя: </td>
@@ -33,7 +33,7 @@
         </form>
 
         <@common.show_messages source="password"/>
-        <form action="/user_profile" method="post" autocomplete="off">
+        <form action="/user_profile.changePassword" method="post" autocomplete="off">
             <table>
                 <tr>
                     <td>Старый пароль: </td>
@@ -58,7 +58,7 @@
         </#list>
 
         <#if has_fields>
-            <form action="/user_profile?profile" method="post" autocomplete="off">
+            <form action="/user_profile.updateProfile" method="post" autocomplete="off">
                 <table>
                     <#list user_profile_fields as f>
                     <#if f.displayInProfile>

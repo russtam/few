@@ -75,22 +75,22 @@
     <@show_messages/>
 
     <a href="/user_list"><< назад</a>
-    <form action="/user_list?user_id=${user_profile.user_id?c}&delete" method="POST">
+    <form action="/user_list.delete?user_id=${user_profile.user_id?c}" method="POST">
         <input type="submit" value="Удалить">
     </form>
 
     <#if user_profile.status == 1>
-        <form action="/user_list?user_id=${user_profile.user_id?c}&ban" method="POST">
+        <form action="/user_list.ban?user_id=${user_profile.user_id?c}" method="POST">
             <input type="submit" value="Заблокировать">
         </form>
     <#else >
-        <form action="/user_list?user_id=${user_profile.user_id?c}&unban" method="POST">
+        <form action="/user_list.unban?user_id=${user_profile.user_id?c}" method="POST">
             <input type="submit" value="Активировать">
         </form>
     </#if>
 
 
-    <form action="/user_list?user_id=${user_profile.user_id?c}&update" method="POST">
+    <form action="/user_list.update?user_id=${user_profile.user_id?c}" method="POST">
         <table>
             <#if user_profile.login?exists>
             <tr>
@@ -140,11 +140,11 @@
     </form>
 
     <#if user_profile.login?exists>
-    <form action="/user_list?user_id=${user_profile.user_id?c}&gen_pass" method="POST">
+    <form action="/user_list.gen_pass?user_id=${user_profile.user_id?c}" method="POST">
         <input type="submit" value="Выслать новый пароль">
     </form>
 
-    <form action="/user_list?user_id=${user_profile.user_id?c}&new_pass" method="POST">
+    <form action="/user_list.new_pass?user_id=${user_profile.user_id?c}" method="POST">
         <input type="text" name="password">
         <input type="submit" value="Задать новый пароль">
     </form>
@@ -155,7 +155,7 @@
 <#macro add_form>
     <a href="/user_list"><< назад</a>
 
-    <form action="/user_list?add" method="POST">
+    <form action="/user_list.add" method="POST">
         <table>
             <tr>
                 <td>login</td>

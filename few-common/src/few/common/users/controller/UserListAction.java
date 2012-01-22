@@ -21,13 +21,8 @@ import java.util.Map;
  * Time: 4:18
  * To change this template use File | Settings | File Templates.
  */
-@Controller(name = "user_list")
-@Restriction(roles = "admin")
+@Controller(name = "user_list", permission = "admin")
 public class UserListAction {
-
-    @Action(_default = true)
-    public void render() {
-    }
 
     private UserService userService = UserService.get();
     private MailService mailService = MailService.get();
@@ -35,8 +30,7 @@ public class UserListAction {
 
     @Action
     public ActionResponse delete(
-            @RequestParameter(name = "user_id") Integer user_id,
-            @RequestParameter(name = "delete") String fake) {
+            @RequestParameter(name = "user_id") Integer user_id) {
 
         userService.deleteUser(user_id);
         auditService.insertActivity(AuditKeys.NORMAL, AuditKeys.USER_DELETE, String.valueOf(user_id));
@@ -46,8 +40,7 @@ public class UserListAction {
 
     @Action
     public ActionResponse ban(
-            @RequestParameter(name = "user_id") Integer user_id,
-            @RequestParameter(name = "ban") String fake
+            @RequestParameter(name = "user_id") Integer user_id
     ) {
         SimpleUser user = userService.selectUser(user_id);
         user.status_id = 2;
@@ -65,8 +58,7 @@ public class UserListAction {
 
     @Action
     public ActionResponse unban(
-            @RequestParameter(name = "user_id") Integer user_id,
-            @RequestParameter(name = "unban") String fake
+            @RequestParameter(name = "user_id") Integer user_id
     ) {
         SimpleUser user = userService.selectUser(user_id);
         user.status_id = 1;
@@ -80,8 +72,6 @@ public class UserListAction {
     @Action
     public ActionResponse update(
             @RequestParameter(name = "user_id") Integer user_id,
-            @RequestParameter(name = "update") String fake,
-
             @RequestParameter(name = "login", required = false) String login,
             @RequestParameter(name = "display_name") String display_name,
             @RequestParameter(name = "email") String email,
@@ -108,7 +98,7 @@ public class UserListAction {
             String _login = userService.selectLoginByUserID(user_id);
             if( !_login.equals(login) ) {
                 userService.updateLogin(user_id, login);
-                gen_pass(user_id, "");
+                gen_pass(user_id);
 
                 Context.get().addMessage(
                         new Message(Message.WARNING, "Логин изменён. Новый пароль выслан на email.")
@@ -120,10 +110,9 @@ public class UserListAction {
     }
 
     UserProfileService profileService = UserProfileService.get();
+
     @Action
     public ActionResponse add(
-            @RequestParameter(name = "add") String fake,
-
             @RequestParameter(name = "login", required = false) String login,
             @RequestParameter(name = "display_name") String display_name,
             @RequestParameter(name = "email") String email,
@@ -151,18 +140,16 @@ public class UserListAction {
 
     @Action
     public ActionResponse gen_pass(
-            @RequestParameter(name = "user_id") Integer user_id,
-            @RequestParameter(name = "gen_pass") String fake
+            @RequestParameter(name = "user_id") Integer user_id
     ) {
-        new_pass(user_id, Utils.generateNewPassword(), "");
+        new_pass(user_id, Utils.generateNewPassword());
         return here(user_id);
     }
 
     @Action
     public ActionResponse new_pass(
             @RequestParameter(name = "user_id") Integer user_id,
-            @RequestParameter(name = "password") String password,
-            @RequestParameter(name = "new_pass") String fake
+            @RequestParameter(name = "password") String password
     ) {
         SimpleUser user = userService.selectUser(user_id);
         String login = userService.selectLoginByUserID(user_id);

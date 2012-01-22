@@ -17,7 +17,7 @@ import java.util.*;
  * Time: 0:17
  * To change this template use File | Settings | File Templates.
  */
-@few.ModelBean(name = "model_beans")
+@few.ModelBean(name = "model_beans", permission = "admin")
 public class ViewModelBeans extends ListWrapper<ViewModelBeans.ViewModelBean>{
 
     private ViewModelBeans(List<ViewModelBean> viewModelBeans) {

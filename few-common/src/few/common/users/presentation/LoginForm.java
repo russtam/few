@@ -23,7 +23,7 @@ public class LoginForm {
 
     public static LoginForm build() {
         LoginForm ret = new LoginForm();
-        MyURL mu = new MyURL(true, "/login");
+        MyURL mu = new MyURL(true, "/login.login");
         if( Context.get().getRequest().getParameter("redirect") != null )
             mu.p("redirect", Context.get().getRequest().getParameter("redirect"));
         ret.loginUrl = mu.toString();

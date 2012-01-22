@@ -1,7 +1,6 @@
 package few.common.users.presentation;
 
 import few.ModelBean;
-import few.Restriction;
 import few.common.CustomUserProfile;
 import few.core.ServiceRegistry;
 import few.utils.ListWrapper;
@@ -16,7 +15,7 @@ import java.util.List;
  * Time: 16:54
  * To change this template use File | Settings | File Templates.
  */
-@ModelBean(name = "user_profile_fields")
+@ModelBean(name = "user_profile_fields", permission = "authorized")
 public class UserProfileFields extends ListWrapper<CustomUserProfile.CustomField>{
 
     private UserProfileFields(List<CustomUserProfile.CustomField> customFields) {

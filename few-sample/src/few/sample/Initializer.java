@@ -5,6 +5,8 @@ import few.common.audit.service.AuditService;
 import few.common.users.service.CredentialsImpl;
 import few.core.ServiceRegistry;
 import few.impl.DefaultConfigurationImpl;
+import few.routing.DefaultRoutes;
+import few.routing.RouteBuilder;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -23,6 +25,9 @@ public class Initializer implements ServletContextListener{
         ServiceRegistry.registerService(CredentialsImpl.class);
         ServiceRegistry.registerService(CustomUserProfile.class);
 
+        // fill routes
+        DefaultRoutes.apply();
+        RouteBuilder.getRoute("/").toServlet(DefaultPage.class.getName()).build();
     }
 
     public void contextDestroyed(ServletContextEvent servletContextEvent) {

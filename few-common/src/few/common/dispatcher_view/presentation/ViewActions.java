@@ -13,7 +13,7 @@ import java.util.*;
  * Time: 0:18
  * To change this template use File | Settings | File Templates.
  */
-@ModelBean(name = "actions")
+@ModelBean(name = "actions", permission = "admin")
 public class ViewActions extends ListWrapper<ViewActions.ViewAction>{
 
 
@@ -23,12 +23,14 @@ public class ViewActions extends ListWrapper<ViewActions.ViewAction>{
 
     public static class ViewAction {
         private String name;
+        private String clazz;
         private String method_name;
         private String permission;
         private List<ViewRequestParameter> parameters;
 
-        public ViewAction(String name, String method_name, String permission, List<ViewRequestParameter> parameters) {
+        public ViewAction(String name, String clazz, String method_name, String permission, List<ViewRequestParameter> parameters) {
             this.name = name;
+            this.clazz = clazz;
             this.method_name = method_name;
             this.permission = permission;
             this.parameters = Collections.unmodifiableList(parameters);
@@ -36,6 +38,10 @@ public class ViewActions extends ListWrapper<ViewActions.ViewAction>{
 
         public String getName() {
             return name;
+        }
+
+        public String getClazz() {
+            return clazz;
         }
 
         public String getMethod_name() {
@@ -55,12 +61,19 @@ public class ViewActions extends ListWrapper<ViewActions.ViewAction>{
         List<ViewAction> actions = new LinkedList<ViewAction>();
 
         DispatcherMap map = DispatcherMap.get();
-        for (DispatcherMap.Action ad : map.getActions().values()) {
-            for (DispatcherMap.ActionMethodDescription adm : ad.getMethods()) {
+        for (Map.Entry<String, DispatcherMap.Controller> e : map.getControllers().entrySet()) {
+            if( !e.getKey().equals(e.getValue().getInstance().getClass().getName()))
+                continue;
 
-                String permission = ad.getAuthorized_roles() != null ? (ad.getAuthorized_roles().length == 1 ? ad.getAuthorized_roles()[0] : "") : "";
-                ViewAction ac = new ViewAction(ad.getName(), adm.getMethod().getName(), permission,
-                        ViewModelBeans.buildParametersFromMethod(adm.getMethod())
+            DispatcherMap.Controller ctrl = e.getValue();
+            for (DispatcherMap.Action a : ctrl.getActions().values()) {
+
+                String permission = ctrl.getPermission();
+                ViewAction ac = new ViewAction(
+                        ctrl.getName(),
+                        ctrl.getInstance().getClass().getName(),
+                        a.getMethod().getName(), permission,
+                        ViewModelBeans.buildParametersFromMethod(a.getMethod())
                         );
 
                 actions.add(ac);

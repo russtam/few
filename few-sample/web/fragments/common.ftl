@@ -8,7 +8,7 @@
 <head>
     <title>${title?html}</title>
     <meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
-
+    <script type="text/javascript" src="/static/jquery.js"></script>
 </head>
 <body>
 

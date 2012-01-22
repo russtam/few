@@ -17,7 +17,7 @@ import java.util.*;
  * Time: 23:53
  * To change this template use File | Settings | File Templates.
  */
-@ModelBean(name = "userInfo")
+@ModelBean(name = "userInfo", permission = "authorized")
 public class UserInfo {
     private boolean signed_in;
     private Integer user_id;

@@ -2,7 +2,6 @@ package few.common.users.presentation;
 
 import few.ModelBean;
 import few.RequestParameter;
-import few.Restriction;
 import few.common.users.persistence.CustomField;
 import few.common.users.persistence.SimpleUser;
 import few.common.users.service.UserService;
@@ -17,8 +16,7 @@ import java.util.Set;
  * Time: 3:33
  * To change this template use File | Settings | File Templates.
  */
-@ModelBean(name = "user_profile")
-@Restriction(roles = "admin")
+@ModelBean(name = "user_profile", permission = "admin")
 public class UserProfile extends UserInfo{
 
     private Integer status;

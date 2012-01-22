@@ -28,15 +28,8 @@ public class RegistrationAction {
     private static AccountService account = AccountService.get();
     private static AuditService auditService = AuditService.get();
 
-    @Action(_default = true)
-    public ActionResponse _default() {
-        if( Context.get().isSignedIn() )
-            return ActionResponse.redirect("user_profile");
-        return ActionResponse._default();
-    }
-
     @Action()
-    public ActionResponse service(
+    public ActionResponse save(
             @RequestParameter(name = "email") String email,
             @RequestParameter(name = "login") String login,
             @RequestParameter(name = "name") String name,

@@ -2,7 +2,6 @@ package few.common.users.presentation;
 
 import few.ModelBean;
 import few.RequestParameter;
-import few.Restriction;
 import few.common.users.persistence.SimpleUser;
 import few.common.users.service.UserService;
 import few.utils.ListWrapper;
@@ -17,8 +16,7 @@ import java.util.List;
  * Time: 2:25
  * To change this template use File | Settings | File Templates.
  */
-@ModelBean(name = "userList")
-@Restriction(roles = "admin")
+@ModelBean(name = "userList", permission = "admin")
 public class UserList extends ListWrapper<SimpleUser>{
 
     public UserList(List<SimpleUser> userInfos) {

@@ -1,5 +1,6 @@
 package few.routing;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -61,7 +62,7 @@ public class RouteBuilder {
         }
 
         public GetRoute build() {
-            if( ftl != null ^ servlet != null )
+            if( !(ftl != null ^ servlet != null) )
                 throw new IllegalStateException("only one of ftl or servlet should be null");
 
             GetRoute ret = new GetRoute(urlPattern, permission, ftl, servlet);
@@ -111,7 +112,7 @@ public class RouteBuilder {
         }
 
         public PostRoute build() {
-            PostRoute ret = new PostRoute(urlPattern, permission, controller, action, remapping);
+            PostRoute ret = new PostRoute(urlPattern, permission, controller, action, remapping == null ? Collections.<String, String>emptyMap() : remapping);
             postRoutes.add(ret);
             return ret;
         }

@@ -21,20 +21,11 @@ import java.util.Map;
  * Time: 21:47
  * To change this template use File | Settings | File Templates.
  */
-@Controller(name = "user_profile")
-@Restriction(roles = "user")
+@Controller(name = "user_profile", permission = "user")
 public class UserProfileAction {
 
     private static UserService userService = UserService.get();
     private static AuditService auditService = AuditService.get();
-
-    @Action(_default = true)
-    public ActionResponse _default() {
-        if( Context.get().isSignedIn() )
-            return ActionResponse._default();
-        else
-            return ActionResponse.redirect("login");
-    }
 
     @Action()
     public void changeEMail(
@@ -95,7 +86,6 @@ public class UserProfileAction {
 
     @Action
     public void updateProfile(
-            @RequestParameter(name = "profile") String action,
             @RequestParameters Map<String, String> fields
     ) {
         List<CustomField> profile = UserProfileService.get().validateProfile(fields);

@@ -1,8 +1,15 @@
 package few.sample;
 
+import few.Context;
 import few.Controller;
 import few.Action;
 import few.ActionResponse;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -11,12 +18,14 @@ import few.ActionResponse;
  * Time: 0:13
  * To change this template use File | Settings | File Templates.
  */
-@Controller(name = "")
-public class DefaultPage {
+public class DefaultPage extends HttpServlet{
 
-    @Action(_default = true)
-    public ActionResponse _default() {
-        return ActionResponse.redirect("login");
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if( !Context.get().isSignedIn() ) {
+            resp.sendRedirect("/login");
+        } else {
+            resp.sendRedirect("/user_profile");
+        }
     }
-
 }

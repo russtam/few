@@ -16,13 +16,13 @@ import java.util.Enumeration;
  * Time: 19:05
  * To change this template use File | Settings | File Templates.
  */
-@Controller(name = "logout")
-@Restriction(roles = "user")
+@Controller(name = "logout", permission = "user")
 public class LogoutAction {
 
     public static AuditService auditService = AuditService.get();
-    @Action(_default = true)
-    public ActionResponse service(HttpSession session) throws ServletException, IOException {
+
+    @Action()
+    public ActionResponse logout(HttpSession session) throws ServletException, IOException {
         auditService.insertActivity(
                 AuditKeys.NORMAL, AuditKeys.LOGOUT, "");
 

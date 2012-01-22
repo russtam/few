@@ -14,13 +14,8 @@ import few.common.audit.service.AuditService;
  * Time: 23:26
  * To change this template use File | Settings | File Templates.
  */
-@Controller(name = "audit")
+@Controller(name = "audit", permission = "admin")
 public class AuditController {
-
-    @Action(_default = true)
-    public ActionResponse _default() {
-        return ActionResponse.redirect("/");
-    }
 
     private static AuditService auditService = AuditService.get();
     @Action

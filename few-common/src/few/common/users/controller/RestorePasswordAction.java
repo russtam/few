@@ -20,10 +20,6 @@ import java.io.IOException;
 @Controller(name = "restore_password")
 public class RestorePasswordAction {
 
-    @Action( _default = true )
-    public void service( ) {
-    }
-
     private static AuditService auditService = AuditService.get();
     private static UserService users = UserService.get();
     @Action
