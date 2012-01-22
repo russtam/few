@@ -1,6 +1,6 @@
 package few.common.cms.controller;
 
-import few.ActionClass;
+import few.Controller;
 
 /**
  * Created by IntelliJ IDEA.
@@ -9,7 +9,7 @@ import few.ActionClass;
  * Time: 14:29
  * To change this template use File | Settings | File Templates.
  */
-@ActionClass(action = "news_admin")
+@Controller(name = "news_admin")
 public class NewsController {
 
 

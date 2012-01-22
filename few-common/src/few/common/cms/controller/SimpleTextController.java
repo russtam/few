@@ -11,15 +11,15 @@ import few.common.cms.service.CMSService;
  * Time: 14:30
  * To change this template use File | Settings | File Templates.
  */
-@ActionClass(action = "simple_text_admin")
+@Controller(name = "simple_text_admin")
 public class SimpleTextController {
 
-    @ActionMethod( _default = true)
+    @Action( _default = true)
     public void render() {
     }
 
     CMSService cmsService = CMSService.get();
-    @ActionMethod
+    @Action
     public ActionResponse save(
             @RequestParameter(name = "save") String action,
             @RequestParameter(name = "cat_id") String cat_id,
@@ -36,7 +36,7 @@ public class SimpleTextController {
         return ActionResponse.redirect(refer);
     }
 
-    @ActionMethod
+    @Action
     public ActionResponse delete(
             @RequestParameter(name = "delete") String action,
             @RequestParameter(name = "cat_id") String cat_id,

@@ -7,12 +7,10 @@ import few.common.mail.MailService;
 import few.common.users.mail.RegistrationWithPasswordMail;
 import few.common.users.persistence.CustomField;
 import few.common.users.persistence.SimpleUser;
-import few.common.users.service.AccountService;
 import few.common.users.service.UserProfileService;
 import few.common.users.service.UserService;
 import few.utils.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,11 +21,11 @@ import java.util.Map;
  * Time: 4:18
  * To change this template use File | Settings | File Templates.
  */
-@ActionClass(action = "user_list")
+@Controller(name = "user_list")
 @Restriction(roles = "admin")
 public class UserListAction {
 
-    @ActionMethod(_default = true)
+    @Action(_default = true)
     public void render() {
     }
 
@@ -35,7 +33,7 @@ public class UserListAction {
     private MailService mailService = MailService.get();
     private AuditService auditService = AuditService.get();
 
-    @ActionMethod
+    @Action
     public ActionResponse delete(
             @RequestParameter(name = "user_id") Integer user_id,
             @RequestParameter(name = "delete") String fake) {
@@ -46,7 +44,7 @@ public class UserListAction {
         return ActionResponse.redirect("user_list");
     }
 
-    @ActionMethod
+    @Action
     public ActionResponse ban(
             @RequestParameter(name = "user_id") Integer user_id,
             @RequestParameter(name = "ban") String fake
@@ -65,7 +63,7 @@ public class UserListAction {
         return ActionResponse.redirect(new MyURL("/user_list").p("user_id", String.valueOf(user_id)));
     }
 
-    @ActionMethod
+    @Action
     public ActionResponse unban(
             @RequestParameter(name = "user_id") Integer user_id,
             @RequestParameter(name = "unban") String fake
@@ -79,7 +77,7 @@ public class UserListAction {
         return here(user_id);
     }
 
-    @ActionMethod
+    @Action
     public ActionResponse update(
             @RequestParameter(name = "user_id") Integer user_id,
             @RequestParameter(name = "update") String fake,
@@ -122,7 +120,7 @@ public class UserListAction {
     }
 
     UserProfileService profileService = UserProfileService.get();
-    @ActionMethod
+    @Action
     public ActionResponse add(
             @RequestParameter(name = "add") String fake,
 
@@ -151,7 +149,7 @@ public class UserListAction {
         return here(user_id);
     }
 
-    @ActionMethod
+    @Action
     public ActionResponse gen_pass(
             @RequestParameter(name = "user_id") Integer user_id,
             @RequestParameter(name = "gen_pass") String fake
@@ -160,7 +158,7 @@ public class UserListAction {
         return here(user_id);
     }
 
-    @ActionMethod
+    @Action
     public ActionResponse new_pass(
             @RequestParameter(name = "user_id") Integer user_id,
             @RequestParameter(name = "password") String password,

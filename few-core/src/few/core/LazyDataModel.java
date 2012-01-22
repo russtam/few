@@ -16,7 +16,7 @@ import java.util.Set;
  */
 public class LazyDataModel implements Map<String, Object> {
 
-    Map<String, DispatcherMap.ModelBeanDescription> description;
+    Map<String, DispatcherMap.ModelBean> description;
     Map<String, Object> instances;
 
     public LazyDataModel(DispatcherMap map) {
@@ -27,13 +27,13 @@ public class LazyDataModel implements Map<String, Object> {
     public Object get(Object key) {
         Object o = instances.get(key);
         if( o == null ) {
-            DispatcherMap.ModelBeanDescription desc = description.get(key);
+            DispatcherMap.ModelBean desc = description.get(key);
             if( desc == null ) {
                 //throw new IllegalArgumentException("no such modelBean");
                 return null;
             }
 
-            o = ActionInvoker.invokeModelMethod(desc, Context.get().getRequest(), Context.get().getResponse());
+            o = ActionInvoker.invokeModelMethod(desc.name, desc.getMethod(), Context.get().getRequest(), Context.get().getResponse());
 
             instances.put((String) key, o);
         }

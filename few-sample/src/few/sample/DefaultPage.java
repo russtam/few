@@ -1,7 +1,7 @@
 package few.sample;
 
-import few.ActionClass;
-import few.ActionMethod;
+import few.Controller;
+import few.Action;
 import few.ActionResponse;
 
 /**
@@ -11,10 +11,10 @@ import few.ActionResponse;
  * Time: 0:13
  * To change this template use File | Settings | File Templates.
  */
-@ActionClass(action = "")
+@Controller(name = "")
 public class DefaultPage {
 
-    @ActionMethod(_default = true)
+    @Action(_default = true)
     public ActionResponse _default() {
         return ActionResponse.redirect("login");
     }

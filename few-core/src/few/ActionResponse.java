@@ -15,11 +15,9 @@ import java.net.MalformedURLException;
 public class ActionResponse {
 
     public static final int DEFAULT  = 0;
-    public static final int FORWARD  = 1;
-    public static final int REDIRECT = 2;
-    public static final int ACTION   = 3;
-    public static final int ERROR    = 4;
-    public static final int JSON     = 5;
+    public static final int REDIRECT = 1;
+    public static final int ERROR    = 2;
+    public static final int JSON     = 3;
 
     private int error_code;
     private int response_type;
@@ -41,11 +39,7 @@ public class ActionResponse {
     }
 
     public static ActionResponse view(String where) {
-        checkPage(where);
-        if( "GET".equals( Context.get().getRequest().getMethod() ) )
-            return new ActionResponse(FORWARD, where);
-        else
-            return new ActionResponse(REDIRECT, "/" + where);
+        return new ActionResponse(REDIRECT, "/" + where);
     }
 
     public static ActionResponse referer() {
@@ -62,10 +56,6 @@ public class ActionResponse {
 
     public static ActionResponse redirect(MyURL where) {
         return new ActionResponse(REDIRECT, where.toString());
-    }
-
-    public static ActionResponse action(String which) {
-        return new ActionResponse(ACTION, which);
     }
 
     public static ActionResponse json(Object res) {
@@ -87,19 +77,5 @@ public class ActionResponse {
     public String getKey() {
         return key;
     }
-
-
-    private static void checkPage(String where) {
-        String ftl= Dispatcher.BASE_PAGE_PATH + where + ".ftl";
-        try {
-            if( Context.get().getServletContext().getResource(ftl) == null ) {
-                throw new IllegalArgumentException("page " + where + " does not exists");
-            }
-        } catch (MalformedURLException e) {
-            throw new IllegalArgumentException(e);
-        }
-
-    }
-
 
 }

@@ -14,4 +14,5 @@ import java.lang.annotation.*;
 @Inherited
 public @interface ModelBean {
     public String name();
+    public abstract String permission() default "";
 }

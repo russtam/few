@@ -1,7 +1,7 @@
 package few.common.audit.controller;
 
-import few.ActionClass;
-import few.ActionMethod;
+import few.Controller;
+import few.Action;
 import few.ActionResponse;
 import few.RequestParameter;
 import few.common.audit.service.AuditKeys;
@@ -14,22 +14,22 @@ import few.common.audit.service.AuditService;
  * Time: 23:26
  * To change this template use File | Settings | File Templates.
  */
-@ActionClass(action = "audit")
+@Controller(name = "audit")
 public class AuditController {
 
-    @ActionMethod(_default = true)
+    @Action(_default = true)
     public ActionResponse _default() {
         return ActionResponse.redirect("/");
     }
 
     private static AuditService auditService = AuditService.get();
-    @ActionMethod
+    @Action
     public ActionResponse clearAccessLog(@RequestParameter(name = "clear_access") String action) {
         auditService.clearAccessLog();
         return ActionResponse.referer();
     }
 
-    @ActionMethod
+    @Action
     public ActionResponse clearActivity(@RequestParameter(name = "clear_activities") String action) {
         auditService.clearActivities();
         auditService.insertActivity(AuditKeys.WARNING, AuditKeys.CLEAR_ACTIVITES);

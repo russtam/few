@@ -1,6 +1,8 @@
 package few.routing;
 
+import few.ActionResponse;
 import few.Context;
+import few.core.ActionInvoker;
 import few.core.DispatcherMap;
 import few.core.ServiceRegistry;
 import few.services.Credentials;
@@ -77,7 +79,7 @@ public class Routing {
             }
         }
         if( route == null ) {
-            response.sendError(404);
+            response.sendError(404, "route not found");
             return false;
         }
 
@@ -111,28 +113,50 @@ public class Routing {
             }
         }
         if( route == null ) {
-            response.sendError(404);
+            response.sendError(404, "route not found");
             return false;
         }
 
         if( route.getPermission() != null ) {
             if( !Context.get().isUserInRole(route.getPermission()) ) {
-                response.sendError(403);
+                response.sendError(403, "route denied");
             }
         }
 
         String ctrl = RouteProcessor.processVars( route.getController(), vars );
         String action = RouteProcessor.processVars( route.getAction(), vars );
 
-        // 1. try select ctrl by name
+        // 1. select ctrl
+        DispatcherMap.Controller c = DispatcherMap.get().getControllers().get(ctrl);
+        if( c == null ) {
+            response.sendError(404, "controller not found");
+            return false;
+        }
 
-        // 2. if absent, try find by class name
+        // 2. select action method
+        DispatcherMap.Action a = c.getActions().get(action);
+        if( a == null ) {
+            response.sendError(404, "action not found");
+            return false;
+        }
 
-        // 3. select action method by parameters
+        // 3. invoke
+        ActionResponse ar = ActionInvoker.invokeActionMethod(c.getInstance(), a.getMethod(), request, response);
 
-        // 4. invoke
+        // 4. process remappings
+        switch(ar.getResponse_type()) {
+            case ActionResponse.REDIRECT:
+                response.sendRedirect(ar.getKey());
+                break;
+            case ActionResponse.ERROR:
+                response.sendError(ar.getError_code());
+                break;
+            case ActionResponse.JSON:
+                response.getOutputStream().print(ar.getKey());
+                response.getOutputStream().close();
+                break;
+        }
 
-        // 5. process remappings
 
         return true;
     }

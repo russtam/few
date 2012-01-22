@@ -21,14 +21,14 @@ import java.util.Map;
  * Time: 21:47
  * To change this template use File | Settings | File Templates.
  */
-@ActionClass(action = "user_profile")
+@Controller(name = "user_profile")
 @Restriction(roles = "user")
 public class UserProfileAction {
 
     private static UserService userService = UserService.get();
     private static AuditService auditService = AuditService.get();
 
-    @ActionMethod(_default = true)
+    @Action(_default = true)
     public ActionResponse _default() {
         if( Context.get().isSignedIn() )
             return ActionResponse._default();
@@ -36,7 +36,7 @@ public class UserProfileAction {
             return ActionResponse.redirect("login");
     }
 
-    @ActionMethod()
+    @Action()
     public void changeEMail(
             @RequestParameter(name = "email") String email
     ) throws ServletException, IOException {
@@ -51,7 +51,7 @@ public class UserProfileAction {
         }
     }
 
-    @ActionMethod()
+    @Action()
     public void changeDisplayName(
             @RequestParameter(name = "name") String name
     ) throws ServletException, IOException {
@@ -66,7 +66,7 @@ public class UserProfileAction {
         }
     }
 
-    @ActionMethod()
+    @Action()
     public void changePassword(
             @RequestParameter(name = "old_password") String old_password,
             @RequestParameter(name = "password") String password,
@@ -93,7 +93,7 @@ public class UserProfileAction {
         }
     }
 
-    @ActionMethod
+    @Action
     public void updateProfile(
             @RequestParameter(name = "profile") String action,
             @RequestParameters Map<String, String> fields

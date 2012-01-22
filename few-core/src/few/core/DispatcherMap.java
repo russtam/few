@@ -2,6 +2,7 @@ package few.core;
 
 import few.*;
 import few.annotations.AnnotationFinder;
+import few.utils.Utils;
 
 import javax.servlet.ServletContext;
 import java.io.IOException;
@@ -19,11 +20,14 @@ import java.util.logging.Logger;
  */
 public class DispatcherMap {
 
-    public static class ControllerDesc {
+    public static class Controller {
         String name;
         String permission;
         Object instance;
-        List<ActionDescription> methods = new LinkedList<ActionDescription>();
+        Map<String, Action> actions;
+
+        Controller() {
+        }
 
         public String getName() {
             return name;
@@ -37,28 +41,35 @@ public class DispatcherMap {
             return instance;
         }
 
-        public List<ActionDescription> getMethods() {
-            return methods;
+        public Map<String, Action> getActions() {
+            return actions;
         }
     }
 
-    public static class ActionDescription {
-        ControllerDesc ctrl;
+    public static class Action {
+        Controller ctrl;
         String name;
         Method method;
         String permission;
         List<String> parameters = new LinkedList<String>();
 
+        Action() {
+        }
+
         public Method getMethod() {
             return method;
         }
 
-        public String[] getAuthorized_roles() {
-            return authorized_roles;
+        public Controller getCtrl() {
+            return ctrl;
         }
 
-        public String getUnauthorized_redirect() {
-            return unauthorized_redirect;
+        public String getName() {
+            return name;
+        }
+
+        public String getPermission() {
+            return permission;
         }
 
         public List<String> getParameters() {
@@ -66,10 +77,14 @@ public class DispatcherMap {
         }
     }
 
-    public static class ModelBeanDescription {
+    public static class ModelBean {
         String name;
+        String permission;
         Class clazz;
         Method method;
+
+        ModelBean() {
+        }
 
         public String getName() {
             return name;
@@ -81,6 +96,10 @@ public class DispatcherMap {
 
         public Method getMethod() {
             return method;
+        }
+
+        public String getPermission() {
+            return permission;
         }
     }
 
@@ -100,96 +119,79 @@ public class DispatcherMap {
         }
     }
 
-    private Map<String, ActionDescription> actions;
-    private Map<Class, Object> controllers;
-    private Map<String, ModelBeanDescription> models;
+    private Map<String, Controller> controllers;
+    private Map<String, ModelBean> models;
 
-    public Map<String, ActionDescription> getActions() {
-        return actions;
-    }
-
-    public Map<Class, Object> getControllers() {
+    public Map<String, Controller> getControllers() {
         return controllers;
     }
 
-    public Map<String, ModelBeanDescription> getModels() {
+    public Map<String, ModelBean> getModels() {
         return models;
     }
 
     private void _build(ServletContext context, ClassLoader classLoader) throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException {
-        // 1. find all classes in action package
-
+        // 1. load annotations
         Map<Class, List<Class>>
             annotations = new AnnotationFinder(context, classLoader).findAnnotations();
 
-        // 2. parse ActionClass annotations
-        List<Class> classes = annotations.get(ActionClass.class);
+        // 2. parse Controller annotations
+        List<Class> classes = annotations.get(few.Controller.class);
         if( classes != null )
             loadControllers(classes);
-        else {
-            this.actions = Collections.emptyMap();
+        else
             this.controllers = Collections.emptyMap();
-        }
 
         // 3. parse ModelBean annotations
-        classes = annotations.get(ModelBean.class);
+        classes = annotations.get(few.ModelBean.class);
         if( classes != null )
             loadModels(classes);
         else
             this.models = Collections.emptyMap();
 
-        unmoifable();
-    }
-
-    private void unmoifable() {
-        actions = Collections.unmodifiableMap(actions);
         controllers = Collections.unmodifiableMap(controllers);
         models = Collections.unmodifiableMap(models);
     }
 
+
     private void loadControllers(List<Class> classes) throws IllegalAccessException, InstantiationException {
-        actions = new HashMap<String, ActionDescription>();
-        controllers = new HashMap<Class, Object>();
+        controllers = new HashMap<String, Controller>();
 
         for (Iterator<Class> iterator = classes.iterator(); iterator.hasNext(); ) {
             Class clazz = iterator.next();
-            ActionClass ac = (ActionClass) clazz.getAnnotation(ActionClass.class);
-            Restriction rc = (Restriction) clazz.getAnnotation(Restriction.class);
+            few.Controller ac = (few.Controller) clazz.getAnnotation(few.Controller.class);
+
+            Controller ctrl = new Controller();
+            ctrl.name = ac.name();
+            ctrl.instance = clazz.newInstance();
+            if( Utils.isNotNull(ac.permission()) )
+                ctrl.permission = ac.permission();
+            ctrl.actions = new HashMap<String, Action>();
+
+            controllers.put(clazz.getName(), ctrl);
+            if( !controllers.containsKey(ac.name()) ) {
+                controllers.put(ac.name(), ctrl);
+            } else {
+                if( controllers.get(ac.name()) != null )
+                    log.warning("ambiguos controller name '" + ac.name() + "', class " + controllers.get(ac.name()).instance.getClass().getName() );
+                log.warning("ambiguos controller name '" + ac.name() + "', class " + clazz.getName());
+                controllers.put(ac.name(), null);
+            }
 
             Method[] ms = clazz.getMethods();
             for (int i = 0; i < ms.length; i++) {
                 Method m = ms[i];
-                ActionMethod am = m.getAnnotation(ActionMethod.class);
+                few.Action am = m.getAnnotation(few.Action.class);
                 if( am == null )
                     continue;
 
-                Restriction restriction = m.getAnnotation(Restriction.class);
-                if( restriction == null )
-                    restriction = rc;
-                String action = ac.action();
-
-                ActionDescription ad = actions.get(action);
-                if( ad == null ) {
-                    ad = new ActionDescription();
-                    ad.name = action;
-                    if( rc != null ) {
-                        ad.authorized_roles = rc.roles();
-                        ad.unauthorized_redirect = rc.redirect();
-                    }
-                    actions.put(action, ad);
-                }
-                ActionMethodDescription amd = new ActionMethodDescription();
-                Object instance = controllers.get(m.getDeclaringClass());
-                if( instance == null) {
-                    instance = m.getDeclaringClass().newInstance();
-                    controllers.put(m.getClass(), instance);
-                }
-                amd.instance = instance;
-                amd.method = m;
-                if( restriction != null ) {
-                    amd.authorized_roles = restriction.roles();
-                    amd.unauthorized_redirect = restriction.redirect();
-                }
+                Action action = new Action();
+                action.ctrl = ctrl;
+                action.method = m;
+                action.name = m.getName();
+                if( Utils.isNotNull(am.permission()) )
+                    action.permission = am.permission();
+                action.parameters = new LinkedList<String>();
 
                 Annotation pa[][] = m.getParameterAnnotations();
                 for (int j = 0; j < pa.length; j++) {
@@ -197,42 +199,30 @@ public class DispatcherMap {
                     if( a != null && a.length == 1 && a[0] instanceof RequestParameter) {
                         RequestParameter rp = (RequestParameter) a[0];
                         if( rp.required() )
-                            amd.parameters.add(rp.name());
+                            action.parameters.add(rp.name());
                     }
                 }
 
-                if( am._default() ) {
-                    if( ad.defaultMethod == null )
-                        ad.defaultMethod = amd;
-                    else
-                        log.severe("Action already contains default method. Class" + clazz.getName());
-                }
-
-                ad.methods.add(amd);
+                ctrl.actions.put(action.name, action);
             }
         }
 
-        for (Iterator<ActionDescription> iterator = actions.values().iterator(); iterator.hasNext(); ) {
-            ActionDescription actionDescription = iterator.next();
-            if( actionDescription.defaultMethod == null && actionDescription.methods.size() == 1)
-                actionDescription.defaultMethod = actionDescription.methods.get(0);
-            if( actionDescription.defaultMethod == null )
-                log.warning("no default method for action " + actionDescription.name);
-        }
     }
 
     private void loadModels(List<Class> classes) {
-        models = new HashMap<String, ModelBeanDescription>();
+        models = new HashMap<String, ModelBean>();
 
         for (Iterator<Class> iterator = classes.iterator(); iterator.hasNext(); ) {
             Class clazz = iterator.next();
-            ModelBean bean = (ModelBean)clazz.getAnnotation(ModelBean.class);
+            few.ModelBean bean = (few.ModelBean)clazz.getAnnotation(few.ModelBean.class);
 
-            ModelBeanDescription desc = new ModelBeanDescription();
+            ModelBean desc = new ModelBean();
             desc.clazz = clazz;
             desc.name = bean.name();
+            if( Utils.isNotNull(bean.permission()) )
+                desc.permission = bean.permission();
             if( models.containsKey(desc.name) ) {
-                ModelBeanDescription aDesc = models.get(desc.name);
+                ModelBean aDesc = models.get(desc.name);
                 log.severe("ambigous modelBean name '" + desc.name + "'. classes " +
                     desc.clazz.getName() + " and " + aDesc.clazz.getName() );
                 continue;

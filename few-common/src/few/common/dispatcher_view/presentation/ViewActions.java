@@ -55,7 +55,7 @@ public class ViewActions extends ListWrapper<ViewActions.ViewAction>{
         List<ViewAction> actions = new LinkedList<ViewAction>();
 
         DispatcherMap map = DispatcherMap.get();
-        for (DispatcherMap.ActionDescription ad : map.getActions().values()) {
+        for (DispatcherMap.Action ad : map.getActions().values()) {
             for (DispatcherMap.ActionMethodDescription adm : ad.getMethods()) {
 
                 String permission = ad.getAuthorized_roles() != null ? (ad.getAuthorized_roles().length == 1 ? ad.getAuthorized_roles()[0] : "") : "";

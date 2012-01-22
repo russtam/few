@@ -17,16 +17,16 @@ import java.io.IOException;
  * Time: 21:46
  * To change this template use File | Settings | File Templates.
  */
-@ActionClass(action = "restore_password")
+@Controller(name = "restore_password")
 public class RestorePasswordAction {
 
-    @ActionMethod ( _default = true )
+    @Action( _default = true )
     public void service( ) {
     }
 
     private static AuditService auditService = AuditService.get();
     private static UserService users = UserService.get();
-    @ActionMethod
+    @Action
     public void restore(
             @RequestParameter(name = "email") String email
     ) throws ServletException, IOException {
@@ -57,7 +57,7 @@ public class RestorePasswordAction {
 
     }
 
-    @ActionMethod
+    @Action
     public ActionResponse activate(
             @RequestParameter(name = "key") String secureKey
     ) {

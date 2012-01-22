@@ -1,9 +1,7 @@
 package few.common.dispatcher_view.presentation;
 
-import few.ModelBean;
 import few.RequestParameter;
 import few.RequestParameters;
-import few.core.Dispatcher;
 import few.core.DispatcherMap;
 import few.utils.ListWrapper;
 import freemarker.template.TemplateMethodModel;
@@ -19,7 +17,7 @@ import java.util.*;
  * Time: 0:17
  * To change this template use File | Settings | File Templates.
  */
-@ModelBean(name = "model_beans")
+@few.ModelBean(name = "model_beans")
 public class ViewModelBeans extends ListWrapper<ViewModelBeans.ViewModelBean>{
 
     private ViewModelBeans(List<ViewModelBean> viewModelBeans) {
@@ -61,7 +59,7 @@ public class ViewModelBeans extends ListWrapper<ViewModelBeans.ViewModelBean>{
 
         DispatcherMap map = DispatcherMap.get();
 
-        for (DispatcherMap.ModelBeanDescription mbd : map.getModels().values()) {
+        for (DispatcherMap.ModelBean mbd : map.getModels().values()) {
             List<ViewRequestParameter> parameters;
 
             parameters = buildParametersFromMethod(mbd.getMethod());

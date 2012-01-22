@@ -3,7 +3,7 @@ package few.core;
 import few.ActionResponse;
 import few.Context;
 import few.MyURL;
-import few.impl.FreemarkerServiceImpl;
+import few.routing.Routing;
 import few.services.FreemarkerService;
 
 import javax.servlet.*;
@@ -28,14 +28,14 @@ public class Dispatcher implements Filter{
 
     ServletContext servletContext;
     DispatcherMap config;
-    DispatcherSelector selector;
+    Routing routing;
     FreemarkerService freemarker;
+
     public void init(FilterConfig filterConfig) throws ServletException {
         servletContext = filterConfig.getServletContext();
         Initializer.init(servletContext);
         freemarker = ServiceRegistry.get(FreemarkerService.class);
         config = DispatcherMap.build(servletContext, Thread.currentThread().getContextClassLoader());
-        selector = new DispatcherSelector(config);
     }
 
     public ServletContext context() {
@@ -54,63 +54,15 @@ public class Dispatcher implements Filter{
         try {
             Context.init(request, response, servletContext, config);
 
-            // 1. validate
-            // 2. get page filename
-            // 3. check exists
-            // 4. forward
+            if( request.getMethod().equals("GET") ) {
+                routing.processGetRoute(request, response);
 
-            // 1. process action
-            int i = uri.indexOf("/", BASE_SERVLET_PATH.length());
-            i = i == -1 ? uri.length() : i;
-            String action = uri.substring(BASE_SERVLET_PATH.length(), i);
-
-            Enumeration<String> e = request.getParameterNames();
-            Set<String> parameters = new HashSet<String>();
-            while (e.hasMoreElements()) {
-                parameters.add(e.nextElement());
-            }
-
-            DispatcherMap.ActionMethodDescription am = selector.selectMethod(action, parameters);
-            ActionResponse ar;
-            if( am != null ) {
-                if( authorized(am.authorized_roles) )
-                    ar = ActionInvoker.invokeActionMethod(am, request, response);
-                else
-                    ar = unauthorized_redirect(am.unauthorized_redirect);
-
-            } else {
-                DispatcherMap.ActionDescription ad = selector.selectAction(action);
-                if( ad == null || authorized(ad.authorized_roles) )
-                    ar = ActionResponse._default();
-                else
-                    ar = unauthorized_redirect(am.unauthorized_redirect);
-            }
-
-            if( ar.getResponse_type() == ActionResponse.DEFAULT )
-                ar = ActionResponse.view(action);
-
-            String ftl = null;
-            if( ar.getResponse_type() == ActionResponse.FORWARD ) {
-                ftl= BASE_PAGE_PATH + ar.getKey() + ".ftl";
-                if( servletContext.getResource(ftl) == null ) {
-                    ar = ActionResponse.error(404);
-                }
-            }
-
-            switch(ar.getResponse_type()) {
-                case ActionResponse.FORWARD:
-                    processTemplate(ftl, request, response);
-                    break;
-                case ActionResponse.REDIRECT:
-                    response.sendRedirect(ar.getKey());
-                    break;
-                case ActionResponse.ACTION:
-                    throw new Error("not implemented yet");
-                case ActionResponse.ERROR:
-                    response.sendError(ar.getError_code());
-                case ActionResponse.JSON:
-                    response.getOutputStream().print(ar.getKey());
-                    response.getOutputStream().close();
+            } else
+            if( request.getMethod().equals("POST")) {
+                routing.processPostRoute(request, response);
+            } else
+            {
+                response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
             }
 
         } finally {

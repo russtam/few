@@ -18,7 +18,7 @@ import java.io.IOException;
  * Time: 19:05
  * To change this template use File | Settings | File Templates.
  */
-@ActionClass(action = "login")
+@Controller(name = "login")
 public class LoginAction {
 
     public static final String USER_ID_SESSION_KEY = "id";
@@ -26,7 +26,7 @@ public class LoginAction {
     private static UserService users = UserService.get();
     private static AuditService auditService = AuditService.get();
 
-    @ActionMethod(_default = true)
+    @Action(_default = true)
     public ActionResponse render() {
         if( Context.get().isSignedIn() ) {
             return ActionResponse.redirect("user_profile");
@@ -35,7 +35,7 @@ public class LoginAction {
         }
     }
 
-    @ActionMethod()
+    @Action()
     public ActionResponse login(
             @RequestParameter(name = "login") String login,
             @RequestParameter(name = "password") String password,
@@ -79,7 +79,7 @@ public class LoginAction {
         throw new IllegalStateException();
     }
 
-    @ActionMethod()
+    @Action()
     public ActionResponse activate(
             @RequestParameter(name = "key") String securityKey,
             HttpSession session

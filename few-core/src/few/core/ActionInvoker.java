@@ -28,9 +28,7 @@ import java.util.logging.Logger;
  */
 public class ActionInvoker {
 
-    public static ActionResponse invokeActionMethod(DispatcherMap.ActionMethodDescription am, HttpServletRequest request, HttpServletResponse response) {
-        Object instance = am.instance;
-        Method m = am.method;
+    public static ActionResponse invokeActionMethod(Object instance, Method m, HttpServletRequest request, HttpServletResponse response) {
 
         Object[] args = mapParameters(m, request, response);
 
@@ -41,27 +39,26 @@ public class ActionInvoker {
                 m.invoke(instance, args);
                 return ActionResponse._default();
             }
-            throw new RuntimeException("bad return type in action method " + am.instance.getClass().getName() + "." + m.getName());
+            throw new RuntimeException("bad return type in action method " + instance.getClass().getName() + "." + m.getName());
         } catch (Throwable t) {
-            log.log(Level.SEVERE, "can not invoke action method " + am.instance.getClass().getName() + "." + m.getName(), t);
+            log.log(Level.SEVERE, "can not invoke action method " + instance.getClass().getName() + "." + m.getName(), t);
             throw new RuntimeException(t);
         }
     }
 
-    public static Object invokeModelMethod(DispatcherMap.ModelBeanDescription desc, HttpServletRequest request, HttpServletResponse response) {
+    public static Object invokeModelMethod(String name, Method m, HttpServletRequest request, HttpServletResponse response) {
         try {
-            Method m = desc.method;
 
             Object[] args = mapParameters(m, request, response);
 
-            Object ret = desc.method.invoke(null, args);
+            Object ret = m.invoke(null, args);
 
             return ret;
         } catch (Throwable e) {
             if( e.getCause() != null )
-                throw new RuntimeException("can not create ModelBean " + desc.name, e.getCause());
+                throw new RuntimeException("can not create ModelBean " + name, e.getCause());
             else
-                throw new RuntimeException("can not create ModelBean " + desc.name, e);
+                throw new RuntimeException("can not create ModelBean " + name, e);
         }
     }
 

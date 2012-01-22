@@ -1,6 +1,6 @@
 package few.annotations;
 
-import few.ActionClass;
+import few.Controller;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
@@ -142,12 +142,12 @@ public class AnnotationFinderTest extends TestCase {
     public void test1() throws MalformedURLException {
         AnnotationFinder af = new AnnotationFinder(
                 new SC("D:\\workSpace\\DRGN\\out\\production\\public-web", "D:\\workSpace\\DRGN\\lib\\testng-6.1.1"),
-                ActionClass.class.getClassLoader());
+                Controller.class.getClassLoader());
 
         Map<Class, List<Class>> ans =
                 af.findAnnotations();
 
-        Assert.assertTrue( ans.containsKey(ActionClass.class) );
+        Assert.assertTrue( ans.containsKey(Controller.class) );
 
     }
 

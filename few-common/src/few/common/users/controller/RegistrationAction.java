@@ -10,8 +10,6 @@ import few.common.users.service.UserService;
 import few.utils.Utils;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -23,21 +21,21 @@ import java.util.Map;
  * Time: 21:45
  * To change this template use File | Settings | File Templates.
  */
-@ActionClass(action = "registration")
+@Controller(name = "registration")
 public class RegistrationAction {
 
     private static UserService users = UserService.get();
     private static AccountService account = AccountService.get();
     private static AuditService auditService = AuditService.get();
 
-    @ActionMethod(_default = true)
+    @Action(_default = true)
     public ActionResponse _default() {
         if( Context.get().isSignedIn() )
             return ActionResponse.redirect("user_profile");
         return ActionResponse._default();
     }
 
-    @ActionMethod()
+    @Action()
     public ActionResponse service(
             @RequestParameter(name = "email") String email,
             @RequestParameter(name = "login") String login,
