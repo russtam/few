@@ -67,7 +67,7 @@ public class ViewModelBeans extends ListWrapper<ViewModelBeans.ViewModelBean>{
             if( TemplateMethodModel.class.isAssignableFrom(mbd.getClazz()) )
                 name += "()";
 
-            beans.add(new ViewModelBean(name, "", mbd.getClazz().getName(), parameters));
+            beans.add(new ViewModelBean(name, mbd.getPermission(), mbd.getClazz().getName(), parameters));
         }
 
         Collections.sort(beans, new Comparator<ViewModelBean>() {

@@ -6,6 +6,9 @@
            version="2.5">
 
     <listener>
+        <listener-class>few.core.Initializer</listener-class>
+    </listener>
+    <listener>
         <listener-class>few.sample.Initializer</listener-class>
     </listener>
     <listener>

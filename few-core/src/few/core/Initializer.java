@@ -3,9 +3,11 @@ package few.core;
 import few.impl.DefaultConfigurationImpl;
 import few.impl.DefaultCredentialsImpl;
 import few.impl.FreemarkerServiceImpl;
-import few.services.Configuration;
+import few.routing.RoutingImpl;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,18 +16,17 @@ import javax.servlet.ServletContext;
  * Time: 1:18
  * To change this template use File | Settings | File Templates.
  */
-public class Initializer {
+public class Initializer implements ServletContextListener {
 
-    public static void init(ServletContext context) {
+    public void contextInitialized(ServletContextEvent sce) {
         ServiceRegistry.registerDefaultImpl(DefaultConfigurationImpl.class);
         ServiceRegistry.registerDefaultImpl(DefaultCredentialsImpl.class);
 
-        ServiceRegistry.registerService( new FreemarkerServiceImpl(context) );
-
+        ServiceRegistry.registerService( new FreemarkerServiceImpl(sce.getServletContext()) );
+        ServiceRegistry.registerService( new RoutingImpl() );
     }
 
-    public static void fini() {
+    public void contextDestroyed(ServletContextEvent sce) {
         ServiceRegistry.shutdown();
     }
-
 }

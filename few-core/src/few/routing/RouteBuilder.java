@@ -1,5 +1,8 @@
 package few.routing;
 
+import few.core.ServiceRegistry;
+import few.services.Routing;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,10 +17,7 @@ import java.util.Map;
 */
 public class RouteBuilder {
 
-    static List<GetRoute> getRoutes = new LinkedList<GetRoute>();
-    static List<PostRoute> postRoutes = new LinkedList<PostRoute>();
-    static List<ErrorRoute> errorRoutes = new LinkedList<ErrorRoute>();
-
+    private static Routing routing = ServiceRegistry.get(Routing.class);
 
     public static GetRouteBuilder getRoute(String urlPattern) {
         GetRouteBuilder ret = new GetRouteBuilder();
@@ -66,7 +66,7 @@ public class RouteBuilder {
                 throw new IllegalStateException("only one of ftl or servlet should be null");
 
             GetRoute ret = new GetRoute(urlPattern, permission, ftl, servlet);
-            getRoutes.add(ret);
+            routing.addGetRoute(ret);
             return ret;
         }
     }
@@ -113,7 +113,7 @@ public class RouteBuilder {
 
         public PostRoute build() {
             PostRoute ret = new PostRoute(urlPattern, permission, controller, action, remapping == null ? Collections.<String, String>emptyMap() : remapping);
-            postRoutes.add(ret);
+            routing.addPostRoute(ret);
             return ret;
         }
     }
@@ -145,7 +145,7 @@ public class RouteBuilder {
                 throw new IllegalStateException("only one of ftl or servlet should be null");
 
             ErrorRoute ret = new ErrorRoute(code, ftl, servlet);
-            errorRoutes.add(ret);
+            routing.addErrorRoute(ret);
             return ret;
         }
     }

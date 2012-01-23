@@ -5,8 +5,10 @@ import few.common.audit.service.AuditService;
 import few.common.users.service.CredentialsImpl;
 import few.core.ServiceRegistry;
 import few.impl.DefaultConfigurationImpl;
+import few.impl.FreemarkerServiceImpl;
 import few.routing.DefaultRoutes;
 import few.routing.RouteBuilder;
+import few.routing.RoutingImpl;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

@@ -89,14 +89,14 @@ public class Context {
     }
 
     private Set<String> userRoles;
-    public boolean isUserInRole(String role) {
+    public boolean hasPermission(String permission) {
         if( !isSignedIn() )
             return false;
         if( userRoles == null ) {
             userRoles = credentials.getRoles(request);
         }
 
-        if( userRoles.contains(role) )
+        if( userRoles.contains(permission) )
             return true;
         else
             return false;
@@ -121,4 +121,5 @@ public class Context {
     public HttpServletResponse getResponse() {
         return response;
     }
+
 }

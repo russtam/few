@@ -18,6 +18,10 @@ public class ErrorRoute {
         this.servlet = servlet;
     }
 
+    public int getCode() {
+        return code;
+    }
+
     public String getFtl() {
         return ftl;
     }

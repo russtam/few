@@ -16,7 +16,7 @@
         <tr style="background-color: #DFDFFF; vertical-align: top;">
             <td>${t}
             <td>${m.name}
-            <td>${m.permission}
+            <td>${m.permission!""}
             <td>
                 <#list m.parameters as p>
                     * ${p.name} <#if p.required>(required)</#if>: ${p.type} <br>
