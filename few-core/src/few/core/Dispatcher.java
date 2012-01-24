@@ -75,15 +75,26 @@ public class Dispatcher implements Filter{
             if( am != null ) {
                 if( authorized(am.authorized_roles) )
                     ar = ActionInvoker.invokeActionMethod(am, request, response);
-                else
-                    ar = unauthorized_redirect(am.unauthorized_redirect);
-
+                else {
+                    if( !Context.get().isSignedIn() )
+                        ar = unauthorized_redirect(am.unauthorized_redirect);
+                    else {
+                        response.sendError(403);
+                        return;
+                    }
+                }
             } else {
                 DispatcherMap.ActionDescription ad = selector.selectAction(action);
                 if( ad == null || authorized(ad.authorized_roles) )
                     ar = ActionResponse._default();
-                else
-                    ar = unauthorized_redirect(am.unauthorized_redirect);
+                else {
+                    if( !Context.get().isSignedIn() )
+                        ar = unauthorized_redirect(am.unauthorized_redirect);
+                    else {
+                        response.sendError(403);
+                        return;
+                    }
+                }
             }
 
             if( ar.getResponse_type() == ActionResponse.DEFAULT )
