@@ -75,7 +75,7 @@ public class UserService extends BaseMyBatisServiceImpl {
     public Integer createNewUser(String display_name, String email, String role, String login, String password, boolean active,
         List<CustomField> profile) {
         SqlSession session = session();
-        int user_id = (Integer)session.selectOne("select_uid");
+        int user_id = (Integer)session.selectOne("few.common.select_uid");
 
         session.insert("few.common.insertSimpleUser", new MapBuilder()
                 .add("id", user_id)

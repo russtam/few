@@ -35,27 +35,27 @@ public class AnnotationFinderTest extends TestCase {
         }
 
         public ServletContext getContext(String uripath) {
-            return null;  //To change body of implemented methods use File | Settings | File Templates.
+            return null;  
         }
 
         public String getContextPath() {
-            return null;  //To change body of implemented methods use File | Settings | File Templates.
+            return null;  
         }
 
         public int getMajorVersion() {
-            return 0;  //To change body of implemented methods use File | Settings | File Templates.
+            return 0;  
         }
 
         public int getMinorVersion() {
-            return 0;  //To change body of implemented methods use File | Settings | File Templates.
+            return 0;  
         }
 
         public String getMimeType(String file) {
-            return null;  //To change body of implemented methods use File | Settings | File Templates.
+            return null;  
         }
 
         public Set getResourcePaths(String path) {
-            return null;  //To change body of implemented methods use File | Settings | File Templates.
+            return null;  
         }
 
         public URL getResource(String path) throws MalformedURLException {
@@ -67,75 +67,75 @@ public class AnnotationFinderTest extends TestCase {
         }
 
         public InputStream getResourceAsStream(String path) {
-            return null;  //To change body of implemented methods use File | Settings | File Templates.
+            return null;  
         }
 
         public RequestDispatcher getRequestDispatcher(String path) {
-            return null;  //To change body of implemented methods use File | Settings | File Templates.
+            return null;  
         }
 
         public RequestDispatcher getNamedDispatcher(String name) {
-            return null;  //To change body of implemented methods use File | Settings | File Templates.
+            return null;  
         }
 
         public Servlet getServlet(String name) throws ServletException {
-            return null;  //To change body of implemented methods use File | Settings | File Templates.
+            return null;  
         }
 
         public Enumeration getServlets() {
-            return null;  //To change body of implemented methods use File | Settings | File Templates.
+            return null;  
         }
 
         public Enumeration getServletNames() {
-            return null;  //To change body of implemented methods use File | Settings | File Templates.
+            return null;  
         }
 
         public void log(String msg) {
-            //To change body of implemented methods use File | Settings | File Templates.
+            
         }
 
         public void log(Exception exception, String msg) {
-            //To change body of implemented methods use File | Settings | File Templates.
+            
         }
 
         public void log(String message, Throwable throwable) {
-            //To change body of implemented methods use File | Settings | File Templates.
+            
         }
 
         public String getRealPath(String path) {
-            return null;  //To change body of implemented methods use File | Settings | File Templates.
+            return null;  
         }
 
         public String getServerInfo() {
-            return null;  //To change body of implemented methods use File | Settings | File Templates.
+            return null;  
         }
 
         public String getInitParameter(String name) {
-            return null;  //To change body of implemented methods use File | Settings | File Templates.
+            return null;  
         }
 
         public Enumeration getInitParameterNames() {
-            return null;  //To change body of implemented methods use File | Settings | File Templates.
+            return null;  
         }
 
         public Object getAttribute(String name) {
-            return null;  //To change body of implemented methods use File | Settings | File Templates.
+            return null;  
         }
 
         public Enumeration getAttributeNames() {
-            return null;  //To change body of implemented methods use File | Settings | File Templates.
+            return null;  
         }
 
         public void setAttribute(String name, Object object) {
-            //To change body of implemented methods use File | Settings | File Templates.
+            
         }
 
         public void removeAttribute(String name) {
-            //To change body of implemented methods use File | Settings | File Templates.
+            
         }
 
         public String getServletContextName() {
-            return null;  //To change body of implemented methods use File | Settings | File Templates.
+            return null;  
         }
     }
 

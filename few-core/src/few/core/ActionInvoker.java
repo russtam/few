@@ -116,7 +116,7 @@ public class ActionInvoker {
             } else
             if( annotations.length > 0 && annotations[0].annotationType() == RequestParameters.class ) {
                 if( type != Map.class ) {
-                    throw new IllegalArgumentException("a type of action parameter annotated with RequestParameters should be Map<String, String>");
+                    throw new IllegalArgumentException("a type of action parameter annotated with RequestParameters should be Map<String, String[]>");
                 }
                 // 1. remember declared parameters
                 HashSet<String> declared = new HashSet<String>();
@@ -128,12 +128,12 @@ public class ActionInvoker {
                 }
 
                 // 2. fill Map
-                HashMap<String, String> map = new HashMap<String, String>();
+                HashMap<String, String[]> map = new HashMap<String, String[]>();
                 for (Object o : request.getParameterMap().entrySet()) {
                     Map.Entry<String, String[]> entry = (Map.Entry<String, String[]>) o;
                     if( !declared.contains(entry.getKey())) {
                         if( entry.getValue().length > 0)
-                            map.put(entry.getKey(), entry.getValue()[0]);
+                            map.put(entry.getKey(), entry.getValue());
                     }
                 }
                 ret[i] = map;
