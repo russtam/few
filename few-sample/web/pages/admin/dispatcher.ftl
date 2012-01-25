@@ -1,6 +1,6 @@
-<#import "../fragments/common.ftl" as common>
-<#import "../few-common/pages/model_beans.ftl" as mb>
-<#import "../few-common/pages/actions.ftl" as ac>
+<#import "../../fragments/common.ftl" as common>
+<#import "../../few-common/pages/model_beans.ftl" as mb>
+<#import "../../few-common/pages/actions.ftl" as ac>
 
 <@common.page title="FewDispatcher">
 

@@ -22,17 +22,28 @@
                 </h1>
             </td>
             <td align="right">
-                <#include "../few-common/pages/user_bar.ftl">
+                <#if !userInfo.signed_in >
+                    <a href="/login">Войти</a>
+                </#if>
+                <#if userInfo.signed_in >
+                    <a href="/user/profile" title="Профиль пользователя">${userInfo.display_name}</a>
+                    &nbsp;
+                    <form action="/logout.logout" method="post" >
+                        <a href="/logout.logout" onclick="$(this).closest('form').submit(); return false;">
+                            Выйти
+                        </a>
+                    </form>
+                </#if>
             </td>
         </tr>
     </table>
 
     <hr/>
         <#if userInfo.isUserInRole("admin")>
-            <a href="/user_list">user_list</a>
-            <a href="/dispatcher">dispatcher</a>
-            <a href="/activity_log">activity_log</a>
-            <a href="/access_log">access_log</a>
+            <a href="/admin/user_list">user_list</a>
+            <a href="/admin/dispatcher">dispatcher</a>
+            <a href="/admin/activity_log">activity_log</a>
+            <a href="/admin/access_log">access_log</a>
         <#else >
             Navigation
         </#if>

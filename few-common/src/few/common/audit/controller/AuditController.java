@@ -19,13 +19,13 @@ public class AuditController {
 
     private static AuditService auditService = AuditService.get();
     @Action
-    public ActionResponse clearAccessLog(@RequestParameter(name = "clear_access") String action) {
+    public ActionResponse clearAccessLog() {
         auditService.clearAccessLog();
         return ActionResponse.referer();
     }
 
     @Action
-    public ActionResponse clearActivity(@RequestParameter(name = "clear_activities") String action) {
+    public ActionResponse clearActivity() {
         auditService.clearActivities();
         auditService.insertActivity(AuditKeys.WARNING, AuditKeys.CLEAR_ACTIVITES);
         return ActionResponse.referer();

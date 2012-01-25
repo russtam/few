@@ -35,7 +35,7 @@ public class UserListAction {
         userService.deleteUser(user_id);
         auditService.insertActivity(AuditKeys.NORMAL, AuditKeys.USER_DELETE, String.valueOf(user_id));
 
-        return ActionResponse.redirect("user_list");
+        return ActionResponse.referer();
     }
 
     @Action

@@ -23,7 +23,7 @@ critical
         }
     </style>
 
-    <form action="/audit?clear_access" method="post">
+    <form action="/audit.clearAccessLog" method="post">
         <input type="submit" value="Очистить">
     </form>
 

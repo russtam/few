@@ -34,7 +34,7 @@
         } );
     </script>
 
-    <a href="/user_list?add_form">Добавить</a>
+    <a href="?add_form">Добавить</a>
 
     <table id="users_table"  cellspacing="0" cellpadding="0" border="0" class="display">
         <thead>
@@ -53,7 +53,7 @@
         <tbody>
             <#list userList as u>
                 <tr>
-                    <td><a href="/user_list?user_id=${u.user_id?c}">${u.email}</a></td>
+                    <td><a href="?user_id=${u.user_id?c}">${u.email}</a></td>
                     <td>${u.display_name}</td>
                     <td><@status u.status_id/></td>
                     <td>${u.display_role}</td>
@@ -74,7 +74,7 @@
 
     <@show_messages/>
 
-    <a href="/user_list"><< назад</a>
+    <a href="?"><< назад</a>
     <form action="/user_list.delete?user_id=${user_profile.user_id?c}" method="POST">
         <input type="submit" value="Удалить">
     </form>
@@ -153,7 +153,7 @@
 </#macro>
 
 <#macro add_form>
-    <a href="/user_list"><< назад</a>
+    <a href="?"><< назад</a>
 
     <form action="/user_list.add" method="POST">
         <table>

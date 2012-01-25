@@ -29,7 +29,7 @@
 
 
 
-    <form action="/audit?clear_activities" method="post">
+    <form action="/audit.clearActivity" method="post">
         <input type="submit" value="Очистить">
     </form>
 
