@@ -127,6 +127,8 @@ public class JSONRenderer {
             }
 
             sb.append("]");
+        } else if( value.getClass().isEnum() ) {
+            sb.append("\"").append(value.toString()).append("\"");
         } else {
             visitObject(value, sb);
         }

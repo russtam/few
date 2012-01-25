@@ -23,7 +23,7 @@ import java.util.*;
  */
 public class AnnotationFinderTest extends TestCase {
 
-    @SuppressWarnings(value = "deprecation")
+    @SuppressWarnings("deprecation")
     public static class SC implements ServletContext {
 
         String classesFolder;
