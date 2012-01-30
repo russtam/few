@@ -10,6 +10,8 @@ import java.io.Writer;
  * To change this template use File | Settings | File Templates.
  */
 public interface FreemarkerService {
+    boolean checkExists(String template);
+
     void processTemplate(String template, Writer writer);
 
     void processTemplate(String template, Writer writer, Object parameters);

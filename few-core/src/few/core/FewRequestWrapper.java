@@ -2,9 +2,7 @@ package few.core;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
-import java.util.Enumeration;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,28 +13,54 @@ import java.util.Map;
  */
 public class FewRequestWrapper extends HttpServletRequestWrapper {
 
+    Map<String, String[]> parameters;
+    Enumeration<String> names;
+
     public FewRequestWrapper(HttpServletRequest request, Map<String, String> vars) {
         super(request);
+
+        parameters = new HashMap<String, String[]>();
+        parameters.putAll(super.getParameterMap());
+
+        for (Map.Entry<String, String> e : vars.entrySet()) {
+            parameters.put(e.getKey(), new String[] {e.getValue()});
+        }
+        parameters = Collections.unmodifiableMap(parameters);
     }
 
     @Override
     public String[] getParameterValues(String name) {
-        return super.getParameterValues(name);    //To change body of overridden methods use File | Settings | File Templates.
+        return parameters.get(name);
     }
 
     @Override
     public Enumeration getParameterNames() {
-        return super.getParameterNames();    //To change body of overridden methods use File | Settings | File Templates.
+        final Iterator<String> i = parameters.keySet().iterator();
+        return new Enumeration<String>() {
+            public boolean hasMoreElements() {
+                return i.hasNext();
+            }
+
+            public String nextElement() {
+                return i.next();
+            }
+        };
     }
 
     @Override
     public Map getParameterMap() {
-        return super.getParameterMap();    //To change body of overridden methods use File | Settings | File Templates.
+        return parameters;
     }
 
     @Override
     public String getParameter(String name) {
-        return super.getParameter(name);    //To change body of overridden methods use File | Settings | File Templates.
+        String ret[] = parameters.get(name);
+        if( ret != null )
+            if( ret.length > 0)
+                return ret[0];
+            else
+                return "";
+        return null;
     }
 
     @Override

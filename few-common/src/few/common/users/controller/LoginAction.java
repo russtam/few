@@ -63,9 +63,12 @@ public class LoginAction {
                         new MyURL(false, "/")
                 );
             else
-                return ActionResponse.redirect(
-                        new MyURL(false, redirect)
-                );
+                if( redirect.startsWith("http") )
+                    return ActionResponse.redirect(redirect);
+                else
+                    return ActionResponse.redirect(
+                            new MyURL(false, redirect)
+                    );
         }
         throw new IllegalStateException();
     }
@@ -81,7 +84,7 @@ public class LoginAction {
             session.setAttribute(USER_ID_SESSION_KEY, user_id);
             auditService.insertActivity(
                     AuditKeys.NORMAL, AuditKeys.ACTIVATION, "");
-            return ActionResponse.redirect("user_profile");
+            return ActionResponse.page("user/profile");
         } else {
             Context.get().addMessage(new Message(Message.INFO, "Ссылка устарела."));
             return ActionResponse._default();

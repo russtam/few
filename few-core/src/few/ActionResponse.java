@@ -15,9 +15,10 @@ import java.net.MalformedURLException;
 public class ActionResponse {
 
     public static final int DEFAULT  = 0;
-    public static final int REDIRECT = 1;
-    public static final int ERROR    = 2;
-    public static final int JSON     = 3;
+    public static final int PAGE = 1;
+    public static final int REDIRECT = 2;
+    public static final int ERROR    = 3;
+    public static final int JSON     = 4;
 
     private int error_code;
     private int response_type;
@@ -38,8 +39,8 @@ public class ActionResponse {
         return new ActionResponse(DEFAULT, null);
     }
 
-    public static ActionResponse view(String where) {
-        return new ActionResponse(REDIRECT, "/" + where);
+    public static ActionResponse page(String where) {
+        return new ActionResponse(PAGE, where);
     }
 
     public static ActionResponse referer() {

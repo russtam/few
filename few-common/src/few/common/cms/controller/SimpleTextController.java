@@ -28,8 +28,7 @@ public class SimpleTextController {
         else
             cmsService.updateSimpleText(s);
 
-        String refer = Context.get().getRequest().getHeader("referer");
-        return ActionResponse.redirect(refer);
+        return ActionResponse.referer();
     }
 
     @Action
@@ -40,7 +39,6 @@ public class SimpleTextController {
     ) {
         cmsService.deleteSimpleText(cat_id, text_id);
 
-        String refer = Context.get().getRequest().getHeader("referer");
-        return ActionResponse.redirect(refer);
+        return ActionResponse.referer();
     }
 }

@@ -1,5 +1,6 @@
 [#ftl]
 [#-- @implicitly included --]
+[#-- @ftlvariable name="request" type="javax.servlet.http.HttpServletRequest" --]
 [#-- @ftlvariable name="messages" type="few.support.Messages" --]
 [#-- @ftlvariable name="ajax" type="few.support.Ajax" --]
 [#-- @ftlvariable name="loginForm" type="few.common.users.presentation.LoginForm" --]

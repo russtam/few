@@ -3,7 +3,7 @@
 
 <@common.page title="Список пользователей">
 
-    <@user_list.user_list_page/>
+    <@user_list.user_list/>
 
 </@common.page>
 

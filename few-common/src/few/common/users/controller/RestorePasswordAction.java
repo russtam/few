@@ -61,7 +61,7 @@ public class RestorePasswordAction {
             Context.get().addMessage( new Message(Message.INFO, "Ваш новый пароль активирован, можете заходить.") );
             auditService.insertActivity(
                 AuditKeys.MINOR, AuditKeys.RESTORE_PASSWORD, "activate");
-            return ActionResponse.view("login");
+            return ActionResponse.page("login");
         } else {
             Context.get().addMessage( new Message(Message.ERROR, "Ссылка устарела. Попробуйте запросить восстановление пароля ещё раз.") );
         }

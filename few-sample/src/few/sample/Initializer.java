@@ -38,6 +38,9 @@ public class Initializer implements ServletContextListener{
         RouteBuilder.getRoute("/favicon.ico").toServlet(ResourceServlet.class.getName()).build();
         RouteBuilder.getRoute("/static/*").toServlet(ResourceServlet.class.getName()).build();
 
+        // RouteBuilder.permission("/admin*", "admin").build();
+        // RouteBuilder.getRoute("/admin/users").withParam("actionId", "55")
+
         RouteBuilder.getRoute("/admin/${page}").toPage("/pages/admin/${page}.ftl").permission("admin").build();
         RouteBuilder.getRoute("/user/${page}").toPage("/pages/user/${page}.ftl").permission("user").build();
 
@@ -50,10 +53,17 @@ public class Initializer implements ServletContextListener{
         // with controller ?
 
         //RouteBuilder.postRoute("/${ctrl}").ctrl("${ctrl}").action("");
+        RouteBuilder.postRoute("/user_list.delete").ctrl("user_list").action("delete").
+                map("default", "/admin/user_list").build();
+        RouteBuilder.postRoute("/user_list.${action}").ctrl("user_list").action("${action}").
+                map("default", "/admin/user_edit?user_id=${user_id}").build();
+
         RouteBuilder.postRoute("/${ctrl}.${action}").ctrl("${ctrl}").action("${action}").build();
 
-
         RouteBuilder.getRoute("/").toServlet(DefaultPage.class.getName()).build();
+
+        RouteBuilder.errorRoute(404).toPage("/pages/_errors/404.ftl").build();
+        RouteBuilder.errorRoute(403).toServlet(AccessDeniedPage.class.getName()).build();
     }
 
     public void contextDestroyed(ServletContextEvent servletContextEvent) {

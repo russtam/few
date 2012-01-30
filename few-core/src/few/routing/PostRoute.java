@@ -33,4 +33,5 @@ public class PostRoute extends Route {
     public Map<String, String> getRemapping() {
         return remapping;
     }
+
 }

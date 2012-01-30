@@ -25,7 +25,10 @@ public class DefaultPage extends HttpServlet{
         if( !Context.get().isSignedIn() ) {
             resp.sendRedirect("/login");
         } else {
-            resp.sendRedirect("/user_profile");
+            if( Context.get().hasPermission("admin") )
+                resp.sendRedirect("/admin/user_list");
+            else
+                resp.sendRedirect("/user/profile");
         }
     }
 }

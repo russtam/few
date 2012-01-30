@@ -75,6 +75,14 @@ public class FreemarkerServiceImpl implements FreemarkerService {
         cfg.setLocale(Locale.US);
     }
 
+    public boolean checkExists(String template) {
+        try {
+            return cfg.getTemplateLoader().findTemplateSource(template) != null;
+        } catch (IOException e) {
+            log.log(Level.SEVERE, "", e);
+            return false;
+        }
+    }
 
     public void processTemplate(String template, Writer writer) {
         processTemplate(template, writer, Context.get().getModel());

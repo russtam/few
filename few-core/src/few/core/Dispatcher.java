@@ -2,6 +2,7 @@ package few.core;
 
 import few.ActionResponse;
 import few.Context;
+import few.routing.ErrorRoute;
 import few.routing.GetRoute;
 import few.routing.PostRoute;
 import few.services.FreemarkerService;
@@ -11,6 +12,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
 
 /**
  * Created by IntelliJ IDEA.
@@ -22,16 +24,24 @@ import java.io.IOException;
 public class Dispatcher implements Filter{
     public static final String BASE_SERVLET_PATH = "/";
 
-    ServletContext servletContext;
-    DispatcherMap config;
-    Routing routing;
-    FreemarkerService freemarker;
+    private ServletContext servletContext;
+    private DispatcherMap config;
+    private Routing routing;
+    private FreemarkerService freemarker;
+
+    private static Dispatcher instance;
+
+    public static Dispatcher get() {
+        return instance;
+    }
 
     public void init(FilterConfig filterConfig) throws ServletException {
         servletContext = filterConfig.getServletContext();
         freemarker = ServiceRegistry.get(FreemarkerService.class);
         config = DispatcherMap.build(servletContext, Thread.currentThread().getContextClassLoader());
         routing = ServiceRegistry.get(Routing.class);
+
+        instance = this;
     }
 
     public ServletContext context() {
@@ -49,13 +59,14 @@ public class Dispatcher implements Filter{
                 return;
             }
 
-            FewRequestWrapper fw = new FewRequestWrapper(request, sr.getVars());
+            FewRequestWrapper  freq  = new FewRequestWrapper(request, sr.getVars());
+            FewResponseWrapper fresp = new FewResponseWrapper(request, response);
 
-            Context.init(fw, response, servletContext, config);
+            Context.init(freq, fresp, servletContext, config);
 
             if( sr.getRoute().getPermission() != null ) {
                 if( !Context.get().hasPermission(sr.getRoute().getPermission()) ) {
-                    response.sendError(403, "route access denied");
+                    fresp.sendError(403, "route access denied");
                     return;
                 }
             }
@@ -65,7 +76,12 @@ public class Dispatcher implements Filter{
 
                 if( getRoute.getFtl() != null ) {
                     String ftl = routing.processVars(getRoute.getFtl(), sr.getVars());
-                    processTemplate(ftl, request, response);
+                    if( freemarker.checkExists(ftl) )
+                        processTemplate(ftl, request, response);
+                    else {
+                        fresp.sendError(404, "template not found");
+                        return;
+                    }
                 }
                 else if( getRoute.getServlet() != null ) {
                     String servlet = routing.processVars(getRoute.getServlet(), sr.getVars());
@@ -89,14 +105,14 @@ public class Dispatcher implements Filter{
                 // 1. select ctrl
                 DispatcherMap.Controller c = DispatcherMap.get().getControllers().get(ctrl);
                 if( c == null ) {
-                    response.sendError(404, "controller not found");
+                    fresp.sendError(404, "controller not found");
                     return;
                 }
 
                 // 2. select action method
                 DispatcherMap.Action a = c.getActions().get(action);
                 if( a == null ) {
-                    response.sendError(404, "action not found");
+                    fresp.sendError(404, "action not found");
                     return;
                 }
 
@@ -104,9 +120,23 @@ public class Dispatcher implements Filter{
                 ActionResponse ar = ActionInvoker.invokeActionMethod(c.getInstance(), a.getMethod(), request, response);
 
                 // 4. process remappings
+                String where ;
                 switch(ar.getResponse_type()) {
                     case ActionResponse.DEFAULT:
-                        response.sendRedirect("/" + ctrl);
+                        where = route.getRemapping().get("default");
+                        if( where != null ) {
+                            where = routing.processVars(where, sr.getVars());
+                            response.sendRedirect(where);
+                        } else
+                            response.sendRedirect("/" + ctrl);
+                        break;
+                    case ActionResponse.PAGE:
+                        where = route.getRemapping().get(ar.getKey());
+                        if( where != null ) {
+                            where = routing.processVars(where, sr.getVars());
+                            response.sendRedirect(where);
+                        } else
+                            response.sendRedirect("/" + ar.getKey());
                         break;
                     case ActionResponse.REDIRECT:
                         response.sendRedirect(ar.getKey());
@@ -126,8 +156,36 @@ public class Dispatcher implements Filter{
         }
     }
 
+    public void processError(int sc, String msg, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        ErrorRoute er = routing.selectErrorRoute(sc);
+        if( er == null ) {
+            response.sendError(sc, msg);
+            return;
+        }
 
-    public void processTemplate(String template, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        if( er.getFtl() != null ) {
+            String ftl = routing.processVars(er.getFtl(), Collections.<String, String>emptyMap());
+            if( freemarker.checkExists(ftl) )
+                processTemplate(ftl, request, response);
+            else {
+                response.sendError(sc, msg + "  \t\nerror template " + ftl + " not found");
+                return;
+            }
+        }
+        if( er.getServlet() != null ) {
+            String servlet = routing.processVars(er.getServlet(), Collections.<String, String>emptyMap());
+
+            try {
+                Object o = Class.forName(servlet).newInstance();
+                Servlet s = (Servlet) o;
+                s.service(request, response);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void processTemplate(String template, HttpServletRequest request, HttpServletResponse response) throws IOException{
         // Prepare the HTTP response:
         // - Set the MIME-type and the charset of the output.
         //   Note that the charset should be in sync with the output_encoding setting.
@@ -148,4 +206,5 @@ public class Dispatcher implements Filter{
 
     public void destroy() {
     }
+
 }

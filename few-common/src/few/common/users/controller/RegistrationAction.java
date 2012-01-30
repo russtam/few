@@ -92,7 +92,7 @@ public class RegistrationAction {
 
         Context.get().addMessage(new Message(Message.INFO, "all", "Аккаунт успешно создан, проверьте почту." ));
 
-        return ActionResponse.view("login");
+        return ActionResponse.page("login");
     }
 
 

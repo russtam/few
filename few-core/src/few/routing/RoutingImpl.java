@@ -1,5 +1,6 @@
 package few.routing;
 
+import few.Context;
 import few.services.Routing;
 
 import javax.servlet.http.HttpServletRequest;
@@ -120,11 +121,13 @@ public class RoutingImpl implements Routing {
                 j = pattern.indexOf("}", i);
                 String var = pattern.substring(i + 2, j);
                 String val = vars.get(var);
+                if( val == null )
+                    val = Context.get().getRequest().getParameter(var);
                 if( val == null ) {
                     log.severe("no parameter ${" + var + "}");
                 }
                 else
-                    sb.append(vars.get(var));
+                    sb.append(val);
                 j += 1;
             } else {
                 sb.append(pattern.substring(j, pattern.length()));

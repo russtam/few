@@ -3,10 +3,7 @@ package few.routing;
 import few.core.ServiceRegistry;
 import few.services.Routing;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
 * Created by IntelliJ IDEA.
@@ -31,6 +28,11 @@ public class RouteBuilder {
         return ret;
     }
 
+    public static ErrorRouteBuilder errorRoute(int code) {
+        ErrorRouteBuilder ret = new ErrorRouteBuilder();
+        ret.code = code;
+        return ret;
+    }
 
     public static class GetRouteBuilder {
         private String urlPattern;
@@ -81,6 +83,7 @@ public class RouteBuilder {
         private Map<String, String> remapping;
 
         private PostRouteBuilder() {
+            this.remapping = new HashMap<String, String>();
         }
 
         public PostRouteBuilder permission(String permission) {
@@ -106,7 +109,12 @@ public class RouteBuilder {
             return this;
         }
 
-        public PostRouteBuilder action(Map<String, String> remapping) {
+        public PostRouteBuilder map(String response, String map) {
+            this.remapping.put(response, map);
+            return this;
+        }
+
+        public PostRouteBuilder map(Map<String, String> remapping) {
             this.remapping.putAll(remapping);
             return this;
         }
@@ -141,7 +149,7 @@ public class RouteBuilder {
         }
 
         public ErrorRoute build() {
-            if( ftl != null ^ servlet != null )
+            if( !(ftl != null ^ servlet != null) )
                 throw new IllegalStateException("only one of ftl or servlet should be null");
 
             ErrorRoute ret = new ErrorRoute(code, ftl, servlet);

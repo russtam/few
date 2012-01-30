@@ -29,17 +29,14 @@ public class UserListAction {
     private AuditService auditService = AuditService.get();
 
     @Action
-    public ActionResponse delete(
+    public void delete(
             @RequestParameter(name = "user_id") Integer user_id) {
-
         userService.deleteUser(user_id);
         auditService.insertActivity(AuditKeys.NORMAL, AuditKeys.USER_DELETE, String.valueOf(user_id));
-
-        return ActionResponse.referer();
     }
 
     @Action
-    public ActionResponse ban(
+    public void ban(
             @RequestParameter(name = "user_id") Integer user_id
     ) {
         SimpleUser user = userService.selectUser(user_id);
@@ -48,16 +45,10 @@ public class UserListAction {
 
         Context.get().addMessage( new Message(Message.INFO, "Пользователь заблокирован.") );
         auditService.insertActivity(AuditKeys.NORMAL, AuditKeys.USER_DISABLE, String.valueOf(user_id));
-
-        return here(user_id);
-    }
-
-    private ActionResponse here(Integer user_id) {
-        return ActionResponse.redirect(new MyURL("/user_list").p("user_id", String.valueOf(user_id)));
     }
 
     @Action
-    public ActionResponse unban(
+    public void unban(
             @RequestParameter(name = "user_id") Integer user_id
     ) {
         SimpleUser user = userService.selectUser(user_id);
@@ -66,11 +57,10 @@ public class UserListAction {
         auditService.insertActivity(AuditKeys.NORMAL, AuditKeys.USER_ACTIVATE, String.valueOf(user_id));
 
         Context.get().addMessage( new Message(Message.INFO, "Пользователь активирован.") );
-        return here(user_id);
     }
 
     @Action
-    public ActionResponse update(
+    public void update(
             @RequestParameter(name = "user_id") Integer user_id,
             @RequestParameter(name = "login", required = false) String login,
             @RequestParameter(name = "display_name") String display_name,
@@ -88,7 +78,7 @@ public class UserListAction {
         List<CustomField> profile = UserProfileService.get().validateProfile(fields);
         if( profile == null ) {
             Context.get().addMessage( new Message(Message.ERROR, "Вы некорректно заполнили поля формы.") );
-            return here(user_id);
+            return ;
         }
         userService.updateSimpleUser(user, profile);
 
@@ -106,13 +96,12 @@ public class UserListAction {
             }
         }
         auditService.insertActivity(AuditKeys.NORMAL, AuditKeys.USER_UPDATE, String.valueOf(user_id));
-        return here(user_id);
     }
 
     UserProfileService profileService = UserProfileService.get();
 
     @Action
-    public ActionResponse add(
+    public void add(
             @RequestParameter(name = "login", required = false) String login,
             @RequestParameter(name = "display_name") String display_name,
             @RequestParameter(name = "email") String email,
@@ -135,19 +124,17 @@ public class UserListAction {
         );
 
         auditService.insertActivity(AuditKeys.NORMAL, AuditKeys.USER_ADD, String.valueOf(user_id));
-        return here(user_id);
     }
 
     @Action
-    public ActionResponse gen_pass(
+    public void gen_pass(
             @RequestParameter(name = "user_id") Integer user_id
     ) {
         new_pass(user_id, Utils.generateNewPassword());
-        return here(user_id);
     }
 
     @Action
-    public ActionResponse new_pass(
+    public void new_pass(
             @RequestParameter(name = "user_id") Integer user_id,
             @RequestParameter(name = "password") String password
     ) {
@@ -159,7 +146,6 @@ public class UserListAction {
 
         Context.get().addMessage( new Message(Message.INFO, "Новый пароль выслан пользователю.") );
         auditService.insertActivity(AuditKeys.NORMAL, AuditKeys.USER_NEW_PASSWORD, String.valueOf(user_id));
-        return here(user_id);
     }
 
 }
