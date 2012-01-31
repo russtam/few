@@ -17,7 +17,6 @@ public class SimpleTextController {
     CMSService cmsService = CMSService.get();
     @Action
     public ActionResponse save(
-            @RequestParameter(name = "save") String action,
             @RequestParameter(name = "cat_id") String cat_id,
             @RequestParameter(name = "text_id") String text_id,
             @RequestParameter(name = "text") String text
@@ -33,7 +32,6 @@ public class SimpleTextController {
 
     @Action
     public ActionResponse delete(
-            @RequestParameter(name = "delete") String action,
             @RequestParameter(name = "cat_id") String cat_id,
             @RequestParameter(name = "text_id") String text_id
     ) {

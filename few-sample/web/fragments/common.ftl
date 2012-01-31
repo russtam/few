@@ -40,7 +40,7 @@
 
     <hr/>
         <#if userInfo.isUserInRole("admin")>
-            <a href="/admin/user_list">user_list</a>
+            <a href="/admin/user_list">user_list</a> <br/>
             <a href="/admin/dispatcher">dispatcher</a>
             <a href="/admin/activity_log">activity_log</a>
             <a href="/admin/access_log">access_log</a>
