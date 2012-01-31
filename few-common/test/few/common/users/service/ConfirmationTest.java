@@ -1,6 +1,7 @@
 package few.common.users.service;
 
 import few.common.BaseTest;
+import few.common.users.dao.ConfirmationService;
 
 /**
  * Created by IntelliJ IDEA.

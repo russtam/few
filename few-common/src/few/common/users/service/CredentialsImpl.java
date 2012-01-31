@@ -1,6 +1,7 @@
 package few.common.users.service;
 
 import few.common.users.controller.LoginAction;
+import few.common.users.dao.UserService;
 import few.services.Credentials;
 
 import javax.servlet.http.HttpServletRequest;

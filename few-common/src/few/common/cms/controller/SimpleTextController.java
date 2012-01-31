@@ -1,8 +1,8 @@
 package few.common.cms.controller;
 
 import few.*;
-import few.common.cms.persistence.SimpleText;
-import few.common.cms.service.CMSService;
+import few.common.cms.dto.SimpleText;
+import few.common.cms.dao.CMSService;
 
 /**
  * Created by IntelliJ IDEA.

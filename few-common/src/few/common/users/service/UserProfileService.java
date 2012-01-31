@@ -1,7 +1,7 @@
 package few.common.users.service;
 
 import few.common.CustomUserProfile;
-import few.common.users.persistence.CustomField;
+import few.common.users.dto.CustomField;
 import few.core.ServiceRegistry;
 
 import java.util.*;

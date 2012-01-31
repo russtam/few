@@ -1,15 +1,11 @@
 package few.common.audit.service;
 
 import few.common.BaseTest;
-import few.common.TestContext;
-import few.common.audit.persistence.ActivityEntry;
-import few.common.audit.persistence.RequestDump;
-import few.core.ServiceRegistry;
-import few.services.Credentials;
+import few.common.audit.dao.AuditService;
+import few.common.audit.dto.ActivityEntry;
+import few.common.audit.dto.RequestDump;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.

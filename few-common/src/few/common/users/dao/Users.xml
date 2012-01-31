@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="few.common">
+
+
+    <select id="select_uid" resultType="int">
+        SELECT nextval('users.id_generator')
+    </select>
+
+<!---               SIMPLE USER             -->
+
+    <select id="selectSimpleUser"
+            resultType="few.common.users.dto.SimpleUser"
+            resultMap="SimpleUserMap">
+        select u.id as user_id, u.display_name, u.status_id, u.email, u.role_id as display_role, r.role as role_name
+        from
+            users.users u
+            inner join users.roles r on u.role_id = r.id
+        <if test="login != null">
+            right join users.simple_auth_data a on a.user_id = u.id
+        </if>
+        <if test="user_id != null">
+          where
+            u.id = #{user_id}
+        </if>
+        <if test="email != null">
+            where
+            u.email = #{email}
+        </if>
+        <if test="login != null">
+            where
+            a.login = #{login}
+        </if>
+        <if test="password != null">
+            and a.password = #{password}
+        </if>
+    </select>
+
+    <select id="selectDisplayRoles" resultType="String">
+        select distinct r.id
+        from users.roles r
+    </select>
+
+    <resultMap id="SimpleUserMap" type="few.common.users.dto.SimpleUser">
+        <id property="user_id" column="user_id"/>
+        <result property="status_id" column="status_id"/>
+        <result property="display_name" column="display_name"/>
+        <result property="email" column="email"/>
+        <result property="display_role" column="display_role"/>
+
+        <collection property="roles" column="role_name" javaType="java.util.HashSet" ofType="String">
+            <id column="role_name"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectAllUsers" resultType="int" >
+        select s.id
+        from users.users s
+    </select>
+
+    <select id="selectLoginByEMail" resultType="String" parameterType="String">
+        select a.login
+        from users.users u
+        inner join users.simple_auth_data a on a.user_id = u.id
+        where u.email = #{id}
+    </select>
+
+    <select id="selectLoginByUserID" resultType="String" parameterType="int">
+        select a.login
+        from users.users u
+        inner join users.simple_auth_data a on a.user_id = u.id
+        where u.id = #{id}
+    </select>
+
+    <insert id="insertSimpleUser" >
+        insert into users.users
+            (id, display_name, role_id, email, status_id, registration_time)
+        values
+            ( #{id}, #{display_name}, #{role_id}, #{email}, #{status_id}, #{registration_time} )
+    </insert>
+
+    <insert id="insertLoginPassword" >
+        insert into users.simple_auth_data
+            (user_id, login, password)
+        values
+            ( #{user_id}, #{login}, #{password} )
+    </insert>
+
+    <update id="updateSimpleUser">
+        update users.users
+        set
+            display_name = #{display_name},
+            email = #{email},
+            status_id = #{status_id},
+            role_id = #{display_role}
+        where users.users.id = #{user_id}
+    </update>
+
+    <update id="updateSimpleUserPassword" >
+        update users.simple_auth_data
+        set
+            password = #{password}
+        where users.simple_auth_data.user_id = #{user_id}
+    </update>
+
+    <update id="updateSimpleUserLogin" >
+        update users.simple_auth_data
+        set
+            login = #{login}
+        where users.simple_auth_data.user_id = #{user_id}
+    </update>
+
+    <update id="updateSimpleUserPasswordByLogin" >
+        update users.simple_auth_data
+        set
+            password = #{password}
+        where users.simple_auth_data.login = #{login}
+    </update>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from users.users
+        where users.users.id = #{id}
+    </delete>
+
+    <update id="updateUserStatus" >
+        update users.users
+        set
+            status_id = #{status_id}
+        where id = #{id}
+    </update>
+
+    <update id="updateLastLogin" parameterType="int">
+        update users.users
+        set
+            last_login_time = now()
+        where
+            id = #{id}
+    </update>
+
+    <select id="selectUserProfile" resultType="few.common.users.dto.UserProfile" resultMap="UserProfileMap">
+        select u.id as user_id, p.field_id, p.value
+        from users.users u
+        left join users.user_profile p on u.id = p.user_id
+        <if test="id != null">
+            where u.id = #{id}
+        </if>
+    </select>
+    <resultMap id="UserProfileMap" type="few.common.users.dto.UserProfile">
+        <result property="user_id" column="user_id"/>
+        <collection property="fieldsList" javaType="java.util.LinkedList" ofType="few.common.users.dto.CustomField">
+            <result property="field_id" column="field_id"/>
+            <result property="value" column="value"/>
+        </collection>
+    </resultMap>
+
+    <insert id="insertUserProfileField" >
+        INSERT INTO users.user_profile
+          ( user_id, field_id, value )
+        VALUES
+          ( #{user_id}, #{field_id}, #{value} );
+    </insert>
+    <update id="updateUserProfileField">
+        UPDATE
+          users.user_profile
+        SET
+          value = #{value}
+        WHERE  user_id = #{user_id} and field_id = #{field_id}
+    </update>
+    <delete id="deleteUserProfileField">
+        DELETE FROM users.user_profile
+        WHERE  user_id = #{user_id} and field_id = #{field_id}
+    </delete>
+    <delete id="deleteUserProfile" parameterType="int">
+        DELETE FROM users.user_profile
+        WHERE  user_id = #{id}
+    </delete>
+
+</mapper>

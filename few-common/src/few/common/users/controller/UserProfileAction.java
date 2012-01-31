@@ -1,12 +1,12 @@
 package few.common.users.controller;
 
 import few.*;
+import few.common.audit.dao.AuditService;
 import few.common.audit.service.AuditKeys;
-import few.common.audit.service.AuditService;
-import few.common.users.persistence.CustomField;
-import few.common.users.persistence.SimpleUser;
+import few.common.users.dao.UserService;
+import few.common.users.dto.CustomField;
+import few.common.users.dto.SimpleUser;
 import few.common.users.service.UserProfileService;
-import few.common.users.service.UserService;
 import few.utils.Utils;
 
 import javax.servlet.ServletException;

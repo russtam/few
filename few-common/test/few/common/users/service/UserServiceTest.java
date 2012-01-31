@@ -1,8 +1,9 @@
 package few.common.users.service;
 
 import few.common.BaseTest;
-import few.common.users.persistence.CustomField;
-import few.common.users.persistence.SimpleUser;
+import few.common.users.dao.UserService;
+import few.common.users.dto.CustomField;
+import few.common.users.dto.SimpleUser;
 import few.utils.Utils;
 
 import java.util.*;

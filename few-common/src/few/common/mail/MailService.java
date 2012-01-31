@@ -1,8 +1,8 @@
 package few.common.mail;
 
 import few.common.PropKeys;
-import few.common.cms.persistence.SimpleText;
-import few.common.cms.service.CMSService;
+import few.common.cms.dto.SimpleText;
+import few.common.cms.dao.CMSService;
 import few.core.ServiceRegistry;
 import few.services.Configuration;
 import few.services.FreemarkerService;

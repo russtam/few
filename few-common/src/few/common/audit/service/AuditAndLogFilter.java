@@ -1,7 +1,7 @@
 package few.common.audit.service;
 
-import few.common.BaseMyBatisServiceImpl;
-import few.common.audit.persistence.RequestDump;
+import few.common.audit.dao.AuditService;
+import few.common.audit.dto.RequestDump;
 import few.core.ServiceRegistry;
 import few.services.Credentials;
 
