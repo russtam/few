@@ -16,9 +16,9 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="few/common/users/persistence/Users.xml"/>
-        <mapper resource="few/common/users/persistence/Confirmations.xml"/>
-        <mapper resource="few/common/cms/persistence/CMS.xml"/>
-        <mapper resource="few/common/audit/persistence/Audit.xml"/>
+        <mapper resource="few/common/users/dao/Users.xml"/>
+        <mapper resource="few/common/users/dao/Confirmations.xml"/>
+        <mapper resource="few/common/cms/dao/CMS.xml"/>
+        <mapper resource="few/common/audit/dao/Audit.xml"/>
     </mappers>
 </configuration>

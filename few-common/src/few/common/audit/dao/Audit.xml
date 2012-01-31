@@ -17,6 +17,13 @@
         FROM common.activity_log l
         LEFT JOIN users.users u ON l.user_id = u.id
         ORDER BY l."timestamp" DESC
+        <if test="page_number != null">
+          limit #{page_size} offset #{page_size} * #{page_number}
+        </if>
+    </select>
+
+    <select id="selectActivitiesCount" resultType="int">
+        SELECT count(*) FROM common.activity_log
     </select>
 
     <delete id="clearActivities">
@@ -36,6 +43,13 @@
     <select id="selectRequestDump" resultType="few.common.audit.dto.RequestDump">
         select * from common.access_log
         order by "timestamp" desc
+        <if test="page_number != null">
+          limit #{page_size} offset #{page_size} * #{page_number}
+        </if>
+    </select>
+
+    <select id="selectRequestDumpCount" resultType="int">
+        select count(*) from common.access_log
     </select>
 
     <delete id="clearAccess">

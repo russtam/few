@@ -4,6 +4,7 @@ import few.common.BaseMyBatisServiceImpl;
 import few.common.audit.dto.ActivityEntry;
 import few.common.audit.dto.RequestDump;
 import few.common.audit.service.AuditKeys;
+import few.utils.MapBuilder;
 
 import java.util.List;
 
@@ -46,7 +47,16 @@ public class AuditService extends BaseMyBatisServiceImpl {
     }
 
     public List<ActivityEntry> selectActivities() {
-        return session().selectList("few.common.selectActivities", null);
+        return session().selectList("few.common.selectActivities");
+    }
+
+    public List<ActivityEntry> selectActivities(int page, int pageSize) {
+        return session().selectList("few.common.selectActivities",
+                new MapBuilder().add("page_size", pageSize).add("page_number", page));
+    }
+
+    public Integer selectActivitiesCount() {
+        return (Integer) session().selectOne("few.common.selectActivitiesCount");
     }
 
     public void clearActivities() {
@@ -64,8 +74,17 @@ public class AuditService extends BaseMyBatisServiceImpl {
         return session().selectList("few.common.selectRequestDump");
     }
 
+    public List<RequestDump> selectRequestDump(int page, int pageSize) {
+        return session().selectList("few.common.selectRequestDump",
+                new MapBuilder().add("page_size", pageSize).add("page_number", page));
+    }
+
     public void clearAccessLog() {
         session().delete("few.common.clearAccess");
         session().commit();
+    }
+
+    public Integer selectRequestDumpCount() {
+        return (Integer) session().selectOne("few.common.selectRequestDumpCount");
     }
 }
