@@ -148,8 +148,15 @@ public class AuditAndLogFilter implements Filter, ServletContextListener, HttpSe
         try {
             AuditService.get().insertActivity(
                     AuditKeys.WARNING, AuditKeys.START, "");
-        } finally {
-            AuditService.get().closeSession();
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                AuditService.get().closeSession();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -158,7 +165,11 @@ public class AuditAndLogFilter implements Filter, ServletContextListener, HttpSe
             AuditService.get().insertActivity(
                     AuditKeys.WARNING, AuditKeys.SHUTDOWN, "");
         } finally {
-            AuditService.get().closeSession();
+            try {
+                AuditService.get().closeSession();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

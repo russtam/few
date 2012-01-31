@@ -1,7 +1,8 @@
 package few.core;
 
 import few.*;
-import few.annotations.AnnotationFinder;
+import few.annotations.AnnotationFinderImpl;
+import few.services.AnnotationFinder;
 import few.utils.Utils;
 
 import javax.servlet.ServletContext;
@@ -132,8 +133,9 @@ public class DispatcherMap {
 
     private void _build(ServletContext context, ClassLoader classLoader) throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException {
         // 1. load annotations
+        AnnotationFinder af = ServiceRegistry.get(AnnotationFinder.class);
         Map<Class, List<Class>>
-            annotations = new AnnotationFinder(context, classLoader).findAnnotations();
+            annotations = af.findAnnotations();
 
         // 2. parse Controller annotations
         List<Class> classes = annotations.get(few.Controller.class);

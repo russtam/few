@@ -140,7 +140,7 @@ public class AnnotationFinderTest extends TestCase {
     }
 
     public void test1() throws MalformedURLException {
-        AnnotationFinder af = new AnnotationFinder(
+        few.services.AnnotationFinder af = new AnnotationFinderImpl(
                 new SC("D:\\workSpace\\DRGN\\out\\production\\public-web", "D:\\workSpace\\DRGN\\lib\\testng-6.1.1"),
                 Controller.class.getClassLoader());
 

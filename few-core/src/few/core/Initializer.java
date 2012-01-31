@@ -1,9 +1,11 @@
 package few.core;
 
+import few.annotations.AnnotationFinderImpl;
 import few.impl.DefaultConfigurationImpl;
 import few.impl.DefaultCredentialsImpl;
 import few.impl.FreemarkerServiceImpl;
 import few.routing.RoutingImpl;
+import few.services.AnnotationFinder;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -19,6 +21,7 @@ import javax.servlet.ServletContextListener;
 public class Initializer implements ServletContextListener {
 
     public void contextInitialized(ServletContextEvent sce) {
+        ServiceRegistry.registerService(new AnnotationFinderImpl(sce.getServletContext(), Thread.currentThread().getContextClassLoader()));
         ServiceRegistry.registerDefaultImpl(DefaultConfigurationImpl.class);
         ServiceRegistry.registerDefaultImpl(DefaultCredentialsImpl.class);
 
