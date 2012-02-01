@@ -20,6 +20,7 @@
             <element id="library" level="project" name="freemarker" />
             <element id="library" level="project" name="mail" />
             <element id="library" level="project" name="mybatis" />
+            <element id="library" level="project" name="postgres" />
           </element>
         </element>
         <element id="javaee-facet-resources" facet="few-common/web/Web" />

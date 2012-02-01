@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by IntelliJ IDEA.
@@ -152,7 +154,11 @@ public class Dispatcher implements Filter{
             }
 
         } finally {
-            Context.fini();
+            try {
+                Context.fini();
+            } catch(Exception e) {
+                log.log(Level.SEVERE, "", e);
+            }
         }
     }
 
@@ -207,4 +213,5 @@ public class Dispatcher implements Filter{
     public void destroy() {
     }
 
+    Logger log = Logger.getLogger(Dispatcher.class.getName());
 }

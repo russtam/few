@@ -41,7 +41,8 @@ public class DefaultConfigurationImpl implements Configuration {
     private Timer autocheckTimer;
 
     public void destroy() {
-        autocheckTimer.cancel();
+        if( autocheckTimer != null )
+            autocheckTimer.cancel();
     }
 
     class ConfigAutocheck extends TimerTask {
