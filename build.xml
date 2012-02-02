@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="few" default="all">
+  
+  
+  <property file="build.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="128m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/.pyc/**"/>
+    <exclude name="**/.pyo/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/*.lib/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/.bundle/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.zip"/>
+    <include name="*.war"/>
+    <include name="*.egg"/>
+    <include name="*.ear"/>
+    <include name="*.swc"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <include name="**/?*.properties"/>
+    <include name="**/?*.xml"/>
+    <include name="**/?*.gif"/>
+    <include name="**/?*.png"/>
+    <include name="**/?*.jpeg"/>
+    <include name="**/?*.jpg"/>
+    <include name="**/?*.html"/>
+    <include name="**/?*.dtd"/>
+    <include name="**/?*.tld"/>
+    <include name="**/?*.ftl"/>
+    <include name="**/ssl_key"/>
+  </patternset>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.bcel-tomcat.classpath">
+    <pathelement location="${basedir}/lib/bcel-tomcat/bcel-tomcat.jar"/>
+  </path>
+  
+  <path id="library.catalina.classpath">
+    <pathelement location="${basedir}/lib/apache-tomcat-embed-6.0.33/catalina.jar"/>
+  </path>
+  
+  <path id="library.commons-fileupload.classpath">
+    <pathelement location="${basedir}/lib/commons-fileupload-1.2.2/commons-fileupload-1.2.2.jar"/>
+  </path>
+  
+  <path id="library.commons-io.classpath">
+    <pathelement location="${basedir}/lib/commons-io-1.4/commons-io-1.4.jar"/>
+  </path>
+  
+  <path id="library.freemarker.classpath">
+    <pathelement location="${basedir}/lib/freemarker-2.3.18/freemarker.jar"/>
+  </path>
+  
+  <path id="library.junit.classpath">
+    <pathelement location="${basedir}/lib/junit-4.8.1/junit-4.8.1.jar"/>
+  </path>
+  
+  <path id="library.mail.classpath">
+    <pathelement location="${basedir}/lib/javamail-1.4.4/mail.jar"/>
+  </path>
+  
+  <path id="library.mybatis.classpath">
+    <pathelement location="${basedir}/lib/mybatis-3.0.6/mybatis-3.0.6.jar"/>
+  </path>
+  
+  <path id="library.postgres.classpath">
+    <pathelement location="${basedir}/lib/postgresql/postgresql-9.0-801.jdbc4.jar"/>
+  </path>
+  
+  <path id="library.servlet-api.classpath">
+    <pathelement location="${basedir}/lib/apache-tomcat-embed-6.0.33/servlet-api.jar"/>
+  </path>
+  
+  <path id="library.tomcat-embedded.classpath">
+    <pathelement location="${basedir}/lib/apache-tomcat-embed-6.0.33/annotations-api.jar"/>
+    <pathelement location="${basedir}/lib/apache-tomcat-embed-6.0.33/tomcat-coyote.jar"/>
+    <pathelement location="${basedir}/lib/apache-tomcat-embed-6.0.33/tomcat-juli.jar"/>
+  </path>
+  
+  
+  <!-- Application Server Libraries -->
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module few-core -->
+  
+  <dirname property="module.few-core.basedir" file="${ant.file}"/>
+  
+  
+  
+  <property name="compiler.args.few-core" value="${compiler.args}"/>
+  
+  <property name="few-core.output.dir" value="${module.few-core.basedir}/out/production/few-core"/>
+  <property name="few-core.testoutput.dir" value="${module.few-core.basedir}/out/test/few-core"/>
+  
+  <path id="few-core.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="few-core.module.production.classpath">
+    <path refid="library.freemarker.classpath"/>
+    <path refid="library.servlet-api.classpath"/>
+    <path refid="library.commons-fileupload.classpath"/>
+    <path refid="library.bcel-tomcat.classpath"/>
+  </path>
+  
+  <path id="few-core.runtime.production.module.classpath">
+    <pathelement location="${few-core.output.dir}"/>
+    <path refid="library.freemarker.classpath"/>
+    <path refid="library.servlet-api.classpath"/>
+    <path refid="library.commons-fileupload.classpath"/>
+    <path refid="library.bcel-tomcat.classpath"/>
+    <path refid="library.commons-io.classpath"/>
+  </path>
+  
+  <path id="few-core.module.classpath">
+    <pathelement location="${few-core.output.dir}"/>
+    <path refid="library.freemarker.classpath"/>
+    <path refid="library.servlet-api.classpath"/>
+    <path refid="library.commons-fileupload.classpath"/>
+    <path refid="library.bcel-tomcat.classpath"/>
+    <path refid="library.junit.classpath"/>
+  </path>
+  
+  <path id="few-core.runtime.module.classpath">
+    <pathelement location="${few-core.testoutput.dir}"/>
+    <pathelement location="${few-core.output.dir}"/>
+    <path refid="library.freemarker.classpath"/>
+    <path refid="library.servlet-api.classpath"/>
+    <path refid="library.commons-fileupload.classpath"/>
+    <path refid="library.bcel-tomcat.classpath"/>
+    <path refid="library.commons-io.classpath"/>
+    <path refid="library.junit.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.few-core">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.few-core">
+    <patternset refid="excluded.from.module.few-core"/>
+  </patternset>
+  
+  <path id="few-core.module.sourcepath">
+    <dirset dir="${module.few-core.basedir}/few-core">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  <path id="few-core.module.test.sourcepath">
+    <dirset dir="${module.few-core.basedir}/few-core">
+      <include name="test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.few-core" depends="compile.module.few-core.production,compile.module.few-core.tests" description="Compile module few-core"/>
+  
+  <target name="compile.module.few-core.production" description="Compile module few-core; production classes">
+    <mkdir dir="${few-core.output.dir}"/>
+    <javac destdir="${few-core.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.few-core}"/>
+      <bootclasspath refid="few-core.module.bootclasspath"/>
+      <classpath refid="few-core.module.production.classpath"/>
+      <src refid="few-core.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.few-core"/>
+    </javac>
+    
+    <copy todir="${few-core.output.dir}">
+      <fileset dir="${module.few-core.basedir}/few-core/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.few-core.tests" depends="compile.module.few-core.production" description="compile module few-core; test classes" unless="skip.tests">
+    <mkdir dir="${few-core.testoutput.dir}"/>
+    <javac destdir="${few-core.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.few-core}"/>
+      <bootclasspath refid="few-core.module.bootclasspath"/>
+      <classpath refid="few-core.module.classpath"/>
+      <src refid="few-core.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.few-core"/>
+    </javac>
+    
+    <copy todir="${few-core.testoutput.dir}">
+      <fileset dir="${module.few-core.basedir}/few-core/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.few-core" description="cleanup module">
+    <delete dir="${few-core.output.dir}"/>
+    <delete dir="${few-core.testoutput.dir}"/>
+  </target>
+  
+  
+  <!-- Module few-runner -->
+  
+  <dirname property="module.few-runner.basedir" file="${ant.file}"/>
+  
+  
+  
+  <property name="compiler.args.few-runner" value="${compiler.args}"/>
+  
+  <property name="few-runner.output.dir" value="${module.few-runner.basedir}/out/production/few-runner"/>
+  <property name="few-runner.testoutput.dir" value="${module.few-runner.basedir}/out/test/few-runner"/>
+  
+  <path id="few-runner.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="few-runner.module.production.classpath">
+    <path refid="library.catalina.classpath"/>
+  </path>
+  
+  <path id="few-runner.runtime.production.module.classpath">
+    <pathelement location="${few-runner.output.dir}"/>
+    <path refid="library.catalina.classpath"/>
+    <path refid="library.tomcat-embedded.classpath"/>
+    <path refid="library.servlet-api.classpath"/>
+  </path>
+  
+  <path id="few-runner.module.classpath">
+    <pathelement location="${few-runner.output.dir}"/>
+    <path refid="library.catalina.classpath"/>
+  </path>
+  
+  <path id="few-runner.runtime.module.classpath">
+    <pathelement location="${few-runner.testoutput.dir}"/>
+    <pathelement location="${few-runner.output.dir}"/>
+    <path refid="library.catalina.classpath"/>
+    <path refid="library.tomcat-embedded.classpath"/>
+    <path refid="library.servlet-api.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.few-runner">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.few-runner">
+    <patternset refid="excluded.from.module.few-runner"/>
+  </patternset>
+  
+  
+  <target name="compile.module.few-runner" depends="compile.module.few-runner.production,compile.module.few-runner.tests" description="Compile module few-runner"/>
+  
+  <target name="compile.module.few-runner.production" description="Compile module few-runner; production classes"/>
+  
+  <target name="compile.module.few-runner.tests" depends="compile.module.few-runner.production" description="compile module few-runner; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.few-runner" description="cleanup module">
+    <delete dir="${few-runner.output.dir}"/>
+    <delete dir="${few-runner.testoutput.dir}"/>
+  </target>
+  
+  
+  <!-- Module few-common -->
+  
+  <dirname property="module.few-common.basedir" file="${ant.file}"/>
+  
+  
+  
+  <property name="compiler.args.few-common" value="${compiler.args}"/>
+  
+  <property name="few-common.output.dir" value="${module.few-common.basedir}/out/production/few-common"/>
+  <property name="few-common.testoutput.dir" value="${module.few-common.basedir}/out/test/few-common"/>
+  
+  <path id="few-common.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="few-common.module.production.classpath">
+    <pathelement location="${few-core.output.dir}"/>
+    <path refid="library.servlet-api.classpath"/>
+    <path refid="library.mybatis.classpath"/>
+    <path refid="library.mail.classpath"/>
+    <path refid="library.freemarker.classpath"/>
+  </path>
+  
+  <path id="few-common.runtime.production.module.classpath">
+    <pathelement location="${few-common.output.dir}"/>
+    <path refid="few-core.runtime.production.module.classpath"/>
+    <path refid="library.servlet-api.classpath"/>
+    <path refid="library.mybatis.classpath"/>
+    <path refid="library.mail.classpath"/>
+    <path refid="library.postgres.classpath"/>
+    <path refid="library.freemarker.classpath"/>
+  </path>
+  
+  <path id="few-common.module.classpath">
+    <pathelement location="${few-common.output.dir}"/>
+    <pathelement location="${few-core.testoutput.dir}"/>
+    <pathelement location="${few-core.output.dir}"/>
+    <path refid="library.servlet-api.classpath"/>
+    <path refid="library.mybatis.classpath"/>
+    <path refid="library.junit.classpath"/>
+    <path refid="library.mail.classpath"/>
+    <path refid="library.freemarker.classpath"/>
+  </path>
+  
+  <path id="few-common.runtime.module.classpath">
+    <pathelement location="${few-common.testoutput.dir}"/>
+    <pathelement location="${few-common.output.dir}"/>
+    <path refid="few-core.runtime.module.classpath"/>
+    <path refid="library.servlet-api.classpath"/>
+    <path refid="library.mybatis.classpath"/>
+    <path refid="library.junit.classpath"/>
+    <path refid="library.mail.classpath"/>
+    <path refid="library.postgres.classpath"/>
+    <path refid="library.freemarker.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.few-common">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.few-common">
+    <patternset refid="excluded.from.module.few-common"/>
+  </patternset>
+  
+  <path id="few-common.module.sourcepath">
+    <dirset dir="${module.few-common.basedir}/few-common">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  <path id="few-common.module.test.sourcepath">
+    <dirset dir="${module.few-common.basedir}/few-common">
+      <include name="test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.few-common" depends="compile.module.few-common.production,compile.module.few-common.tests" description="Compile module few-common"/>
+  
+  <target name="compile.module.few-common.production" depends="compile.module.few-core" description="Compile module few-common; production classes">
+    <mkdir dir="${few-common.output.dir}"/>
+    <javac destdir="${few-common.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.few-common}"/>
+      <bootclasspath refid="few-common.module.bootclasspath"/>
+      <classpath refid="few-common.module.production.classpath"/>
+      <src refid="few-common.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.few-common"/>
+    </javac>
+    
+    <copy todir="${few-common.output.dir}">
+      <fileset dir="${module.few-common.basedir}/few-common/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.few-common.tests" depends="compile.module.few-common.production" description="compile module few-common; test classes" unless="skip.tests">
+    <mkdir dir="${few-common.testoutput.dir}"/>
+    <javac destdir="${few-common.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.few-common}"/>
+      <bootclasspath refid="few-common.module.bootclasspath"/>
+      <classpath refid="few-common.module.classpath"/>
+      <src refid="few-common.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.few-common"/>
+    </javac>
+    
+    <copy todir="${few-common.testoutput.dir}">
+      <fileset dir="${module.few-common.basedir}/few-common/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.few-common" description="cleanup module">
+    <delete dir="${few-common.output.dir}"/>
+    <delete dir="${few-common.testoutput.dir}"/>
+  </target>
+  
+  
+  <!-- Module few-tiny-sample -->
+  
+  <dirname property="module.few-tiny-sample.basedir" file="${ant.file}"/>
+  
+  
+  
+  <property name="compiler.args.few-tiny-sample" value="${compiler.args}"/>
+  
+  <property name="few-tiny-sample.output.dir" value="${module.few-tiny-sample.basedir}/out/production/few-tiny-sample"/>
+  <property name="few-tiny-sample.testoutput.dir" value="${module.few-tiny-sample.basedir}/out/test/few-tiny-sample"/>
+  
+  <path id="few-tiny-sample.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="few-tiny-sample.module.production.classpath">
+    <pathelement location="${few-core.output.dir}"/>
+    <path refid="library.servlet-api.classpath"/>
+  </path>
+  
+  <path id="few-tiny-sample.runtime.production.module.classpath">
+    <pathelement location="${few-tiny-sample.output.dir}"/>
+    <path refid="few-core.runtime.production.module.classpath"/>
+    <path refid="few-runner.runtime.production.module.classpath"/>
+    <path refid="library.servlet-api.classpath"/>
+  </path>
+  
+  <path id="few-tiny-sample.module.classpath">
+    <pathelement location="${few-tiny-sample.output.dir}"/>
+    <pathelement location="${few-core.testoutput.dir}"/>
+    <pathelement location="${few-core.output.dir}"/>
+    <path refid="library.servlet-api.classpath"/>
+  </path>
+  
+  <path id="few-tiny-sample.runtime.module.classpath">
+    <pathelement location="${few-tiny-sample.testoutput.dir}"/>
+    <pathelement location="${few-tiny-sample.output.dir}"/>
+    <path refid="few-core.runtime.module.classpath"/>
+    <path refid="few-runner.runtime.module.classpath"/>
+    <path refid="library.servlet-api.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.few-tiny-sample">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.few-tiny-sample">
+    <patternset refid="excluded.from.module.few-tiny-sample"/>
+  </patternset>
+  
+  <path id="few-tiny-sample.module.sourcepath">
+    <dirset dir="${module.few-tiny-sample.basedir}/few-tiny-sample">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.few-tiny-sample" depends="compile.module.few-tiny-sample.production,compile.module.few-tiny-sample.tests" description="Compile module few-tiny-sample"/>
+  
+  <target name="compile.module.few-tiny-sample.production" depends="compile.module.few-core,compile.module.few-runner" description="Compile module few-tiny-sample; production classes">
+    <mkdir dir="${few-tiny-sample.output.dir}"/>
+    <javac destdir="${few-tiny-sample.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.few-tiny-sample}"/>
+      <bootclasspath refid="few-tiny-sample.module.bootclasspath"/>
+      <classpath refid="few-tiny-sample.module.production.classpath"/>
+      <src refid="few-tiny-sample.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.few-tiny-sample"/>
+    </javac>
+    
+    <copy todir="${few-tiny-sample.output.dir}">
+      <fileset dir="${module.few-tiny-sample.basedir}/few-tiny-sample/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.few-tiny-sample.tests" depends="compile.module.few-tiny-sample.production" description="compile module few-tiny-sample; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.few-tiny-sample" description="cleanup module">
+    <delete dir="${few-tiny-sample.output.dir}"/>
+    <delete dir="${few-tiny-sample.testoutput.dir}"/>
+  </target>
+  
+  
+  <!-- Module few-sample -->
+  
+  <dirname property="module.few-sample.basedir" file="${ant.file}"/>
+  
+  
+  
+  <property name="compiler.args.few-sample" value="${compiler.args}"/>
+  
+  <property name="few-sample.output.dir" value="${module.few-sample.basedir}/out/production/few-sample"/>
+  <property name="few-sample.testoutput.dir" value="${module.few-sample.basedir}/out/test/few-sample"/>
+  
+  <path id="few-sample.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="few-sample.module.production.classpath">
+    <pathelement location="${few-core.output.dir}"/>
+    <pathelement location="${few-common.output.dir}"/>
+    <path refid="library.servlet-api.classpath"/>
+  </path>
+  
+  <path id="few-sample.runtime.production.module.classpath">
+    <pathelement location="${few-sample.output.dir}"/>
+    <path refid="few-core.runtime.production.module.classpath"/>
+    <path refid="few-common.runtime.production.module.classpath"/>
+    <path refid="few-runner.runtime.production.module.classpath"/>
+    <path refid="library.servlet-api.classpath"/>
+  </path>
+  
+  <path id="few-sample.module.classpath">
+    <pathelement location="${few-sample.output.dir}"/>
+    <pathelement location="${few-core.testoutput.dir}"/>
+    <pathelement location="${few-core.output.dir}"/>
+    <pathelement location="${few-common.testoutput.dir}"/>
+    <pathelement location="${few-common.output.dir}"/>
+    <path refid="library.servlet-api.classpath"/>
+  </path>
+  
+  <path id="few-sample.runtime.module.classpath">
+    <pathelement location="${few-sample.testoutput.dir}"/>
+    <pathelement location="${few-sample.output.dir}"/>
+    <path refid="few-core.runtime.module.classpath"/>
+    <path refid="few-common.runtime.module.classpath"/>
+    <path refid="few-runner.runtime.module.classpath"/>
+    <path refid="library.servlet-api.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.few-sample">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.few-sample">
+    <patternset refid="excluded.from.module.few-sample"/>
+  </patternset>
+  
+  <path id="few-sample.module.sourcepath">
+    <dirset dir="${module.few-sample.basedir}/few-sample">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.few-sample" depends="compile.module.few-sample.production,compile.module.few-sample.tests" description="Compile module few-sample"/>
+  
+  <target name="compile.module.few-sample.production" depends="compile.module.few-core,compile.module.few-common,compile.module.few-runner" description="Compile module few-sample; production classes">
+    <mkdir dir="${few-sample.output.dir}"/>
+    <javac destdir="${few-sample.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.few-sample}"/>
+      <bootclasspath refid="few-sample.module.bootclasspath"/>
+      <classpath refid="few-sample.module.production.classpath"/>
+      <src refid="few-sample.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.few-sample"/>
+    </javac>
+    
+    <copy todir="${few-sample.output.dir}">
+      <fileset dir="${module.few-sample.basedir}/few-sample/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.few-sample.tests" depends="compile.module.few-sample.production" description="compile module few-sample; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.few-sample" description="cleanup module">
+    <delete dir="${few-sample.output.dir}"/>
+    <delete dir="${few-sample.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.few-core, clean.module.few-runner, clean.module.few-common, clean.module.few-tiny-sample, clean.module.few-sample, clean.artifact.few-sample:war_exploded, clean.artifact.few-tiny-sample:war_exploded" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.few-core, compile.module.few-runner, compile.module.few-common, compile.module.few-tiny-sample, compile.module.few-sample" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.few-sample:war_exploded" value="${basedir}/out/artifacts/few_sample_war_exploded"/>
+    <property name="artifact.output.few-tiny-sample:war_exploded" value="${basedir}/out/artifacts/few_tiny_sample_war_exploded"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="clean.artifact.few-sample:war_exploded" description="clean few-sample:war exploded artifact output">
+    <delete dir="${artifact.output.few-sample:war_exploded}"/>
+  </target>
+  
+  <target name="clean.artifact.few-tiny-sample:war_exploded" description="clean few-tiny-sample:war exploded artifact output">
+    <delete dir="${artifact.output.few-tiny-sample:war_exploded}"/>
+  </target>
+  
+  <target name="artifact.few-sample:war_exploded" depends="init.artifacts, compile.module.few-sample, compile.module.few-core, compile.module.few-common" description="Build &#39;few-sample:war exploded&#39; artifact">
+    <mkdir dir="${artifact.output.few-sample:war_exploded}"/>
+    <copy todir="${artifact.output.few-sample:war_exploded}">
+      <fileset dir="${basedir}/few-sample/web"/>
+    </copy>
+    <mkdir dir="${artifact.output.few-sample:war_exploded}/WEB-INF"/>
+    <copy file="${basedir}/few-sample/web/WEB-INF/web.xml" tofile="${artifact.output.few-sample:war_exploded}/WEB-INF/web.xml"/>
+    <mkdir dir="${artifact.output.few-sample:war_exploded}/WEB-INF"/>
+    <mkdir dir="${artifact.output.few-sample:war_exploded}/WEB-INF/classes"/>
+    <copy todir="${artifact.output.few-sample:war_exploded}/WEB-INF/classes">
+      <fileset dir="${few-sample.output.dir}"/>
+    </copy>
+    <copy todir="${artifact.output.few-sample:war_exploded}/WEB-INF/classes">
+      <fileset dir="${few-core.output.dir}"/>
+    </copy>
+    <copy todir="${artifact.output.few-sample:war_exploded}/WEB-INF/classes">
+      <fileset dir="${few-common.output.dir}"/>
+    </copy>
+    <mkdir dir="${artifact.output.few-sample:war_exploded}/WEB-INF/lib"/>
+    <copy file="${basedir}/lib/bcel-tomcat/bcel-tomcat.jar" tofile="${artifact.output.few-sample:war_exploded}/WEB-INF/lib/bcel-tomcat.jar"/>
+    <copy file="${basedir}/lib/commons-fileupload-1.2.2/commons-fileupload-1.2.2.jar" tofile="${artifact.output.few-sample:war_exploded}/WEB-INF/lib/commons-fileupload-1.2.2.jar"/>
+    <copy file="${basedir}/lib/freemarker-2.3.18/freemarker.jar" tofile="${artifact.output.few-sample:war_exploded}/WEB-INF/lib/freemarker.jar"/>
+    <copy file="${basedir}/lib/javamail-1.4.4/mail.jar" tofile="${artifact.output.few-sample:war_exploded}/WEB-INF/lib/mail.jar"/>
+    <copy file="${basedir}/lib/mybatis-3.0.6/mybatis-3.0.6.jar" tofile="${artifact.output.few-sample:war_exploded}/WEB-INF/lib/mybatis-3.0.6.jar"/>
+    <copy file="${basedir}/lib/postgresql/postgresql-9.0-801.jdbc4.jar" tofile="${artifact.output.few-sample:war_exploded}/WEB-INF/lib/postgresql-9.0-801.jdbc4.jar"/>
+    <copy todir="${artifact.output.few-sample:war_exploded}">
+      <fileset dir="${basedir}/few-common/web"/>
+    </copy>
+  </target>
+  
+  <target name="artifact.few-tiny-sample:war_exploded" depends="init.artifacts, compile.module.few-tiny-sample, compile.module.few-core" description="Build &#39;few-tiny-sample:war exploded&#39; artifact">
+    <mkdir dir="${artifact.output.few-tiny-sample:war_exploded}"/>
+    <mkdir dir="${artifact.output.few-tiny-sample:war_exploded}/WEB-INF"/>
+    <mkdir dir="${artifact.output.few-tiny-sample:war_exploded}/WEB-INF/classes"/>
+    <copy todir="${artifact.output.few-tiny-sample:war_exploded}/WEB-INF/classes">
+      <fileset dir="${few-tiny-sample.output.dir}"/>
+    </copy>
+    <copy todir="${artifact.output.few-tiny-sample:war_exploded}/WEB-INF/classes">
+      <fileset dir="${few-core.output.dir}"/>
+    </copy>
+    <mkdir dir="${artifact.output.few-tiny-sample:war_exploded}/WEB-INF/lib"/>
+    <copy file="${basedir}/lib/freemarker-2.3.18/freemarker.jar" tofile="${artifact.output.few-tiny-sample:war_exploded}/WEB-INF/lib/freemarker.jar"/>
+    <copy file="${basedir}/lib/bcel-tomcat/bcel-tomcat.jar" tofile="${artifact.output.few-tiny-sample:war_exploded}/WEB-INF/lib/bcel-tomcat.jar"/>
+    <copy todir="${artifact.output.few-tiny-sample:war_exploded}">
+      <fileset dir="${basedir}/few-tiny-sample/web"/>
+    </copy>
+    <mkdir dir="${artifact.output.few-tiny-sample:war_exploded}/WEB-INF"/>
+    <copy file="${basedir}/few-tiny-sample/web/WEB-INF/web.xml" tofile="${artifact.output.few-tiny-sample:war_exploded}/WEB-INF/web.xml"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.few-sample:war_exploded, artifact.few-tiny-sample:war_exploded" description="Build all artifacts">
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>
