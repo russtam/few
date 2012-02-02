@@ -35,7 +35,7 @@
     <select id="selectNews" resultType="few.common.cms.dto.News">
         SELECT  n.*, u.display_name as author_display_name
         FROM  common.news n
-        RIGHT JOIN users.users u on n.author_user_id = u.id
+        LEFT JOIN users.users u on n.author_user_id = u.id
         <if test="feed_id != null" >
             WHERE n.feed_id = #{feed_id}
         </if>

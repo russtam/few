@@ -1,12 +1,17 @@
 package few.common;
 
+import few.annotations.AnnotationFinderImpl;
 import few.common.DataConfigProvider;
 import few.core.ServiceRegistry;
+import few.services.AnnotationFinder;
 import few.services.Credentials;
+import few.utils.ListBuilder;
 import junit.framework.TestCase;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -38,6 +43,23 @@ public class BaseTest extends TestCase {
                 return null;
             }
         });
+
+        ServiceRegistry.registerService(new AnnotationFinder() {
+
+            public Map<Class, List<Class>> findAnnotations() {
+                return null;  //To change body of implemented methods use File | Settings | File Templates.
+            }
+
+            public List<String> findXmlFiles() {
+                ClassLoader cl = Thread.currentThread().getContextClassLoader();
+                return new ListBuilder<String>()
+                        .build(cl.getResource("few/common/audit/dao/Audit.xml").getFile())
+                        .build(cl.getResource("few/common/cms/dao/CMS.xml").getFile())
+                        .build(cl.getResource("few/common/users/dao/Users.xml").getFile())
+                        .build(cl.getResource("few/common/users/dao/Confirmations.xml").getFile());
+            }
+        }
+        );
     }
 
 
