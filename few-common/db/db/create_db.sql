@@ -1,5 +1,5 @@
 \encoding UTF8
-\i database/config.sql
+\i db/config.sql
 
 create role :db_user_name login unencrypted password :db_user_password nosuperuser inherit;
 \echo creating database...
