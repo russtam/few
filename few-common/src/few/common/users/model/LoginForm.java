@@ -3,6 +3,9 @@ package few.common.users.model;
 import few.Context;
 import few.ModelBean;
 import few.MyURL;
+import few.common.PropKeys;
+import few.core.ServiceRegistry;
+import few.services.Configuration;
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,9 +22,11 @@ public class LoginForm {
         return loginUrl;
     }
 
+    private static Configuration configuration = ServiceRegistry.get(Configuration.class);
     public static LoginForm build() {
         LoginForm ret = new LoginForm();
-        MyURL mu = new MyURL(true, "/login.login");
+        boolean https = Boolean.parseBoolean(configuration.getProperty(PropKeys.LOGIN_THROUGH_HTTPS));
+        MyURL mu = new MyURL(https, "/login.login");
         if( Context.get().getRequest().getParameter("redirect") != null )
             mu.p("redirect", Context.get().getRequest().getParameter("redirect"));
         ret.loginUrl = mu.toString();

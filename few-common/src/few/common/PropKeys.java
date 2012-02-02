@@ -15,4 +15,6 @@ public class PropKeys {
 
     public static final String MAILS_SITE_NAME = "mails.site_name";
 
+    public static final String LOGIN_THROUGH_HTTPS = "web.server.login_through_https";
+
 }
