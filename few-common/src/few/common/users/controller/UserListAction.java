@@ -124,6 +124,7 @@ public class UserListAction {
         );
 
         auditService.insertActivity(AuditKeys.NORMAL, AuditKeys.USER_ADD, String.valueOf(user_id));
+        Context.get().getRequest().setAttribute("user_id", String.valueOf(user_id));
     }
 
     @Action

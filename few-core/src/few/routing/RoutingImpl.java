@@ -123,6 +123,8 @@ public class RoutingImpl implements Routing {
                 String val = vars.get(var);
                 if( val == null )
                     val = Context.get().getRequest().getParameter(var);
+                if( val == null )
+                    val = (String) Context.get().getRequest().getAttribute(var);
                 if( val == null ) {
                     log.severe("no parameter ${" + var + "}");
                 }
