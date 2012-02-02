@@ -1,3 +1,7 @@
 /*.iws
+/few-bcel/
+/few-common/target/
+/few-core/target/
+/few-sample/target/
+/few-tiny-sample/target/
 /out/
-/few-sample/web/few-common
