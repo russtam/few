@@ -21,6 +21,7 @@
             <element id="library" level="project" name="mail" />
             <element id="library" level="project" name="mybatis" />
             <element id="library" level="project" name="postgres" />
+            <element id="library" level="project" name="commons-io" />
           </element>
         </element>
         <element id="javaee-facet-resources" facet="few-common/web/Web" />
@@ -37,9 +38,58 @@
           <element id="directory" name="lib">
             <element id="library" level="project" name="freemarker" />
             <element id="library" level="project" name="bcel-tomcat" />
+            <element id="library" level="project" name="commons-io" />
+            <element id="library" level="project" name="commons-fileupload" />
           </element>
         </element>
         <element id="javaee-facet-resources" facet="few-tiny-sample/web/Web" />
+      </root>
+    </artifact>
+    <artifact name="few-core:jar">
+      <output-path>$PROJECT_DIR$/out/release</output-path>
+      <root id="root">
+        <element id="archive" name="few-core.jar">
+          <element id="module-output" name="few-core" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="commons-fileupload" />
+          <element id="library" level="project" name="commons-io" />
+          <element id="library" level="project" name="freemarker" />
+          <element id="library" level="project" name="servlet-api" />
+          <element id="library" level="project" name="bcel-tomcat" />
+        </element>
+      </root>
+    </artifact>
+    <artifact name="few-common:jar">
+      <output-path>$PROJECT_DIR$/out/release</output-path>
+      <root id="root">
+        <element id="archive" name="few-common.jar">
+          <element id="module-output" name="few-common" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="commons-fileupload" />
+          <element id="library" level="project" name="commons-io" />
+          <element id="library" level="project" name="freemarker" />
+          <element id="library" level="project" name="mail" />
+          <element id="library" level="project" name="mybatis" />
+          <element id="library" level="project" name="postgres" />
+          <element id="library" level="project" name="servlet-api" />
+          <element id="library" level="project" name="bcel-tomcat" />
+        </element>
+      </root>
+    </artifact>
+    <artifact type="war" name="few-common:war">
+      <output-path>$PROJECT_DIR$/out/release</output-path>
+      <root id="archive" name="few-common.war">
+        <element id="javaee-facet-resources" facet="few-common/web/Web" />
+      </root>
+    </artifact>
+    <artifact name="few-common:sql">
+      <output-path>$PROJECT_DIR$/out/release</output-path>
+      <root id="root">
+        <element id="directory" name="few-common.sql">
+          <element id="dir-copy" path="$PROJECT_DIR$/few-common/db" />
+        </element>
       </root>
     </artifact>
   </component>

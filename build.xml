@@ -63,10 +63,6 @@
     <pathelement location="${basedir}/lib/bcel-tomcat/bcel-tomcat.jar"/>
   </path>
   
-  <path id="library.catalina.classpath">
-    <pathelement location="${basedir}/lib/apache-tomcat-embed-6.0.33/catalina.jar"/>
-  </path>
-  
   <path id="library.commons-fileupload.classpath">
     <pathelement location="${basedir}/lib/commons-fileupload-1.2.2/commons-fileupload-1.2.2.jar"/>
   </path>
@@ -97,12 +93,6 @@
   
   <path id="library.servlet-api.classpath">
     <pathelement location="${basedir}/lib/apache-tomcat-embed-6.0.33/servlet-api.jar"/>
-  </path>
-  
-  <path id="library.tomcat-embedded.classpath">
-    <pathelement location="${basedir}/lib/apache-tomcat-embed-6.0.33/annotations-api.jar"/>
-    <pathelement location="${basedir}/lib/apache-tomcat-embed-6.0.33/tomcat-coyote.jar"/>
-    <pathelement location="${basedir}/lib/apache-tomcat-embed-6.0.33/tomcat-juli.jar"/>
   </path>
   
   
@@ -225,67 +215,6 @@
   <target name="clean.module.few-core" description="cleanup module">
     <delete dir="${few-core.output.dir}"/>
     <delete dir="${few-core.testoutput.dir}"/>
-  </target>
-  
-  
-  <!-- Module few-runner -->
-  
-  <dirname property="module.few-runner.basedir" file="${ant.file}"/>
-  
-  
-  
-  <property name="compiler.args.few-runner" value="${compiler.args}"/>
-  
-  <property name="few-runner.output.dir" value="${module.few-runner.basedir}/out/production/few-runner"/>
-  <property name="few-runner.testoutput.dir" value="${module.few-runner.basedir}/out/test/few-runner"/>
-  
-  <path id="few-runner.module.bootclasspath">
-    <!-- Paths to be included in compilation bootclasspath -->
-  </path>
-  
-  <path id="few-runner.module.production.classpath">
-    <path refid="library.catalina.classpath"/>
-  </path>
-  
-  <path id="few-runner.runtime.production.module.classpath">
-    <pathelement location="${few-runner.output.dir}"/>
-    <path refid="library.catalina.classpath"/>
-    <path refid="library.tomcat-embedded.classpath"/>
-    <path refid="library.servlet-api.classpath"/>
-  </path>
-  
-  <path id="few-runner.module.classpath">
-    <pathelement location="${few-runner.output.dir}"/>
-    <path refid="library.catalina.classpath"/>
-  </path>
-  
-  <path id="few-runner.runtime.module.classpath">
-    <pathelement location="${few-runner.testoutput.dir}"/>
-    <pathelement location="${few-runner.output.dir}"/>
-    <path refid="library.catalina.classpath"/>
-    <path refid="library.tomcat-embedded.classpath"/>
-    <path refid="library.servlet-api.classpath"/>
-  </path>
-  
-  
-  <patternset id="excluded.from.module.few-runner">
-    <patternset refid="ignored.files"/>
-  </patternset>
-  
-  <patternset id="excluded.from.compilation.few-runner">
-    <patternset refid="excluded.from.module.few-runner"/>
-  </patternset>
-  
-  
-  <target name="compile.module.few-runner" depends="compile.module.few-runner.production,compile.module.few-runner.tests" description="Compile module few-runner"/>
-  
-  <target name="compile.module.few-runner.production" description="Compile module few-runner; production classes"/>
-  
-  <target name="compile.module.few-runner.tests" depends="compile.module.few-runner.production" description="compile module few-runner; test classes" unless="skip.tests"/>
-  
-  <target name="clean.module.few-runner" description="cleanup module">
-    <delete dir="${few-runner.output.dir}"/>
-    <delete dir="${few-runner.testoutput.dir}"/>
   </target>
   
   
@@ -434,7 +363,6 @@
   <path id="few-tiny-sample.runtime.production.module.classpath">
     <pathelement location="${few-tiny-sample.output.dir}"/>
     <path refid="few-core.runtime.production.module.classpath"/>
-    <path refid="few-runner.runtime.production.module.classpath"/>
     <path refid="library.servlet-api.classpath"/>
   </path>
   
@@ -449,7 +377,6 @@
     <pathelement location="${few-tiny-sample.testoutput.dir}"/>
     <pathelement location="${few-tiny-sample.output.dir}"/>
     <path refid="few-core.runtime.module.classpath"/>
-    <path refid="few-runner.runtime.module.classpath"/>
     <path refid="library.servlet-api.classpath"/>
   </path>
   
@@ -471,7 +398,7 @@
   
   <target name="compile.module.few-tiny-sample" depends="compile.module.few-tiny-sample.production,compile.module.few-tiny-sample.tests" description="Compile module few-tiny-sample"/>
   
-  <target name="compile.module.few-tiny-sample.production" depends="compile.module.few-core,compile.module.few-runner" description="Compile module few-tiny-sample; production classes">
+  <target name="compile.module.few-tiny-sample.production" depends="compile.module.few-core" description="Compile module few-tiny-sample; production classes">
     <mkdir dir="${few-tiny-sample.output.dir}"/>
     <javac destdir="${few-tiny-sample.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
       <compilerarg line="${compiler.args.few-tiny-sample}"/>
@@ -522,7 +449,6 @@
     <pathelement location="${few-sample.output.dir}"/>
     <path refid="few-core.runtime.production.module.classpath"/>
     <path refid="few-common.runtime.production.module.classpath"/>
-    <path refid="few-runner.runtime.production.module.classpath"/>
     <path refid="library.servlet-api.classpath"/>
   </path>
   
@@ -540,7 +466,6 @@
     <pathelement location="${few-sample.output.dir}"/>
     <path refid="few-core.runtime.module.classpath"/>
     <path refid="few-common.runtime.module.classpath"/>
-    <path refid="few-runner.runtime.module.classpath"/>
     <path refid="library.servlet-api.classpath"/>
   </path>
   
@@ -562,7 +487,7 @@
   
   <target name="compile.module.few-sample" depends="compile.module.few-sample.production,compile.module.few-sample.tests" description="Compile module few-sample"/>
   
-  <target name="compile.module.few-sample.production" depends="compile.module.few-core,compile.module.few-common,compile.module.few-runner" description="Compile module few-sample; production classes">
+  <target name="compile.module.few-sample.production" depends="compile.module.few-core,compile.module.few-common" description="Compile module few-sample; production classes">
     <mkdir dir="${few-sample.output.dir}"/>
     <javac destdir="${few-sample.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
       <compilerarg line="${compiler.args.few-sample}"/>
@@ -591,15 +516,34 @@
     <!-- Perform any build initialization in this target -->
   </target>
   
-  <target name="clean" depends="clean.module.few-core, clean.module.few-runner, clean.module.few-common, clean.module.few-tiny-sample, clean.module.few-sample, clean.artifact.few-sample:war_exploded, clean.artifact.few-tiny-sample:war_exploded" description="cleanup all"/>
+  <target name="clean" depends="clean.module.few-core, clean.module.few-common, clean.module.few-tiny-sample, clean.module.few-sample, clean.artifact.few-common:jar, clean.artifact.few-common:sql, clean.artifact.few-core:jar, clean.artifact.few-sample:war_exploded, clean.artifact.few-tiny-sample:war_exploded" description="cleanup all"/>
   
-  <target name="build.modules" depends="init, clean, compile.module.few-core, compile.module.few-runner, compile.module.few-common, compile.module.few-tiny-sample, compile.module.few-sample" description="build all modules"/>
+  <target name="build.modules" depends="init, clean, compile.module.few-core, compile.module.few-common, compile.module.few-tiny-sample, compile.module.few-sample" description="build all modules"/>
   
   <target name="init.artifacts">
     <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.few-common:jar" value="${basedir}/out/release"/>
+    <property name="artifact.output.few-common:sql" value="${basedir}/out/release"/>
+    <property name="artifact.output.few-common:war" value="${basedir}/out/release"/>
+    <property name="artifact.output.few-core:jar" value="${basedir}/out/release"/>
     <property name="artifact.output.few-sample:war_exploded" value="${basedir}/out/artifacts/few_sample_war_exploded"/>
     <property name="artifact.output.few-tiny-sample:war_exploded" value="${basedir}/out/artifacts/few_tiny_sample_war_exploded"/>
     <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.few-common.jar" value="${artifacts.temp.dir}/few-common.jar"/>
+    <property name="temp.jar.path.few-common.war" value="${artifacts.temp.dir}/few-common.war"/>
+    <property name="temp.jar.path.few-core.jar" value="${artifacts.temp.dir}/few-core.jar"/>
+  </target>
+  
+  <target name="clean.artifact.few-common:jar" description="clean few-common:jar artifact output">
+    <delete dir="${artifact.output.few-common:jar}"/>
+  </target>
+  
+  <target name="clean.artifact.few-common:sql" description="clean few-common:sql artifact output">
+    <delete dir="${artifact.output.few-common:sql}"/>
+  </target>
+  
+  <target name="clean.artifact.few-core:jar" description="clean few-core:jar artifact output">
+    <delete dir="${artifact.output.few-core:jar}"/>
   </target>
   
   <target name="clean.artifact.few-sample:war_exploded" description="clean few-sample:war exploded artifact output">
@@ -608,6 +552,55 @@
   
   <target name="clean.artifact.few-tiny-sample:war_exploded" description="clean few-tiny-sample:war exploded artifact output">
     <delete dir="${artifact.output.few-tiny-sample:war_exploded}"/>
+  </target>
+  
+  <target name="artifact.few-common:jar" depends="init.artifacts, compile.module.few-common, compile.module.few-core" description="Build &#39;few-common:jar&#39; artifact">
+    <mkdir dir="${artifact.output.few-common:jar}"/>
+    <jar destfile="${temp.jar.path.few-common.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${few-common.output.dir}"/>
+      <zipfileset dir="${few-core.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.few-common.jar}" tofile="${artifact.output.few-common:jar}/few-common.jar"/>
+    <mkdir dir="${artifact.output.few-common:jar}/lib"/>
+    <copy file="${basedir}/lib/commons-fileupload-1.2.2/commons-fileupload-1.2.2.jar" tofile="${artifact.output.few-common:jar}/lib/commons-fileupload-1.2.2.jar"/>
+    <copy file="${basedir}/lib/commons-io-1.4/commons-io-1.4.jar" tofile="${artifact.output.few-common:jar}/lib/commons-io-1.4.jar"/>
+    <copy file="${basedir}/lib/freemarker-2.3.18/freemarker.jar" tofile="${artifact.output.few-common:jar}/lib/freemarker.jar"/>
+    <copy file="${basedir}/lib/javamail-1.4.4/mail.jar" tofile="${artifact.output.few-common:jar}/lib/mail.jar"/>
+    <copy file="${basedir}/lib/mybatis-3.0.6/mybatis-3.0.6.jar" tofile="${artifact.output.few-common:jar}/lib/mybatis-3.0.6.jar"/>
+    <copy file="${basedir}/lib/postgresql/postgresql-9.0-801.jdbc4.jar" tofile="${artifact.output.few-common:jar}/lib/postgresql-9.0-801.jdbc4.jar"/>
+    <copy file="${basedir}/lib/apache-tomcat-embed-6.0.33/servlet-api.jar" tofile="${artifact.output.few-common:jar}/lib/servlet-api.jar"/>
+    <copy file="${basedir}/lib/bcel-tomcat/bcel-tomcat.jar" tofile="${artifact.output.few-common:jar}/lib/bcel-tomcat.jar"/>
+  </target>
+  
+  <target name="artifact.few-common:sql" depends="init.artifacts" description="Build &#39;few-common:sql&#39; artifact">
+    <mkdir dir="${artifact.output.few-common:sql}"/>
+    <mkdir dir="${artifact.output.few-common:sql}/few-common-db"/>
+    <copy todir="${artifact.output.few-common:sql}/few-common-db">
+      <fileset dir="${basedir}/few-common/db"/>
+    </copy>
+  </target>
+  
+  <target name="artifact.few-common:war" depends="init.artifacts" description="Build &#39;few-common:war&#39; artifact">
+    <property name="artifact.temp.output.few-common:war" value="${artifacts.temp.dir}/few_common_war"/>
+    <mkdir dir="${artifact.temp.output.few-common:war}"/>
+    <zip destfile="${temp.jar.path.few-common.war}">
+      <zipfileset dir="${basedir}/few-common/web"/>
+    </zip>
+    <copy file="${temp.jar.path.few-common.war}" tofile="${artifact.temp.output.few-common:war}/few-common.war"/>
+  </target>
+  
+  <target name="artifact.few-core:jar" depends="init.artifacts, compile.module.few-core" description="Build &#39;few-core:jar&#39; artifact">
+    <mkdir dir="${artifact.output.few-core:jar}"/>
+    <jar destfile="${temp.jar.path.few-core.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${few-core.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.few-core.jar}" tofile="${artifact.output.few-core:jar}/few-core.jar"/>
+    <mkdir dir="${artifact.output.few-core:jar}/lib"/>
+    <copy file="${basedir}/lib/commons-fileupload-1.2.2/commons-fileupload-1.2.2.jar" tofile="${artifact.output.few-core:jar}/lib/commons-fileupload-1.2.2.jar"/>
+    <copy file="${basedir}/lib/commons-io-1.4/commons-io-1.4.jar" tofile="${artifact.output.few-core:jar}/lib/commons-io-1.4.jar"/>
+    <copy file="${basedir}/lib/freemarker-2.3.18/freemarker.jar" tofile="${artifact.output.few-core:jar}/lib/freemarker.jar"/>
+    <copy file="${basedir}/lib/apache-tomcat-embed-6.0.33/servlet-api.jar" tofile="${artifact.output.few-core:jar}/lib/servlet-api.jar"/>
+    <copy file="${basedir}/lib/bcel-tomcat/bcel-tomcat.jar" tofile="${artifact.output.few-core:jar}/lib/bcel-tomcat.jar"/>
   </target>
   
   <target name="artifact.few-sample:war_exploded" depends="init.artifacts, compile.module.few-sample, compile.module.few-core, compile.module.few-common" description="Build &#39;few-sample:war exploded&#39; artifact">
@@ -660,7 +653,11 @@
     <copy file="${basedir}/few-tiny-sample/web/WEB-INF/web.xml" tofile="${artifact.output.few-tiny-sample:war_exploded}/WEB-INF/web.xml"/>
   </target>
   
-  <target name="build.all.artifacts" depends="artifact.few-sample:war_exploded, artifact.few-tiny-sample:war_exploded" description="Build all artifacts">
+  <target name="build.all.artifacts" depends="artifact.few-common:jar, artifact.few-common:sql, artifact.few-common:war, artifact.few-core:jar, artifact.few-sample:war_exploded, artifact.few-tiny-sample:war_exploded" description="Build all artifacts">
+    <mkdir dir="${artifact.output.few-common:war}"/>
+    <copy todir="${artifact.output.few-common:war}">
+      <fileset dir="${artifact.temp.output.few-common:war}"/>
+    </copy>
     
     <!-- Delete temporary files -->
     <delete dir="${artifacts.temp.dir}"/>
