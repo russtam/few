@@ -136,7 +136,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/few-common/few-common.iml" filepath="$PROJECT_DIR$/few-common/few-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/few-core/few-core.iml" filepath="$PROJECT_DIR$/few-core/few-core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/few-runner/few-runner.iml" filepath="$PROJECT_DIR$/few-runner/few-runner.iml" />
       <module fileurl="file://$PROJECT_DIR$/few-sample/few-sample.iml" filepath="$PROJECT_DIR$/few-sample/few-sample.iml" />
       <module fileurl="file://$PROJECT_DIR$/few-tiny-sample/few-tiny-sample.iml" filepath="$PROJECT_DIR$/few-tiny-sample/few-tiny-sample.iml" />
     </modules>
