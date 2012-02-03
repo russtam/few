@@ -83,17 +83,6 @@ CREATE TABLE status (
 
 
 --
--- Name: user_profile; Type: TABLE; Schema: users; Owner: -; Tablespace: 
---
-
-CREATE TABLE user_profile (
-    user_id integer NOT NULL,
-    field_id character varying(20) NOT NULL,
-    value character varying
-);
-
-
---
 -- Name: users; Type: TABLE; Schema: users; Owner: -; Tablespace: 
 --
 
