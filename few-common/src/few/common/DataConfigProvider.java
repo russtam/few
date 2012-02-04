@@ -1,11 +1,8 @@
 package few.common;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 23.08.11
- * Time: 12:22
- * To change this template use File | Settings | File Templates.
  */
 public interface DataConfigProvider {
 

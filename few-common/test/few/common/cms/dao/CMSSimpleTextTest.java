@@ -6,11 +6,8 @@ import few.common.cms.dto.SimpleText;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 07.01.12
- * Time: 13:12
- * To change this template use File | Settings | File Templates.
  */
 public class CMSSimpleTextTest extends BaseTest {
 

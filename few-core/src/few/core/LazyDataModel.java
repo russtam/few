@@ -8,11 +8,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 29.11.11
- * Time: 17:32
- * To change this template use File | Settings | File Templates.
  */
 public class LazyDataModel implements Map<String, Object> {
 

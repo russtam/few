@@ -5,11 +5,8 @@ import few.utils.ListWrapper;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 31.01.12
- * Time: 3:49
- * To change this template use File | Settings | File Templates.
  */
 public abstract class BasePaginator<T> extends ListWrapper<T> {
 

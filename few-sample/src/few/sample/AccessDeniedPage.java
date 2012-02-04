@@ -13,11 +13,8 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 31.01.12
- * Time: 2:07
- * To change this template use File | Settings | File Templates.
  */
 public class AccessDeniedPage extends HttpServlet {
 

@@ -4,11 +4,8 @@ package few.services;
 import java.util.Collection;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 31.10.11
- * Time: 23:27
- * To change this template use File | Settings | File Templates.
  */
 public interface Configuration {
 

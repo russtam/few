@@ -15,11 +15,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 07.01.12
- * Time: 13:52
- * To change this template use File | Settings | File Templates.
  */
 @SuppressWarnings(value = "deprecation")
 public class TestContext extends Context{

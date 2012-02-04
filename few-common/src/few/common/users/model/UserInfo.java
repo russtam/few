@@ -11,11 +11,8 @@ import few.common.users.service.UserProfileService;
 import java.util.*;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 31.10.11
- * Time: 23:53
- * To change this template use File | Settings | File Templates.
  */
 @ModelBean(name = "userInfo", permission = "authorized")
 public class UserInfo {

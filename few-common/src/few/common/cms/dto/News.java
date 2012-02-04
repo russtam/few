@@ -5,11 +5,8 @@ import few.Context;
 import java.util.Date;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 22.12.11
- * Time: 22:21
- * To change this template use File | Settings | File Templates.
  */
 public class News {
     public String feed_id;

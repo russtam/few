@@ -5,11 +5,8 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import java.util.*;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 23.01.12
- * Time: 8:41
- * To change this template use File | Settings | File Templates.
  */
 public class FewRequestWrapper extends HttpServletRequestWrapper {
 

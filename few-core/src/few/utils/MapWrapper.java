@@ -5,11 +5,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 30.11.11
- * Time: 20:19
- * To change this template use File | Settings | File Templates.
  */
 public class MapWrapper<K,V> implements Map<K,V> {
 

@@ -8,11 +8,8 @@ import few.common.audit.dto.RequestDump;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 07.01.12
- * Time: 19:31
- * To change this template use File | Settings | File Templates.
  */
 public class AuditServiceTest extends BaseTest{
 

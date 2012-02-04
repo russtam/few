@@ -5,11 +5,8 @@ import few.common.cms.dto.SimpleText;
 import few.common.cms.dao.CMSService;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 07.01.12
- * Time: 14:30
- * To change this template use File | Settings | File Templates.
  */
 @Controller(name = "simple_text_admin", permission = "cms-admin")
 public class SimpleTextController {

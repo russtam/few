@@ -13,11 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 07.01.12
- * Time: 19:14
- * To change this template use File | Settings | File Templates.
  */
 public class AuditAndLogFilter implements Filter, ServletContextListener, HttpSessionListener {
     Credentials credentials;

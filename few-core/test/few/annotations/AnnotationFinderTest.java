@@ -15,11 +15,8 @@ import java.net.URL;
 import java.util.*;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 30.11.11
- * Time: 17:59
- * To change this template use File | Settings | File Templates.
  */
 public class AnnotationFinderTest extends TestCase {
 

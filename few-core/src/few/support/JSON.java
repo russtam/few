@@ -11,11 +11,8 @@ import freemarker.template.TemplateModelException;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 04.12.11
- * Time: 12:14
- * To change this template use File | Settings | File Templates.
  */
 @ModelBean(name = "json")
 public class JSON implements TemplateMethodModelEx {

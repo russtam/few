@@ -11,11 +11,8 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 10.01.12
- * Time: 0:17
- * To change this template use File | Settings | File Templates.
  */
 @few.ModelBean(name = "model_beans", permission = "admin")
 public class ViewModelBeans extends ListWrapper<ViewModelBeans.ViewModelBean>{

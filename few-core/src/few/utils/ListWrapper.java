@@ -6,11 +6,8 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 30.11.11
- * Time: 20:22
- * To change this template use File | Settings | File Templates.
  */
 public class ListWrapper<T> implements List<T> {
 

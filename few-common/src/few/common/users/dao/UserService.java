@@ -12,11 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 28.10.11
- * Time: 21:29
- * To change this template use File | Settings | File Templates.
  */
 public class UserService extends BaseMyBatisServiceImpl {
 

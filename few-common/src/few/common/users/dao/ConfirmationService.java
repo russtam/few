@@ -8,11 +8,8 @@ import java.util.Date;
 import java.util.StringTokenizer;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 04.11.11
- * Time: 16:55
- * To change this template use File | Settings | File Templates.
  */
 public class ConfirmationService extends BaseMyBatisServiceImpl {
 

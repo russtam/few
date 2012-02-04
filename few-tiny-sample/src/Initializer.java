@@ -5,11 +5,8 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 02.02.12
- * Time: 1:38
- * To change this template use File | Settings | File Templates.
  */
 public class Initializer implements ServletContextListener{
     public void contextInitialized(ServletContextEvent sce) {

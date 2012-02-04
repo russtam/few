@@ -6,11 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 06.01.12
- * Time: 22:34
- * To change this template use File | Settings | File Templates.
  */
 public class UserProfile {
     public int user_id;

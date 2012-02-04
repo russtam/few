@@ -15,11 +15,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 04.01.12
- * Time: 2:16
- * To change this template use File | Settings | File Templates.
  */
 public class BaseTest extends TestCase {
 

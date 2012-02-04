@@ -7,11 +7,8 @@ import few.core.ServiceRegistry;
 import java.util.*;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 04.01.12
- * Time: 16:41
- * To change this template use File | Settings | File Templates.
  */
 public class UserProfileService {
 

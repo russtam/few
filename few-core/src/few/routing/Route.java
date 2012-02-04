@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 /**
-* Created by IntelliJ IDEA.
 * User: igor
 * Date: 20.01.12
-* Time: 19:10
-* To change this template use File | Settings | File Templates.
 */
 public class Route {
     private String method;

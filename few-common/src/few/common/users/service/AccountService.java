@@ -14,11 +14,8 @@ import few.utils.Utils;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 03.11.11
- * Time: 19:03
- * To change this template use File | Settings | File Templates.
  */
 public class AccountService {
 

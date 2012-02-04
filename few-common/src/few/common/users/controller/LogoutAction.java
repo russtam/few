@@ -10,11 +10,8 @@ import java.io.IOException;
 import java.util.Enumeration;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 31.10.11
- * Time: 19:05
- * To change this template use File | Settings | File Templates.
  */
 @Controller(name = "logout", permission = "user")
 public class LogoutAction {

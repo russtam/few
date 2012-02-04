@@ -11,11 +11,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 07.12.11
- * Time: 23:36
- * To change this template use File | Settings | File Templates.
  */
 @ModelBean(name = "date_format")
 public class DateFormat  implements TemplateMethodModelEx {

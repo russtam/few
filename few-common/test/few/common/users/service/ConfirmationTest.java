@@ -4,11 +4,8 @@ import few.common.BaseTest;
 import few.common.users.dao.ConfirmationService;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 04.11.11
- * Time: 19:03
- * To change this template use File | Settings | File Templates.
  */
 
 public class ConfirmationTest extends BaseTest {

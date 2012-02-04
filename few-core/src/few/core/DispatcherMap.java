@@ -13,11 +13,8 @@ import java.util.*;
 import java.util.logging.Logger;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 05.11.11
- * Time: 12:12
- * To change this template use File | Settings | File Templates.
  */
 public class DispatcherMap {
 

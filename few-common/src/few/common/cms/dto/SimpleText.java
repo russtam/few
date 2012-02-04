@@ -1,11 +1,8 @@
 package few.common.cms.dto;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 22.12.11
- * Time: 22:09
- * To change this template use File | Settings | File Templates.
  */
 public class SimpleText {
     public String cat_id;

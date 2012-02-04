@@ -3,11 +3,8 @@ package few.routing;
 import few.core.ResourceServlet;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 22.01.12
- * Time: 22:30
- * To change this template use File | Settings | File Templates.
  */
 public class DefaultRoutes {
 

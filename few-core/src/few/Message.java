@@ -1,11 +1,8 @@
 package few;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 02.11.11
- * Time: 21:25
- * To change this template use File | Settings | File Templates.
  */
 public class Message {
     public static final String NO_SOURCE = "all";

@@ -17,11 +17,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 31.10.11
- * Time: 19:37
- * To change this template use File | Settings | File Templates.
  */
 public class Dispatcher implements Filter{
     public static final String BASE_SERVLET_PATH = "/";

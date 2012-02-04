@@ -8,11 +8,8 @@ import few.utils.MapBuilder;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 22.12.11
- * Time: 16:16
- * To change this template use File | Settings | File Templates.
  */
 public class CMSService extends BaseMyBatisServiceImpl {
 

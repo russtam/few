@@ -11,11 +11,8 @@ import java.util.*;
 import java.util.logging.Logger;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 17.11.11
- * Time: 22:30
- * To change this template use File | Settings | File Templates.
  */
 public class MultipartRequest extends HttpServletRequestWrapper {
 

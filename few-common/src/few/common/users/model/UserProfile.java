@@ -8,11 +8,8 @@ import few.common.users.dto.SimpleUser;
 import java.util.Set;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 25.12.11
- * Time: 3:33
- * To change this template use File | Settings | File Templates.
  */
 @ModelBean(name = "user_profile", permission = "admin")
 public class UserProfile extends UserInfo{

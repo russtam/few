@@ -7,11 +7,8 @@ import few.utils.ListWrapper;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 25.12.11
- * Time: 3:45
- * To change this template use File | Settings | File Templates.
  */
 @ModelBean(name = "user_roles", permission = "admin")
 public class UserRoles extends ListWrapper<String> {

@@ -8,11 +8,8 @@ import freemarker.template.TemplateModelException;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 05.12.11
- * Time: 14:46
- * To change this template use File | Settings | File Templates.
  */
 @ModelBean(name = "new_id")
 public class IDGenerator implements TemplateMethodModelEx {

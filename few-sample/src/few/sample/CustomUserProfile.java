@@ -4,11 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 04.01.12
- * Time: 15:31
- * To change this template use File | Settings | File Templates.
  */
 public class CustomUserProfile implements few.common.CustomUserProfile{
 

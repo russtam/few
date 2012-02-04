@@ -5,11 +5,8 @@ import few.utils.Utils;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 04.01.12
- * Time: 15:32
- * To change this template use File | Settings | File Templates.
  */
 public interface CustomUserProfile {
 

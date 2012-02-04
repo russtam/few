@@ -5,11 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 22.01.12
- * Time: 22:14
- * To change this template use File | Settings | File Templates.
  */
 public class ResourceServlet implements Servlet{
     public void init(ServletConfig config) throws ServletException {

@@ -11,11 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 17.11.11
- * Time: 22:29
- * To change this template use File | Settings | File Templates.
  */
 public class FileUploadFilter implements Filter {
 

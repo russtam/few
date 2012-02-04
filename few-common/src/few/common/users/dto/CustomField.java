@@ -1,11 +1,8 @@
 package few.common.users.dto;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 04.01.12
- * Time: 16:14
- * To change this template use File | Settings | File Templates.
  */
 public class CustomField {
     public String field_id;

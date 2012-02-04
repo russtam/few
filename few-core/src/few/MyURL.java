@@ -12,11 +12,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 31.10.11
- * Time: 23:22
- * To change this template use File | Settings | File Templates.
  */
 public class MyURL {
 

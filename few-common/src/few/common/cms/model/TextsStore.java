@@ -7,11 +7,8 @@ import few.common.cms.dao.CMSService;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 07.01.12
- * Time: 14:33
- * To change this template use File | Settings | File Templates.
  */
 @ModelBean(name = "texts_store")
 public class TextsStore {

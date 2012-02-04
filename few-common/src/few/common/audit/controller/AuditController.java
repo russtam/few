@@ -7,11 +7,8 @@ import few.common.audit.dao.AuditService;
 import few.common.audit.service.AuditKeys;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 07.01.12
- * Time: 23:26
- * To change this template use File | Settings | File Templates.
  */
 @Controller(name = "audit", permission = "admin")
 public class AuditController {

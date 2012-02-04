@@ -10,11 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 19.12.11
- * Time: 1:16
- * To change this template use File | Settings | File Templates.
  */
 public class DefaultConfigurationImpl implements Configuration {
 

@@ -7,11 +7,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 19.12.11
- * Time: 0:46
- * To change this template use File | Settings | File Templates.
  */
 public class ServiceRegistry {
 

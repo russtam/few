@@ -9,11 +9,8 @@ import few.utils.ListWrapper;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 07.01.12
- * Time: 22:39
- * To change this template use File | Settings | File Templates.
  */
 @ModelBean(name = "activity_log", permission = "admin")
 public class ActivityLog extends BasePaginator<ActivityEntry>{

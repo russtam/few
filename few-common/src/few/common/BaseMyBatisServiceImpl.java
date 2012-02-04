@@ -27,11 +27,8 @@ import java.util.Properties;
 import java.util.logging.Logger;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 06.09.11
- * Time: 20:10
- * To change this template use File | Settings | File Templates.
  */
 public abstract class BaseMyBatisServiceImpl {
 

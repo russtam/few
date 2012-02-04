@@ -10,11 +10,8 @@ import few.utils.Utils;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 25.12.11
- * Time: 2:25
- * To change this template use File | Settings | File Templates.
  */
 @ModelBean(name = "userList", permission = "admin")
 public class UserList extends ListWrapper<SimpleUser>{

@@ -6,11 +6,8 @@ import few.utils.JSONRenderer;
 import java.net.MalformedURLException;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 05.11.11
- * Time: 11:47
- * To change this template use File | Settings | File Templates.
  */
 public class ActionResponse {
 

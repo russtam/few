@@ -5,11 +5,8 @@ import few.common.users.dao.UserService;
 import java.util.*;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 12.10.11
- * Time: 17:28
- * To change this template use File | Settings | File Templates.
  */
 public class SimpleUser {
     public static final int NOT_ACTIVE = 0;

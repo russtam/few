@@ -15,11 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 31.10.11
- * Time: 21:47
- * To change this template use File | Settings | File Templates.
  */
 @Controller(name = "user_profile", permission = "user")
 public class UserProfileAction {

@@ -6,11 +6,8 @@ import few.common.cms.dto.News;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 07.01.12
- * Time: 13:11
- * To change this template use File | Settings | File Templates.
  */
 public class CMSNewsTest extends BaseTest{
 

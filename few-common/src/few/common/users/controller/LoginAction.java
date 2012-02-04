@@ -12,11 +12,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 31.10.11
- * Time: 19:05
- * To change this template use File | Settings | File Templates.
  */
 @Controller(name = "login")
 public class LoginAction {

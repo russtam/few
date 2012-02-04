@@ -11,11 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 01.11.11
- * Time: 20:35
- * To change this template use File | Settings | File Templates.
  */
 public class UserServiceTest extends BaseTest {
 

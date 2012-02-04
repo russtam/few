@@ -8,11 +8,8 @@ import few.core.ServiceRegistry;
 import few.services.Configuration;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 31.10.11
- * Time: 23:50
- * To change this template use File | Settings | File Templates.
  */
 @ModelBean(name = "loginForm")
 public class LoginForm {

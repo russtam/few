@@ -12,11 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 24.12.11
- * Time: 0:13
- * To change this template use File | Settings | File Templates.
  */
 public class DefaultPage extends HttpServlet{
 

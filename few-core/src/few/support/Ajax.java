@@ -8,11 +8,8 @@ import freemarker.template.TemplateModelException;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 23.12.11
- * Time: 20:49
- * To change this template use File | Settings | File Templates.
  */
 @ModelBean(name = "ajax")
 public class Ajax implements TemplateBooleanModel {

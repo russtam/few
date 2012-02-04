@@ -11,11 +11,8 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 31.10.11
- * Time: 21:46
- * To change this template use File | Settings | File Templates.
  */
 @Controller(name = "restore_password")
 public class RestorePasswordAction {

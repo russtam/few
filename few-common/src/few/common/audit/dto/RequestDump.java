@@ -3,11 +3,8 @@ package few.common.audit.dto;
 import java.util.Date;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 07.01.12
- * Time: 18:52
- * To change this template use File | Settings | File Templates.
  */
 public class RequestDump {
     public String uri;

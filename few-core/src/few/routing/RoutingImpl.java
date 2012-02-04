@@ -11,11 +11,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 20.01.12
- * Time: 14:30
- * To change this template use File | Settings | File Templates.
  */
 public class RoutingImpl implements Routing {
 

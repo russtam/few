@@ -1,11 +1,8 @@
 package few.routing;
 
 /**
-* Created by IntelliJ IDEA.
 * User: igor
 * Date: 20.01.12
-* Time: 19:11
-* To change this template use File | Settings | File Templates.
 */
 public class ErrorRoute {
     private int code;

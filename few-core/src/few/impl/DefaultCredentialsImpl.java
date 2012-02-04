@@ -8,11 +8,8 @@ import java.util.Collections;
 import java.util.Set;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 19.12.11
- * Time: 1:22
- * To change this template use File | Settings | File Templates.
  */
 public class DefaultCredentialsImpl implements Credentials {
     public String getUserID(HttpServletRequest request) {

@@ -7,11 +7,8 @@ import few.utils.ListWrapper;
 import java.util.*;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 10.01.12
- * Time: 0:18
- * To change this template use File | Settings | File Templates.
  */
 @ModelBean(name = "actions", permission = "admin")
 public class ViewActions extends ListWrapper<ViewActions.ViewAction>{

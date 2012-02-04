@@ -9,11 +9,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 04.01.12
- * Time: 16:54
- * To change this template use File | Settings | File Templates.
  */
 @ModelBean(name = "user_profile_fields", permission = "authorized")
 public class UserProfileFields extends ListWrapper<CustomUserProfile.CustomField>{

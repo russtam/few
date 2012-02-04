@@ -4,11 +4,8 @@ import java.util.Collections;
 import java.util.Map;
 
 /**
-* Created by IntelliJ IDEA.
 * User: igor
 * Date: 20.01.12
-* Time: 19:11
-* To change this template use File | Settings | File Templates.
 */
 public class PostRoute extends Route {
     private String controller;

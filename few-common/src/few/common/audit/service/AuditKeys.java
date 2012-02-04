@@ -1,11 +1,8 @@
 package few.common.audit.service;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 07.01.12
- * Time: 19:56
- * To change this template use File | Settings | File Templates.
  */
 public class AuditKeys {
 

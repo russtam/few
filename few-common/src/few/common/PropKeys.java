@@ -1,11 +1,8 @@
 package few.common;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 24.12.11
- * Time: 3:09
- * To change this template use File | Settings | File Templates.
  */
 public class PropKeys {
 

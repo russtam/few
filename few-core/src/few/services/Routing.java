@@ -12,11 +12,8 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 23.01.12
- * Time: 8:35
- * To change this template use File | Settings | File Templates.
  */
 public interface Routing {
     void addGetRoute(GetRoute r);

@@ -12,11 +12,8 @@ import javax.servlet.http.HttpSession;
 import java.util.*;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 02.11.11
- * Time: 21:29
- * To change this template use File | Settings | File Templates.
  */
 public class Context {
 

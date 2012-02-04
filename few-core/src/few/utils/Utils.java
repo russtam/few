@@ -10,11 +10,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by IntelliJ IDEA.
  * User: gerbylev
  * Date: 12.10.11
- * Time: 17:23
- * To change this template use File | Settings | File Templates.
  */
 public class Utils {
 

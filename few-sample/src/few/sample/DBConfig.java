@@ -5,11 +5,8 @@ import few.core.ServiceRegistry;
 import few.services.Configuration;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 19.12.11
- * Time: 2:08
- * To change this template use File | Settings | File Templates.
  */
 public class DBConfig implements DataConfigProvider{
 

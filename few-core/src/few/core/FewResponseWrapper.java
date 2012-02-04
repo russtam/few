@@ -12,11 +12,8 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 23.01.12
- * Time: 8:41
- * To change this template use File | Settings | File Templates.
  */
 public class FewResponseWrapper extends HttpServletResponseWrapper {
 

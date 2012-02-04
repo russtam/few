@@ -4,11 +4,8 @@ import javax.servlet.*;
 import java.io.IOException;
 
 /**
- * Created by IntelliJ IDEA.
  * User: igor
  * Date: 02.01.12
- * Time: 20:27
- * To change this template use File | Settings | File Templates.
  */
 public class BaseMyBatisTLSFilter implements Filter{
     public void init(FilterConfig filterConfig) throws ServletException {
