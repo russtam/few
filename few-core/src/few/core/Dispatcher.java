@@ -144,6 +144,7 @@ public class Dispatcher implements Filter{
                         response.sendError(ar.getError_code());
                         break;
                     case ActionResponse.JSON:
+		        response.setContentType("application/json");
                         response.getOutputStream().print(ar.getKey());
                         response.getOutputStream().close();
                         break;
