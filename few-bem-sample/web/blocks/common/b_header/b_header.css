@@ -1,0 +1,38 @@
+.b_header__top {
+    height: 55px;
+}
+
+.b_header__logo {
+    float: left;
+    font-size: 20px;
+    color: #883333;
+    padding-bottom: 10px;
+    border-bottom: #333333 solid ;
+    margin: 10px;
+}
+
+.b_header__user_bar {
+    margin-top: 13px;
+    margin-right: 10px;
+}
+
+.b_header__user_bar {
+    float: right;
+}
+
+.b_header__user_menu {
+
+}
+
+.b_header__user_menu {
+
+}
+.b_header__admin_menu {
+
+}
+
+.b_header__breadcrumbs {
+    width: 100%;
+    margin: 10px;
+}
+

@@ -92,6 +92,28 @@
         </element>
       </root>
     </artifact>
+    <artifact type="exploded-war" name="few-bem-sample:war exploded">
+      <output-path>$PROJECT_DIR$/out/artifacts/few_bem_sample_war_exploded</output-path>
+      <root id="root">
+        <element id="directory" name="WEB-INF">
+          <element id="directory" name="classes">
+            <element id="module-output" name="few-bem-sample" />
+            <element id="module-output" name="few-core" />
+            <element id="module-output" name="few-common" />
+          </element>
+          <element id="directory" name="lib">
+            <element id="library" level="project" name="freemarker" />
+            <element id="library" level="project" name="commons-fileupload" />
+            <element id="library" level="project" name="bcel-tomcat" />
+            <element id="library" level="project" name="commons-io" />
+            <element id="library" level="project" name="mybatis" />
+            <element id="library" level="project" name="mail" />
+            <element id="library" level="project" name="postgres" />
+          </element>
+        </element>
+        <element id="javaee-facet-resources" facet="few-bem-sample/web/Web" />
+      </root>
+    </artifact>
   </component>
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
@@ -184,6 +206,7 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/few-bem-sample/few-bem-sample.iml" filepath="$PROJECT_DIR$/few-bem-sample/few-bem-sample.iml" />
       <module fileurl="file://$PROJECT_DIR$/few-common/few-common.iml" filepath="$PROJECT_DIR$/few-common/few-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/few-core/few-core.iml" filepath="$PROJECT_DIR$/few-core/few-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/few-sample/few-sample.iml" filepath="$PROJECT_DIR$/few-sample/few-sample.iml" />

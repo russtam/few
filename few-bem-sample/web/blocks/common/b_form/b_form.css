@@ -1,0 +1,52 @@
+.b_form {
+    margin: 3px;
+}
+
+.b_form__table {
+
+}
+
+.b_form__row {
+
+}
+
+.b_form__label_col {
+    padding: 5px;
+}
+
+.b_form__label_col_required  {
+    font-weight: bold;
+}
+
+.b_form__input_col {
+    padding: 5px;
+}
+
+.b_form__message_col {
+    padding: 5px;
+}
+
+.b_form__input {
+    padding: 5px;
+}
+
+.b_form__button {
+    background: -moz-linear-gradient(#1F7DAA, #4AA6D6) repeat scroll 0 0 transparent;
+    border: 0 none;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 0 1px #999999;
+    color: #FFFFFF;
+    display: inline-block;
+    font-family: verdana,sans-serif;
+    padding: 4px 20px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px #12455D;
+    min-width: 120px;
+}
+
+.b_form__button:hover {
+    background: -moz-linear-gradient(#4AA6D6, #1F7DAA) repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+}
+
