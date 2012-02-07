@@ -1,0 +1,220 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.b_center_layout {
+  margin-left: auto;
+  margin-right: auto;
+}
+.b_container_centered {
+  width: 100%;
+  text-align: center;
+  margin-top: 5px;
+}
+.b_footer {
+  padding-top: 50px;
+  padding-bottom: 30px;
+}
+.b_footer__top_line {
+  border-top: 2px solid #333333;
+  margin: 10px;
+  padding-top: 10px;
+  color: #000000;
+}
+.b_form {
+  margin: 3px;
+}
+.b_form__label_col {
+  padding: 5px;
+}
+.b_form__label_col_required {
+  font-weight: bold;
+}
+.b_form__input_col {
+  padding: 5px;
+}
+.b_form__message_col {
+  padding: 5px;
+}
+.b_form__input {
+  padding: 5px;
+}
+.b_form__button {
+  background: -moz-linear-gradient(#1f7daa, #4aa6d6) repeat scroll 0 0 transparent;
+  border: 0 none;
+  border-radius: 4px 4px 4px 4px;
+  box-shadow: 0 0 1px #999999;
+  color: #FFFFFF;
+  display: inline-block;
+  font-family: verdana, sans-serif;
+  padding: 4px 20px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 1px 1px 1px #12455D;
+  min-width: 120px;
+}
+.b_form__button:hover {
+  background: -moz-linear-gradient(#4aa6d6, #1f7daa) repeat scroll 0 0 transparent;
+  color: #FFFFFF;
+}
+.b_header__top {
+  height: 55px;
+}
+.b_header__logo {
+  float: left;
+  font-size: 20px;
+  color: #883333;
+  padding-bottom: 10px;
+  border-bottom: #333333 solid ;
+  margin: 10px;
+}
+.b_header__user_bar {
+  margin-top: 13px;
+  margin-right: 10px;
+}
+.b_header__user_bar {
+  float: right;
+}
+.b_header__breadcrumbs {
+  width: 100%;
+  margin: 10px;
+}
+body {
+  color: #333333;
+  font-family: arial, sans-serif;
+  font-size: 16px;
+}
+.b_page__container {
+  max-width: 920px;
+  margin: 0 auto;
+}
+.b_login____href_register {
+  margin: 6px;
+  font-size: 14px;
+}
+.b_login__href_restore {
+  margin: 6px;
+  font-size: 12px;
+}
