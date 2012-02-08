@@ -31,7 +31,6 @@
             <element id="module-output" name="few-common" />
           </element>
           <element id="directory" name="lib">
-            <element id="library" level="project" name="bcel-tomcat" />
             <element id="library" level="project" name="commons-fileupload" />
             <element id="library" level="project" name="freemarker" />
             <element id="library" level="project" name="mail" />
@@ -53,7 +52,6 @@
           </element>
           <element id="directory" name="lib">
             <element id="library" level="project" name="freemarker" />
-            <element id="library" level="project" name="bcel-tomcat" />
             <element id="library" level="project" name="commons-io" />
             <element id="library" level="project" name="commons-fileupload" />
           </element>
@@ -72,7 +70,6 @@
           <element id="library" level="project" name="commons-io" />
           <element id="library" level="project" name="freemarker" />
           <element id="library" level="project" name="servlet-api" />
-          <element id="library" level="project" name="bcel-tomcat" />
         </element>
       </root>
     </artifact>
@@ -90,7 +87,6 @@
           <element id="library" level="project" name="mybatis" />
           <element id="library" level="project" name="postgres" />
           <element id="library" level="project" name="servlet-api" />
-          <element id="library" level="project" name="bcel-tomcat" />
         </element>
       </root>
     </artifact>
@@ -126,7 +122,6 @@
           <element id="directory" name="lib">
             <element id="library" level="project" name="freemarker" />
             <element id="library" level="project" name="commons-fileupload" />
-            <element id="library" level="project" name="bcel-tomcat" />
             <element id="library" level="project" name="commons-io" />
             <element id="library" level="project" name="mybatis" />
             <element id="library" level="project" name="mail" />
@@ -245,24 +240,6 @@
     <mapping directory="" vcs="" />
   </component>
   <component name="libraryTable">
-    <library name="bcel-tomcat">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/bcel-tomcat/bcel-tomcat.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/lib/bcel-tomcat/bcel-tomcat-src.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="catalina">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-embed-6.0.33/catalina.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-6.0.33-src/apache-tomcat-6.0.33-src.zip!/apache-tomcat-6.0.33-src/java" />
-      </SOURCES>
-    </library>
     <library name="commons-fileupload">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/lib/commons-fileupload-1.2.2/commons-fileupload-1.2.2.jar!/" />
@@ -280,6 +257,13 @@
       <SOURCES>
         <root url="jar://$PROJECT_DIR$/lib/commons-io-1.4/commons-io-1.4-sources.jar!/" />
       </SOURCES>
+    </library>
+    <library name="coyote">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-7.0.22/lib/tomcat-coyote.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
     </library>
     <library name="freemarker">
       <CLASSES>
@@ -322,23 +306,10 @@
     </library>
     <library name="servlet-api">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-embed-6.0.33/servlet-api.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-7.0.22/lib/servlet-api.jar!/" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-6.0.33-src/apache-tomcat-6.0.33-src.zip!/apache-tomcat-6.0.33-src/java" />
-      </SOURCES>
-    </library>
-    <library name="tomcat-embedded">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-embed-6.0.33/annotations-api.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-embed-6.0.33/tomcat-coyote.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-embed-6.0.33/tomcat-juli.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/lib/apache-tomcat-6.0.33-src/apache-tomcat-6.0.33-src.zip!/apache-tomcat-6.0.33-src/java" />
-      </SOURCES>
+      <SOURCES />
     </library>
   </component>
 </project>

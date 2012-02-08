@@ -4,10 +4,8 @@ import few.Controller;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.Servlet;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
+import javax.servlet.*;
+import javax.servlet.descriptor.JspConfigDescriptor;
 import java.io.File;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -45,6 +43,14 @@ public class AnnotationFinderTest extends TestCase {
 
         public int getMinorVersion() {
             return 0;  
+        }
+
+        public int getEffectiveMajorVersion() {
+            return 0;
+        }
+
+        public int getEffectiveMinorVersion() {
+            return 0;
         }
 
         public String getMimeType(String file) {
@@ -115,6 +121,10 @@ public class AnnotationFinderTest extends TestCase {
             return null;  
         }
 
+        public boolean setInitParameter(String s, String s1) {
+            return false;
+        }
+
         public Object getAttribute(String name) {
             return null;  
         }
@@ -133,6 +143,98 @@ public class AnnotationFinderTest extends TestCase {
 
         public String getServletContextName() {
             return null;  
+        }
+
+        public ServletRegistration.Dynamic addServlet(String s, String s1) {
+            return null;
+        }
+
+        public ServletRegistration.Dynamic addServlet(String s, Servlet servlet) {
+            return null;
+        }
+
+        public ServletRegistration.Dynamic addServlet(String s, Class<? extends Servlet> aClass) {
+            return null;
+        }
+
+        public <T extends Servlet> T createServlet(Class<T> tClass) throws ServletException {
+            return null;
+        }
+
+        public ServletRegistration getServletRegistration(String s) {
+            return null;
+        }
+
+        public Map<String, ? extends ServletRegistration> getServletRegistrations() {
+            return null;
+        }
+
+        public FilterRegistration.Dynamic addFilter(String s, String s1) {
+            return null;
+        }
+
+        public FilterRegistration.Dynamic addFilter(String s, Filter filter) {
+            return null;
+        }
+
+        public FilterRegistration.Dynamic addFilter(String s, Class<? extends Filter> aClass) {
+            return null;
+        }
+
+        public <T extends Filter> T createFilter(Class<T> tClass) throws ServletException {
+            return null;
+        }
+
+        public FilterRegistration getFilterRegistration(String s) {
+            return null;
+        }
+
+        public Map<String, ? extends FilterRegistration> getFilterRegistrations() {
+            return null;
+        }
+
+        public SessionCookieConfig getSessionCookieConfig() {
+            return null;
+        }
+
+        public void setSessionTrackingModes(Set<SessionTrackingMode> sessionTrackingModes) throws IllegalStateException, IllegalArgumentException {
+
+        }
+
+        public Set<SessionTrackingMode> getDefaultSessionTrackingModes() {
+            return null;
+        }
+
+        public Set<SessionTrackingMode> getEffectiveSessionTrackingModes() {
+            return null;
+        }
+
+        public void addListener(Class<? extends EventListener> aClass) {
+
+        }
+
+        public void addListener(String s) {
+
+        }
+
+        public <T extends EventListener> void addListener(T t) {
+
+        }
+
+        public <T extends EventListener> T createListener(Class<T> tClass) throws ServletException {
+            return null;
+        }
+
+        public void declareRoles(String... strings) {
+
+        }
+
+        public ClassLoader getClassLoader() {
+            return null;
+        }
+
+        public JspConfigDescriptor getJspConfigDescriptor() {
+            return null;
         }
     }
 

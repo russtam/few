@@ -4,15 +4,13 @@ import few.Context;
 import few.core.DispatcherMap;
 
 import javax.servlet.*;
+import javax.servlet.descriptor.JspConfigDescriptor;
 import javax.servlet.http.*;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.Principal;
-import java.util.Enumeration;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * User: igor
@@ -67,6 +65,27 @@ public class TestContext extends Context{
         public boolean isRequestedSessionIdFromCookie() {return false;}
         public boolean isRequestedSessionIdFromURL() {return false;}
         public boolean isRequestedSessionIdFromUrl() {return false;}
+
+        public boolean authenticate(HttpServletResponse response) throws IOException, ServletException {
+            return false;
+        }
+
+        public void login(String s, String s1) throws ServletException {
+
+        }
+
+        public void logout() throws ServletException {
+
+        }
+
+        public Collection<Part> getParts() throws IOException, IllegalStateException, ServletException {
+            return null;
+        }
+
+        public Part getPart(String s) throws IOException, IllegalStateException, ServletException {
+            return null;
+        }
+
         public Object getAttribute(String name) {return null;}
         public Enumeration getAttributeNames() {return null;}
         public String getCharacterEncoding() {return null;}
@@ -96,6 +115,34 @@ public class TestContext extends Context{
         public String getLocalName() {return null;}
         public String getLocalAddr() {return null;}
         public int getLocalPort() {return 0;}
+
+        public ServletContext getServletContext() {
+            return null;
+        }
+
+        public AsyncContext startAsync() {
+            return null;
+        }
+
+        public AsyncContext startAsync(ServletRequest servletRequest, ServletResponse servletResponse) {
+            return null;
+        }
+
+        public boolean isAsyncStarted() {
+            return false;
+        }
+
+        public boolean isAsyncSupported() {
+            return false;
+        }
+
+        public AsyncContext getAsyncContext() {
+            return null;
+        }
+
+        public DispatcherType getDispatcherType() {
+            return null;
+        }
     }
 
     @SuppressWarnings(value = "deprecation")
@@ -118,6 +165,23 @@ public class TestContext extends Context{
         public void addIntHeader(String name, int value) {}
         public void setStatus(int sc) {}
         public void setStatus(int sc, String sm) {}
+
+        public int getStatus() {
+            return 0;
+        }
+
+        public String getHeader(String s) {
+            return null;
+        }
+
+        public Collection<String> getHeaders(String s) {
+            return null;
+        }
+
+        public Collection<String> getHeaderNames() {
+            return null;
+        }
+
         public String getCharacterEncoding() {return null;}
         public String getContentType() {return null;}
         public ServletOutputStream getOutputStream() throws IOException {return null;}
@@ -141,6 +205,15 @@ public class TestContext extends Context{
         public String getContextPath() {return null;}
         public int getMajorVersion() {return 0;}
         public int getMinorVersion() {return 0;}
+
+        public int getEffectiveMajorVersion() {
+            return 0;
+        }
+
+        public int getEffectiveMinorVersion() {
+            return 0;
+        }
+
         public String getMimeType(String file) {return null;}
         public Set getResourcePaths(String path) {return null;}
         public URL getResource(String path) throws MalformedURLException {return null;}
@@ -157,11 +230,108 @@ public class TestContext extends Context{
         public String getServerInfo() {return null;}
         public String getInitParameter(String name) {return null;}
         public Enumeration getInitParameterNames() {return null;}
+
+        public boolean setInitParameter(String s, String s1) {
+            return false;
+        }
+
         public Object getAttribute(String name) {return null;}
         public Enumeration getAttributeNames() {return null;}
         public void setAttribute(String name, Object object) {}
         public void removeAttribute(String name) {}
         public String getServletContextName() {return null;}
+
+        public ServletRegistration.Dynamic addServlet(String s, String s1) {
+            return null;
+        }
+
+        public ServletRegistration.Dynamic addServlet(String s, Servlet servlet) {
+            return null;
+        }
+
+        public ServletRegistration.Dynamic addServlet(String s, Class<? extends Servlet> aClass) {
+            return null;
+        }
+
+        public <T extends Servlet> T createServlet(Class<T> tClass) throws ServletException {
+            return null;
+        }
+
+        public ServletRegistration getServletRegistration(String s) {
+            return null;
+        }
+
+        public Map<String, ? extends ServletRegistration> getServletRegistrations() {
+            return null;
+        }
+
+        public FilterRegistration.Dynamic addFilter(String s, String s1) {
+            return null;
+        }
+
+        public FilterRegistration.Dynamic addFilter(String s, Filter filter) {
+            return null;
+        }
+
+        public FilterRegistration.Dynamic addFilter(String s, Class<? extends Filter> aClass) {
+            return null;
+        }
+
+        public <T extends Filter> T createFilter(Class<T> tClass) throws ServletException {
+            return null;
+        }
+
+        public FilterRegistration getFilterRegistration(String s) {
+            return null;
+        }
+
+        public Map<String, ? extends FilterRegistration> getFilterRegistrations() {
+            return null;
+        }
+
+        public SessionCookieConfig getSessionCookieConfig() {
+            return null;
+        }
+
+        public void setSessionTrackingModes(Set<SessionTrackingMode> sessionTrackingModes) throws IllegalStateException, IllegalArgumentException {
+
+        }
+
+        public Set<SessionTrackingMode> getDefaultSessionTrackingModes() {
+            return null;
+        }
+
+        public Set<SessionTrackingMode> getEffectiveSessionTrackingModes() {
+            return null;
+        }
+
+        public void addListener(Class<? extends EventListener> aClass) {
+
+        }
+
+        public void addListener(String s) {
+
+        }
+
+        public <T extends EventListener> void addListener(T t) {
+
+        }
+
+        public <T extends EventListener> T createListener(Class<T> tClass) throws ServletException {
+            return null;
+        }
+
+        public void declareRoles(String... strings) {
+
+        }
+
+        public ClassLoader getClassLoader() {
+            return null;
+        }
+
+        public JspConfigDescriptor getJspConfigDescriptor() {
+            return null;
+        }
     }
 
     @SuppressWarnings(value = "deprecation")
