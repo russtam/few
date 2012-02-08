@@ -1,5 +1,6 @@
 [#ftl]
 [#-- @implicitly included --]
+[#-- @ftlvariable name="userList" type="few.common.users.model.UserList" --]
 [#-- @ftlvariable name="user_profile_fields" type="few.common.CustomUserProfile.CustomField[]" --]
 [#-- @ftlvariable name="request" type="javax.servlet.http.HttpServletRequest" --]
 [#-- @ftlvariable name="messages" type="few.support.Messages" --]

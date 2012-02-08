@@ -15,7 +15,7 @@
 
         <div class="b_header__user_menu">
             <@b_menu.b_menu permission="user">
-                <@b_menu.e_item href="/" >Здесь могло бы быть меню авторизованного пользователя</@b_menu.e_item>
+                <@b_menu.e_item href="/user/profile">Профиль</@b_menu.e_item>
             </@b_menu.b_menu>
         </div>
 
@@ -24,7 +24,7 @@
                 <@b_menu.e_item href="/admin/user_list">Пользователи</@b_menu.e_item>
                 <@b_menu.e_item href="/admin/activity_log">Лог активностей</@b_menu.e_item>
                 <@b_menu.e_item href="/admin/access_log">Лог запросов</@b_menu.e_item>
-                <@b_menu.e_item href="/admin/?">?</@b_menu.e_item>
+                <@b_menu.e_item href="/admin/dispatcher">Конфигурация движка</@b_menu.e_item>
             </@b_menu.b_menu>
         </div>
 

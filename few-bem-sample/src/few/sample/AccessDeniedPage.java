@@ -22,7 +22,7 @@ public class AccessDeniedPage extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         if(Context.get().isSignedIn()) {
-            Dispatcher.get().processTemplate("/pages/_errors/403.ftl", req, resp);
+            Dispatcher.get().processTemplate("/bem_pages/_errors/p_403.ftl", req, resp);
         } else {
             StringBuilder sb = new StringBuilder();
             sb.append(req.getRequestURL());

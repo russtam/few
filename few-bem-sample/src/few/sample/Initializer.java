@@ -34,8 +34,8 @@ public class Initializer implements ServletContextListener{
         // RouteBuilder.permission("/admin*", "admin").build();
         // RouteBuilder.getRoute("/admin/users").withParam("actionId", "55")
 
-        RouteBuilder.getRoute("/admin/${page}").toPage("/pages/admin/${page}.ftl").permission("admin").build();
-        RouteBuilder.getRoute("/user/${page}").toPage("/pages/user/${page}.ftl").permission("user").build();
+        RouteBuilder.getRoute("/admin/${page}").toPage("/bem_pages/admin/p_${page}.ftl").permission("admin").build();
+        RouteBuilder.getRoute("/user/${page}").toPage("/bem_pages/user/p_${page}.ftl").permission("user").build();
 
         RouteBuilder.getRoute("/${page}").toPage("/bem_pages/p_${page}.ftl").build();
 
@@ -50,12 +50,14 @@ public class Initializer implements ServletContextListener{
                 map("default", "/admin/user_list").build();
         RouteBuilder.postRoute("/user_list.${action}").ctrl("user_list").action("${action}").
                 map("default", "/admin/user_edit?user_id=${user_id}").build();
+        RouteBuilder.postRoute("/user_profile.${action}").ctrl("user_profile").action("${action}").
+                map("default", "/user/profile").build();
 
         RouteBuilder.postRoute("/${ctrl}.${action}").ctrl("${ctrl}").action("${action}").build();
 
         RouteBuilder.getRoute("/").toServlet(DefaultPage.class.getName()).build();
 
-        RouteBuilder.errorRoute(404).toPage("/pages/_errors/404.ftl").build();
+        RouteBuilder.errorRoute(404).toPage("/bem_pages/_errors/p_404.ftl").build();
         RouteBuilder.errorRoute(403).toServlet(AccessDeniedPage.class.getName()).build();
     }
 

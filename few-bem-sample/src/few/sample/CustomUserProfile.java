@@ -15,19 +15,19 @@ public class CustomUserProfile implements few.common.CustomUserProfile{
         fields = new LinkedList<CustomField>();
 
         fields.add(
-                new CustomField("sex",          "Пол", true, "М/Ж", true, true) {
+                new CustomField("sex",          "Пол", false, "М/Ж", true, true) {
                     @Override
                     public boolean validate(String v) {
                         return v.equals("М") || v.equals("Ж");
                     }
                 }
         );
-        fields.add(
-                new CustomField("birthday",     "Дата рождения")
-        );
-        fields.add(
-                new CustomField("phone_number", "Номер телефона")
-        );
+//        fields.add(
+//                new CustomField("birthday",     "Дата рождения")
+//        );
+//        fields.add(
+//                new CustomField("phone_number", "Номер телефона")
+//        );
     }
 
     public List<CustomField> getCustomFields() {

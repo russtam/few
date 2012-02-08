@@ -37,6 +37,26 @@
     </@f_field_tr>
 </#macro>
 
+<#macro e_field_checkbox title name value=false hint="" required=true>
+    <#assign id = "r_" + new_id()>
+    <@f_field_tr id title name hint required>
+        <input type="checkbox" name="${name}" id="${id}" class="b_form__input" <#if value>checked=""></#if>/>
+    </@f_field_tr>
+</#macro>
+
+<#macro e_field_combobox title name value="" hint="" required=true>
+    <#assign id = "r_" + new_id()>
+    <@f_field_tr id title name hint required>
+        <select name="${name}" id="${id}" class="b_form__input" >
+            <#nested/>
+        </select>
+    </@f_field_tr>
+</#macro>
+
+<#macro e_option value title selected>
+    <option value="${value}" <#if selected>selected=""</#if>>${title}</option>
+</#macro>
+
 <#macro e_field_password title name value="" hint="" required=true>
     <#assign id = new_id()>
     <@f_field_tr id title name hint required>
@@ -44,9 +64,11 @@
     </@f_field_tr>
 </#macro>
 
-<#macro b_form action autocomplete="on">
-
-    <form action="${action}" method="post" class="b_form"
+<#macro b_form action class="" autocomplete="on" >
+    <#if class?length != 0 >
+        <#assign modificator="b_form__${class}"/>
+    </#if>
+    <form action="${action}" method="post" class="b_form ${modificator!""}"
             autocomplete="${autocomplete}">
         <#nested >
     </form>

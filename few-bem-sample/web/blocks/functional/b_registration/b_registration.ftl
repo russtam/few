@@ -6,7 +6,7 @@
 
     <@b_messages.m_messages/>
 
-    <@b_form.b_form "/registration" "off">
+    <@b_form.b_form "/registration" "registration" "off">
         <@b_form.e_fields>
             <@b_form.e_field_text       "Введите e-mail"  "email" request.getParameter("email") "" true/>
 

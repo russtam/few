@@ -130,8 +130,18 @@ table {
 }
 .b_container_centered {
   width: 100%;
-  text-align: center;
   margin-top: 5px;
+  text-align: center;
+}
+.b_container_left {
+  width: 100%;
+  margin-top: 5px;
+  text-align: left;
+}
+.b_container_right {
+  width: 100%;
+  margin-top: 5px;
+  text-align: right;
 }
 .b_footer {
   padding-top: 50px;
@@ -160,6 +170,7 @@ table {
 }
 .b_form__input {
   padding: 5px;
+  width: 100%;
 }
 .b_form__button {
   background: -moz-linear-gradient(#1f7daa, #4aa6d6) repeat scroll 0 0 transparent;
@@ -197,9 +208,57 @@ table {
 .b_header__user_bar {
   float: right;
 }
+.b_header__user_menu {
+  width: 100%;
+  padding: 10px;
+  clear: both;
+}
+.b_header__admin_menu {
+  width: 100%;
+  padding: 10px;
+  clear: both;
+  text-shadow: black 1px 1px 2px, #FFA0A0 0 0 1em;
+  /* Параметры тени */
+
+}
 .b_header__breadcrumbs {
   width: 100%;
-  margin: 10px;
+  padding: 10px;
+  clear: both;
+}
+.b_message__severity__info {
+  background: none repeat scroll 0 0 #BCD9FF;
+  border: 1px solid #2180FF;
+  color: #1F49BF;
+  font-size: 14px;
+  border-radius: 8px 8px 8px 8px;
+  padding: 8px 14px;
+}
+.b_message__severity__warning {
+  background: -moz-linear-gradient(#6e9e30, #87c03b) repeat scroll 0 0 transparent;
+  border: 1px solid #6E9E30;
+  color: #FFFFFF;
+  font-size: 14px;
+  border-radius: 8px 8px 8px 8px;
+  padding: 8px 14px;
+}
+.b_message__severity__error {
+  background: -moz-linear-gradient(#ec252e, #f05057) repeat scroll 0 0 transparent;
+  border: 1px solid #EC252E;
+  color: #FFFFFF;
+  font-size: 14px;
+  border-radius: 8px 8px 8px 8px;
+  padding: 8px 14px;
+}
+.b_menu {
+  clear: both;
+}
+.b_menu__item {
+  float: left;
+  padding-right: 10px;
+}
+.b_menu__item__active {
+  font-weight: bold;
 }
 body {
   color: #333333;
@@ -210,11 +269,42 @@ body {
   max-width: 920px;
   margin: 0 auto;
 }
-.b_login____href_register {
+.b_login__href_register {
   margin: 6px;
   font-size: 14px;
 }
 .b_login__href_restore {
   margin: 6px;
   font-size: 12px;
+}
+.b_form__user_profile .b_form__label_col {
+  width: 150px;
+}
+.b_form__user_profile .b_form__input_col {
+  width: 250px;
+}
+.info {
+  background-color: #e5e5ff;
+}
+.warning {
+  background-color: #ffe8e8;
+}
+.critical {
+  background-color: #fffff0;
+  font-weight: bold;
+  color: red;
+}
+.minor {
+  background-color: #e5ffe5;
+}
+.info {
+  background-color: #e5e5ff;
+}
+.warning {
+  background-color: #ffe8e8;
+}
+.critical {
+  background-color: #fffff0;
+  font-weight: bold;
+  color: red;
 }

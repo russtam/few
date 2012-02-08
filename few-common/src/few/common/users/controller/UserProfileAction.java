@@ -35,22 +35,7 @@ public class UserProfileAction {
             user.email = email;
             userService.updateSimpleUser(user);
             auditService.insertActivity(AuditKeys.MINOR, AuditKeys.UPDATE_PROFILE, "changeEMail");
-            Context.get().addMessage(new Message(Message.INFO, "email", "e-mail изменён" ));
-        }
-    }
-
-    @Action()
-    public void changeDisplayName(
-            @RequestParameter(name = "name") String name
-    ) throws ServletException, IOException {
-        int user_id = Integer.valueOf(Context.get().getUserID());
-
-        if( Utils.isNotNull(name) ) {
-            SimpleUser user = userService.selectUser(user_id);
-            user.display_name = name;
-            userService.updateSimpleUser(user);
-            auditService.insertActivity(AuditKeys.MINOR, AuditKeys.UPDATE_PROFILE, "changeDisplayName");
-            Context.get().addMessage(new Message(Message.INFO, "display_name", "Имя пользователя изменено" ));
+            Context.get().addMessage(new Message(Message.INFO, "e-mail изменён" ));
         }
     }
 
@@ -74,7 +59,7 @@ public class UserProfileAction {
                 String login = userService.selectLoginByUserID(user_id);
                 userService.updateUserPassword(login, password);
                 auditService.insertActivity(AuditKeys.MINOR, AuditKeys.UPDATE_PROFILE, "changePassword");
-                Context.get().addMessage(new Message(Message.INFO, "password", "Пароль обновлён" ));
+                Context.get().addMessage(new Message(Message.INFO, "Пароль обновлён" ));
             } else {
                 Context.get().addMessage(new Message(Message.ERROR, "password", "Пароли не совпадают" ));
             }
@@ -83,6 +68,7 @@ public class UserProfileAction {
 
     @Action
     public void updateProfile(
+            @RequestParameter(name = "name") String name,
             @RequestParameters Map<String, String[]> fields
     ) {
         List<CustomField> profile = UserProfileService.get().validateProfile(fields);
@@ -91,8 +77,10 @@ public class UserProfileAction {
             return ;
         }
         SimpleUser user = userService.selectUser(Integer.parseInt(Context.get().getUserID()));
-        auditService.insertActivity(AuditKeys.MINOR, AuditKeys.UPDATE_PROFILE, "updateProfile");
+        user.display_name = name;
         userService.updateSimpleUser(user, profile);
+        auditService.insertActivity(AuditKeys.MINOR, AuditKeys.UPDATE_PROFILE, "updateProfile");
+        Context.get().addMessage(new Message(Message.INFO, "Профиль обновлён" ));
     }
 
 }

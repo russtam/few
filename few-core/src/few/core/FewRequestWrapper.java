@@ -1,5 +1,7 @@
 package few.core;
 
+import few.Context;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import java.util.*;
@@ -63,5 +65,10 @@ public class FewRequestWrapper extends HttpServletRequestWrapper {
     @Override
     public Locale getLocale() {
         return super.getLocale();
+    }
+
+    @Override
+    public boolean isUserInRole(String role) {
+        return Context.get().hasPermission(role);
     }
 }
