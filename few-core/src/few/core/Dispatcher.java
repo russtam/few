@@ -51,12 +51,12 @@ public class Dispatcher implements Filter{
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
+        Routing.SelectedRoute sr = routing.selectRoute(request);
+        if( sr == null ) {
+            response.sendError(404, "route not found");
+            return;
+        }
         try {
-            Routing.SelectedRoute sr = routing.selectRoute(request);
-            if( sr == null ) {
-                response.sendError(404, "route not found");
-                return;
-            }
 
             FewRequestWrapper  freq  = new FewRequestWrapper(request, sr.getVars());
             FewResponseWrapper fresp = new FewResponseWrapper(request, response);

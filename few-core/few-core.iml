@@ -15,6 +15,8 @@
     <orderEntry type="library" scope="RUNTIME" name="commons-io" level="project" />
     <orderEntry type="library" scope="TEST" name="junit" level="project" />
     <orderEntry type="library" name="coyote" level="project" />
+    <orderEntry type="library" name="coyote" level="project" />
+    <orderEntry type="library" name="coyote" level="project" />
   </component>
 </module>
 

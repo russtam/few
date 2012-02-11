@@ -231,8 +231,7 @@ public class DispatcherMap {
             Method [] methods = clazz.getMethods();
             for (int i = 0; i < methods.length; i++) {
                 Method method = methods[i];
-                if( method.getName().equals("build") &&
-                        method.getReturnType().equals(clazz) ) {
+                if( method.getName().equals("build")  ) {
                     if( buildMethod != null ) {
                         log.severe("more then one build method for ModelBean " + clazz.getName() + "! try use the first");
                     } else {
