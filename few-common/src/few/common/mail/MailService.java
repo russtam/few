@@ -53,7 +53,7 @@ public class MailService {
                 mailTemplate.getParameters());
     }
 
-    public boolean sendEmailSimple(String email,
+    public int sendEmailSimple(String email,
                                 MailTemplate mailTemplate) {
 
         try {
@@ -63,10 +63,10 @@ public class MailService {
 
             sendEmailSimple(email, mailTemplate.getSubject(), content, mailTemplate.getContentType());
 
-            return true;
+            return content.getBytes().length;
         } catch (Throwable e) {
             log.log(Level.SEVERE, "can not send email to " + email, e);
-            return false;
+            return -1;
         }
     }
 

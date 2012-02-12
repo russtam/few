@@ -39,7 +39,7 @@ public class AccountService {
         Integer user_id = userService.createNewUser(display_name, email, DEFAULT_ROLE, login, password, true, profile);
 
         RegistrationWithPasswordMail tpl = new RegistrationWithPasswordMail( display_name, login, password);
-        return mailService.sendEmailSimple(email, tpl);
+        return mailService.sendEmailSimple(email, tpl) > 0;
     }
 
     public boolean registerUserWithActivation(String email, String display_name, String login, String password, List<CustomField> profile) {
@@ -50,7 +50,7 @@ public class AccountService {
         String link = new MyURL("/login").p("key", secureKey).toString();
 
         RegistrationWithActivationMail tpl = new RegistrationWithActivationMail( display_name, login, password, link);
-        return mailService.sendEmailSimple(email, tpl);
+        return mailService.sendEmailSimple(email, tpl) > 0;
     }
 
     public Integer activateUser(String secureKey) {
@@ -77,7 +77,7 @@ public class AccountService {
         String link = new MyURL("/restore_password").p("key", secureKey).toString();
 
         RestorePasswordMail tpl = new RestorePasswordMail( su.display_name, login, password, link);
-        return mailService.sendEmailSimple(su.email, tpl);
+        return mailService.sendEmailSimple(su.email, tpl) > 0;
     }
 
     public boolean restorePasswordActivate(String secureKey) {
