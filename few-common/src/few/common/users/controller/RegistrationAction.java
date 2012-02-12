@@ -28,10 +28,10 @@ public class RegistrationAction {
     @Action()
     public ActionResponse save(
             @RequestParameter(name = "email") String email,
-            @RequestParameter(name = "login") String login,
-            @RequestParameter(name = "name") String name,
-            @RequestParameter(name = "password") String password,
-            @RequestParameter(name = "password1") String password1,
+            @RequestParameter(name = "login", required = false) String login,
+            @RequestParameter(name = "name", required = false) String name,
+            @RequestParameter(name = "password", required = false) String password,
+            @RequestParameter(name = "password1", required = false) String password1,
             @RequestParameters Map<String, String[]> fields
 
     ) throws ServletException, IOException {
