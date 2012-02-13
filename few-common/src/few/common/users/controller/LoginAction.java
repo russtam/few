@@ -70,22 +70,5 @@ public class LoginAction {
         throw new IllegalStateException();
     }
 
-    @Action()
-    public ActionResponse activate(
-            @RequestParameter(name = "key") String securityKey,
-            HttpSession session
-    ) {
-        Integer user_id = AccountService.get().activateUser(securityKey);
-        if( user_id != null ) {
-            Context.get().addMessage(new Message(Message.INFO, "Ваш аккаунт успешно подтверждён."));
-            session.setAttribute(USER_ID_SESSION_KEY, user_id);
-            auditService.insertActivity(
-                    AuditKeys.NORMAL, AuditKeys.ACTIVATION, "");
-            return ActionResponse.page("user/profile");
-        } else {
-            Context.get().addMessage(new Message(Message.INFO, "Ссылка устарела."));
-            return ActionResponse._default();
-        }
-    }
 
 }

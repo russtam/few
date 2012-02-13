@@ -47,7 +47,7 @@ public class AccountService {
         Integer user_id = userService.createNewUser(display_name, email, DEFAULT_ROLE, login, password, false, profile);
 
         String secureKey = confirmationService.createConfirmationKey(new String[]{user_id.toString()}, ConfirmationService.ONE_DAY_TIMEOUT);
-        String link = new MyURL("/login.activate").p("key", secureKey).toString();
+        String link = new MyURL("/confirmation.registration").p("key", secureKey).toString();
 
         RegistrationWithActivationMail tpl = new RegistrationWithActivationMail( display_name, login, password, link);
         return mailService.sendEmailSimple(email, tpl) > 0;
@@ -74,7 +74,7 @@ public class AccountService {
 
         String secureKey = confirmationService.createConfirmationKey( new String[]{login, password}, ConfirmationService.ONE_DAY_TIMEOUT);
 
-        String link = new MyURL("/restore_password.restore").p("key", secureKey).toString();
+        String link = new MyURL("/confirmation.restore_password").p("key", secureKey).toString();
 
         RestorePasswordMail tpl = new RestorePasswordMail( su.display_name, login, password, link);
         return mailService.sendEmailSimple(su.email, tpl) > 0;
