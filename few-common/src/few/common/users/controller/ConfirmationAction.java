@@ -37,7 +37,7 @@ public class ConfirmationAction extends HttpServlet {
                 session.setAttribute(LoginAction.USER_ID_SESSION_KEY, user_id);
                 auditService.insertActivity(
                         AuditKeys.NORMAL, AuditKeys.ACTIVATION, "");
-                resp.sendRedirect("/user/profile");
+                resp.sendRedirect("/subscriber/routes");
             } else {
                 Context.get().addMessage(new Message(Message.INFO, "Ссылка устарела."));
                 resp.sendRedirect("/registration");
