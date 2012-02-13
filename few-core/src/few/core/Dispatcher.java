@@ -48,24 +48,24 @@ public class Dispatcher implements Filter{
     }
 
 
-    public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
+    public void service(HttpServletRequest _request, HttpServletResponse _response) throws ServletException, IOException {
+        _request.setCharacterEncoding("UTF-8");
 
-        Routing.SelectedRoute sr = routing.selectRoute(request);
+        Routing.SelectedRoute sr = routing.selectRoute(_request);
         if( sr == null ) {
-            response.sendError(404, "route not found");
+            _response.sendError(404, "route not found");
             return;
         }
         try {
 
-            FewRequestWrapper  freq  = new FewRequestWrapper(request, sr.getVars());
-            FewResponseWrapper fresp = new FewResponseWrapper(request, response);
+            FewRequestWrapper  request  = new FewRequestWrapper(_request, sr.getVars());
+            FewResponseWrapper response = new FewResponseWrapper(_request, _response);
 
-            Context.init(freq, fresp, servletContext, config);
+            Context.init(request, response, servletContext, config);
 
             if( sr.getRoute().getPermission() != null ) {
                 if( !Context.get().hasPermission(sr.getRoute().getPermission()) ) {
-                    fresp.sendError(403, "route access denied");
+                    response.sendError(403, "route access denied");
                     return;
                 }
             }
@@ -78,7 +78,7 @@ public class Dispatcher implements Filter{
                     if( freemarker.checkExists(ftl) )
                         processTemplate(ftl, request, response);
                     else {
-                        fresp.sendError(404, "template not found");
+                        response.sendError(404, "template not found");
                         return;
                     }
                 }
@@ -104,14 +104,14 @@ public class Dispatcher implements Filter{
                 // 1. select ctrl
                 DispatcherMap.Controller c = DispatcherMap.get().getControllers().get(ctrl);
                 if( c == null ) {
-                    fresp.sendError(404, "controller not found");
+                    response.sendError(404, "controller not found");
                     return;
                 }
 
                 // 2. select action method
                 DispatcherMap.Action a = c.getActions().get(action);
                 if( a == null ) {
-                    fresp.sendError(404, "action not found");
+                    response.sendError(404, "action not found");
                     return;
                 }
 

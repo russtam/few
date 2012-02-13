@@ -40,9 +40,9 @@ public class ConfirmationAction extends HttpServlet {
                 resp.sendRedirect("/user/profile");
             } else {
                 Context.get().addMessage(new Message(Message.INFO, "Ссылка устарела."));
-                resp.sendRedirect("/registrationк");
+                resp.sendRedirect("/registration");
             }
-        }
+        } else
         if( action.equals("restore_password") ) {
             if( AccountService.get().restorePasswordActivate(key) ) {
                 Context.get().addMessage( new Message(Message.INFO, "Ваш новый пароль активирован, можете заходить.") );
@@ -53,8 +53,8 @@ public class ConfirmationAction extends HttpServlet {
                 Context.get().addMessage( new Message(Message.ERROR, "Ссылка устарела. Попробуйте запросить восстановление пароля ещё раз.") );
             }
             resp.sendRedirect("/restore_password");
+        } else {
+            resp.sendRedirect("/");
         }
-
-
     }
 }
