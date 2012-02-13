@@ -7,18 +7,9 @@ package few;
 public class Message {
     public static final String NO_SOURCE = "all";
 
-    public static class Severity {
-        private String s;
-        private Severity(String s) {
-            this.s = s;
-        }
-        public String toString() {
-            return s;
-        }
-    }
-    public static Severity INFO    = new Severity("INFO");
-    public static Severity WARNING = new Severity("WARNING");
-    public static Severity ERROR   = new Severity("ERROR");
+    public static Severity INFO    = Severity.INFO;
+    public static Severity WARNING = Severity.WARNING;
+    public static Severity ERROR   = Severity.ERROR;
 
     private Severity severity;
     private String source;
