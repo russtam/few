@@ -14,9 +14,7 @@
     <orderEntry type="library" name="commons-fileupload" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="commons-io" level="project" />
     <orderEntry type="library" scope="TEST" name="junit" level="project" />
-    <orderEntry type="library" name="coyote" level="project" />
-    <orderEntry type="library" name="coyote" level="project" />
-    <orderEntry type="library" name="coyote" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="coyote" level="project" />
   </component>
 </module>
 
