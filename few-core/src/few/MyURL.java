@@ -65,11 +65,11 @@ public class MyURL {
         else
             stringBuilder.append(request.getServerName());
 
-        if( !secure && WEB_SERVER_HTTP_PORT != 0 ) {
+        if( !secure && WEB_SERVER_HTTP_PORT != 0 && WEB_SERVER_HTTP_PORT != 80 ) {
             stringBuilder.append(":");
             stringBuilder.append(WEB_SERVER_HTTP_PORT);
         } else
-            if( secure && WEB_SERVER_HTTPS_PORT != 0 ) {
+            if( secure && WEB_SERVER_HTTPS_PORT != 0 && WEB_SERVER_HTTPS_PORT != 443 ) {
                 stringBuilder.append(":");
                 stringBuilder.append(WEB_SERVER_HTTPS_PORT);
             } else

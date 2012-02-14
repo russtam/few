@@ -39,12 +39,12 @@ public class UserProfileService {
         List<CustomField> list = new ArrayList<CustomField>(fields.size());
         for (Map.Entry<String, String[]> entry : fields.entrySet()) {
             CustomUserProfile.CustomField f = getCustomFields().get(entry.getKey());
-            if( f == null )
-                return null;
-            if( !f.validate(entry.getValue()[0]) )
-                return null;
+            if( f != null ) {
+                if( !f.validate(entry.getValue()[0]) )
+                    return null;
 
-            list.add(new CustomField(entry.getKey(), entry.getValue()[0]));
+                list.add(new CustomField(entry.getKey(), entry.getValue()[0]));
+            }
         }
         return list;
     }
