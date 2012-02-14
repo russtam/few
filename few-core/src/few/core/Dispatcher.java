@@ -144,9 +144,11 @@ public class Dispatcher implements Filter{
                         response.sendError(ar.getError_code());
                         break;
                     case ActionResponse.JSON:
-		        response.setContentType("application/json");
-                        response.getOutputStream().print(ar.getKey());
-                        response.getOutputStream().close();
+		                response.setContentType("application/json; charset=UTF-8");
+                        response.setCharacterEncoding("UTF-8");
+                        response.getWriter().write(ar.getKey());
+                        response.getWriter().close();
+                        request.getSession().removeAttribute(Context.MESSAGE_SESSION_KEY);
                         break;
                 }
             }

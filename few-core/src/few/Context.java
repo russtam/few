@@ -17,7 +17,7 @@ import java.util.*;
  */
 public class Context {
 
-    protected static final String MESSAGE_SESSION_KEY = "few_messages";
+    public static final String MESSAGE_SESSION_KEY = "few_messages";
     protected static ThreadLocal<Context> threadLocal = new ThreadLocal<Context>();
 
     static public void init(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext, DispatcherMap config) {
