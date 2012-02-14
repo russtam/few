@@ -8,7 +8,7 @@ import java.util.LinkedList;
  */
 public class ListBuilder<T> extends LinkedList<T> {
 
-    public ListBuilder build(T t) {
+    public ListBuilder<T> build(T t) {
         add(t);
         return this;
     }

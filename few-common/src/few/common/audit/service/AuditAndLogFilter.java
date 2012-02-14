@@ -112,6 +112,7 @@ public class AuditAndLogFilter implements Filter, ServletContextListener, HttpSe
             status = sc;
             super.setStatus(sc);
         }
+        @SuppressWarnings(value = "deprecation")
         public void setStatus(int sc, String sm) {
             status = sc;
             super.setStatus(sc, sm);

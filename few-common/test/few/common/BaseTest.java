@@ -44,7 +44,7 @@ public class BaseTest extends TestCase {
         ServiceRegistry.registerService(new AnnotationFinder() {
 
             public Map<Class, List<Class>> findAnnotations() {
-                return null;  //To change body of implemented methods use File | Settings | File Templates.
+                return null;
             }
 
             public List<String> findXmlFiles() {
