@@ -14,9 +14,11 @@ public class FewRequestWrapper extends HttpServletRequestWrapper {
 
     Map<String, String[]> parameters;
     Enumeration<String> names;
+    HttpServletRequest request;
 
     public FewRequestWrapper(HttpServletRequest request, Map<String, String> vars) {
         super(request);
+        this.request = request;
 
         parameters = new HashMap<String, String[]>();
         parameters.putAll(super.getParameterMap());
@@ -70,5 +72,9 @@ public class FewRequestWrapper extends HttpServletRequestWrapper {
     @Override
     public boolean isUserInRole(String role) {
         return Context.get().hasPermission(role);
+    }
+
+    public HttpServletRequest getWrapped() {
+        return request;
     }
 }

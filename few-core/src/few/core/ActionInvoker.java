@@ -82,7 +82,7 @@ public class ActionInvoker {
                 RequestParameter param = (RequestParameter) annotations[0];
 
                 if( type == FileItem.class ) { // it means file upload
-                    MultipartRequest mpRequest = (MultipartRequest) Context.get().getRequest();
+                    MultipartRequest mpRequest = (MultipartRequest) ((FewRequestWrapper)Context.get().getRequest()).getWrapped();
                     ret[i] = mpRequest.getFileItem(param.name());
                     continue;
                 }

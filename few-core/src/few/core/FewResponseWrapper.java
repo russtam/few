@@ -24,7 +24,7 @@ public class FewResponseWrapper extends HttpServletResponseWrapper {
     }
 
     public void sendError(int sc) throws IOException {
-        sendError(sc);
+        sendError(sc, "");
     }
 
     boolean error_processing = false;
@@ -38,4 +38,5 @@ public class FewResponseWrapper extends HttpServletResponseWrapper {
 
         Dispatcher.get().processError(sc, msg, request, this);
     }
+
 }
