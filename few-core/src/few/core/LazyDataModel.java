@@ -1,11 +1,13 @@
 package few.core;
 
 import few.Context;
+import few.utils.Utils;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
 /**
  * User: gerbylev
@@ -27,6 +29,10 @@ public class LazyDataModel implements Map<String, Object> {
             DispatcherMap.ModelBean desc = description.get(key);
             if( desc == null ) {
                 //throw new IllegalArgumentException("no such modelBean");
+                return null;
+            }
+            if( Utils.isNotNull(desc.getPermission()) && !Context.get().hasPermission(desc.getPermission()) ) {
+                log.warning("model '" + key + "' access denied, user doesn't have permission " + desc.getPermission());
                 return null;
             }
 
@@ -73,4 +79,6 @@ public class LazyDataModel implements Map<String, Object> {
     public Set<Map.Entry<String, Object>> entrySet() {
         throw new UnsupportedOperationException();
     }
+    
+    static private Logger log = Logger.getLogger(LazyDataModel.class.getName());
 }

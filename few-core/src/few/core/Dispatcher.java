@@ -7,6 +7,7 @@ import few.routing.GetRoute;
 import few.routing.PostRoute;
 import few.services.FreemarkerService;
 import few.services.Routing;
+import few.utils.Utils;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -107,13 +108,24 @@ public class Dispatcher implements Filter{
                     response.sendError(404, "controller not found");
                     return;
                 }
-
+                
+                if( Utils.isNotNull(c.getPermission()) && !Context.get().hasPermission(c.getPermission()) ) {
+                    response.sendError(403, "controller access denied");
+                    return;
+                }
+                                                
                 // 2. select action method
                 DispatcherMap.Action a = c.getActions().get(action);
                 if( a == null ) {
                     response.sendError(404, "action not found");
                     return;
                 }
+
+                if( Utils.isNotNull(a.getPermission()) &&  !Context.get().hasPermission(a.getPermission()) ) {
+                    response.sendError(403, "action access denied");
+                    return;
+                }
+
 
                 // 3. invoke
                 ActionResponse ar = ActionInvoker.invokeActionMethod(c.getInstance(), a.getMethod(), request, response);
