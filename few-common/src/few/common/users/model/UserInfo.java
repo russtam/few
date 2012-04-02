@@ -14,7 +14,7 @@ import java.util.*;
  * User: gerbylev
  * Date: 31.10.11
  */
-@ModelBean(name = "userInfo", permission = "authorized")
+@ModelBean(name = "userInfo")
 public class UserInfo {
     private boolean signed_in;
     private Integer user_id;
