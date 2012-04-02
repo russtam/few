@@ -12,7 +12,7 @@ import java.util.List;
  * User: igor
  * Date: 04.01.12
  */
-@ModelBean(name = "user_profile_fields", permission = "authorized")
+@ModelBean(name = "user_profile_fields")
 public class UserProfileFields extends ListWrapper<CustomUserProfile.CustomField>{
 
     private UserProfileFields(List<CustomUserProfile.CustomField> customFields) {

@@ -4,7 +4,7 @@ set HOST=localhost
 set PORT=5432
 
 set PG_USER=postgres
-set PG_PASSWORD=postgres
+set PG_PASSWORD=1Q2w3e4r
 
 set DB_NAME=sample
 set DB_USER=sample
