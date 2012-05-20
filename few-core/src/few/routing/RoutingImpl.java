@@ -57,6 +57,8 @@ public class RoutingImpl implements Routing {
 
     public SelectedRoute selectRoute(HttpServletRequest request) {
         String uri = request.getRequestURI();
+        uri = uri.substring(request.getServletContext().getContextPath().length());
+        
         Route route = null;;
         Map<String, String> vars = null;
         if( request.getMethod().equals("GET")) {

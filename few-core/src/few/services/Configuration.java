@@ -13,6 +13,7 @@ public interface Configuration {
     String WEB_SERVER_HTTP_PORT =  "web.server.http_port";
     String WEB_SERVER_HTTPS_PORT = "web.server.https_port";
     String AUTOCHECK_INTERVAL = "fremarker.autocheck_interval";
+    String CONTEXT_URI = "web.context_uri";
 
 
     String getProperty(String key);

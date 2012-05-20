@@ -20,7 +20,9 @@ public class ResourceServlet implements Servlet{
         HttpServletRequest request = (HttpServletRequest) req;
 
         // forward to default resource servlet
-        req.getRequestDispatcher(request.getRequestURI()).forward(req, res);
+        String uri = request.getRequestURI();
+        uri = uri.substring(request.getServletContext().getContextPath().length());
+        req.getRequestDispatcher(uri).forward(req, res);
     }
 
     public String getServletInfo() {
