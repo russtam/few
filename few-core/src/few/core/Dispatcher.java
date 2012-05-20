@@ -152,7 +152,9 @@ public class Dispatcher implements Filter{
                             response.sendRedirect(ctx() + "/" + ar.getKey());
                         break;
                     case ActionResponse.REDIRECT:
-                        response.sendRedirect( ctx() + ar.getKey());
+                        String s = ar.getKey();
+                        if( !s.contains("://") ) s = ctx() + s;
+                        response.sendRedirect(s);
                         break;
                     case ActionResponse.ERROR:
                         response.sendError(ar.getError_code());
