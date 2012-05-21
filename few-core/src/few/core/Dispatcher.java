@@ -47,7 +47,9 @@ public class Dispatcher implements Filter{
     public ServletContext context() {
         return servletContext;
     }
-
+    public String ctx() {
+        return context().getContextPath();
+    }
 
     public void service(HttpServletRequest _request, HttpServletResponse _response) throws ServletException, IOException {
         _request.setCharacterEncoding("UTF-8");
@@ -137,9 +139,9 @@ public class Dispatcher implements Filter{
                         where = route.getRemapping().get("default");
                         if( where != null ) {
                             where = routing.processVars(where, sr.getVars());
-                            response.sendRedirect(where);
+                            response.sendRedirect(ctx() + where);
                         } else
-                            response.sendRedirect("/" + ctrl);
+                            response.sendRedirect(ctx() + "/" + ctrl);
                         break;
                     case ActionResponse.PAGE:
                         where = route.getRemapping().get(ar.getKey());
@@ -147,10 +149,12 @@ public class Dispatcher implements Filter{
                             where = routing.processVars(where, sr.getVars());
                             response.sendRedirect(where);
                         } else
-                            response.sendRedirect("/" + ar.getKey());
+                            response.sendRedirect(ctx() + "/" + ar.getKey());
                         break;
                     case ActionResponse.REDIRECT:
-                        response.sendRedirect(ar.getKey());
+                        String s = ar.getKey();
+                        if( !s.contains("://") ) s = ctx() + s;
+                        response.sendRedirect(s);
                         break;
                     case ActionResponse.ERROR:
                         response.sendError(ar.getError_code());
