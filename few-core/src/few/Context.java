@@ -92,11 +92,14 @@ public class Context {
         if( userRoles == null ) {
             userRoles = credentials.getRoles(request);
         }
+		
+		String[] permList = permission.split(",");
 
-        if( userRoles.contains(permission) )
-            return true;
-        else
-            return false;
+		for (String perm : permList)
+			if( userRoles.contains(perm) )
+				return true;
+        //else
+        return false;
     }
 
     public ServletContext getServletContext() {

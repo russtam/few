@@ -17,96 +17,93 @@ import java.util.List;
  */
 public class MyURL {
 
-    public static final Configuration conf = ServiceRegistry.get(Configuration.class);
+	public static final Configuration conf = ServiceRegistry.get(Configuration.class);
+	public static final String WEB_SERVER_HOST =
+			conf.getProperty(Configuration.WEB_SERVER_HOST);
+	public static final int WEB_SERVER_HTTP_PORT =
+			Integer.valueOf(conf.getProperty(Configuration.WEB_SERVER_HTTP_PORT));
+	public static final int WEB_SERVER_HTTPS_PORT =
+			Integer.valueOf(conf.getProperty(Configuration.WEB_SERVER_HTTPS_PORT));
+	boolean secure;
+	String page;
+	List<Parameter> params = new LinkedList<Parameter>();
 
-    public static final String WEB_SERVER_HOST =
-            conf.getProperty(Configuration.WEB_SERVER_HOST);
-    public static final int WEB_SERVER_HTTP_PORT =
-            Integer.valueOf( conf.getProperty(Configuration.WEB_SERVER_HTTP_PORT) );
-    public static final int WEB_SERVER_HTTPS_PORT =
-            Integer.valueOf( conf.getProperty(Configuration.WEB_SERVER_HTTPS_PORT) );
+	private static class Parameter {
 
-    boolean secure;
-    String page;
-    List<Parameter> params = new LinkedList<Parameter>();
+		String name;
+		String value;
 
-    private static class Parameter {
-        String name;
-        String value;
+		private Parameter(String name, String value) {
+			this.name = name;
+			this.value = value;
+		}
+	}
 
-        private Parameter(String name, String value) {
-            this.name = name;
-            this.value = value;
-        }
-    }
+	public MyURL(String page) {
+		this.secure = false;
+		this.page = page;
+	}
 
-    public MyURL(String page) {
-        this.secure = false;
-        this.page = page;
-    }
+	public MyURL(boolean secure, String page) {
+		this.secure = secure;
+		this.page = page;
+	}
 
-    public MyURL(boolean secure, String page) {
-        this.secure = secure;
-        this.page = page;
-    }
+	public String toString() {
+		HttpServletRequest request = Context.get().getRequest();
 
-    public String toString() {
-        HttpServletRequest request = Context.get().getRequest();
+		StringBuilder stringBuilder = new StringBuilder();
+		if (!(page != null && page.toLowerCase().startsWith("http"))) {
+			if (!secure)
+				stringBuilder.append("http://");
+			else
+				stringBuilder.append("https://");
 
-        StringBuilder stringBuilder = new StringBuilder();
+			if (Utils.isNotNull(WEB_SERVER_HOST))
+				stringBuilder.append(WEB_SERVER_HOST);
+			else
+				stringBuilder.append(request.getServerName());
 
-        if( !secure )
-            stringBuilder.append("http://");
-        else
-            stringBuilder.append("https://");
+			if (!secure && WEB_SERVER_HTTP_PORT != 0 && WEB_SERVER_HTTP_PORT != 80) {
+				stringBuilder.append(":");
+				stringBuilder.append(WEB_SERVER_HTTP_PORT);
+			} else if (secure && WEB_SERVER_HTTPS_PORT != 0 && WEB_SERVER_HTTPS_PORT != 443) {
+				stringBuilder.append(":");
+				stringBuilder.append(WEB_SERVER_HTTPS_PORT);
+			} else if (request.getServerPort() != 80) {
+				stringBuilder.append(":");
+				stringBuilder.append(request.getServerPort());
+			}
+		}
+		stringBuilder.append(page);
 
-        if( Utils.isNotNull(WEB_SERVER_HOST) )
-            stringBuilder.append(WEB_SERVER_HOST);
-        else
-            stringBuilder.append(request.getServerName());
+		encodeParameters(stringBuilder);
 
-        if( !secure && WEB_SERVER_HTTP_PORT != 0 && WEB_SERVER_HTTP_PORT != 80 ) {
-            stringBuilder.append(":");
-            stringBuilder.append(WEB_SERVER_HTTP_PORT);
-        } else
-            if( secure && WEB_SERVER_HTTPS_PORT != 0 && WEB_SERVER_HTTPS_PORT != 443 ) {
-                stringBuilder.append(":");
-                stringBuilder.append(WEB_SERVER_HTTPS_PORT);
-            } else
-                if( request.getServerPort() != 80 ) {
-                    stringBuilder.append(":");
-                    stringBuilder.append(request.getServerPort());
-                }
-        stringBuilder.append(page);
+		return stringBuilder.toString();
+	}
 
-        encodeParameters(stringBuilder);
+	public MyURL p(String name, String value) {
+		params.add(new Parameter(name, value));
+		return this;
+	}
 
-        return stringBuilder.toString();
-    }
+	private void encodeParameters(StringBuilder builder) {
+		if (!params.isEmpty())
+			builder.append("?");
 
-    public MyURL p(String name, String value) {
-        params.add(new Parameter(name, value));
-        return this;
-    }
+		for (Iterator<Parameter> iterator = params.iterator(); iterator.hasNext();) {
+			Parameter param = iterator.next();
 
-    private void encodeParameters(StringBuilder builder) {
-        if( !params.isEmpty() )
-            builder.append("?");
+			try {
+				builder.append(param.name).append("=").append(
+						URLEncoder.encode(param.value, "UTF-8"));
+			} catch (UnsupportedEncodingException e) {
+				throw new Error();
+			}
 
-        for (Iterator<Parameter> iterator = params.iterator(); iterator.hasNext(); ) {
-            Parameter param = iterator.next();
-            if( iterator.hasNext() )
-                builder.append("&");
+			if (iterator.hasNext())
+				builder.append("&");
 
-            try {
-                builder.append(param.name).append("=").append(
-                        URLEncoder.encode(param.value, "UTF-8")
-                );
-            } catch (UnsupportedEncodingException e) {
-                throw new Error();
-            }
-
-        }
-    }
-
+		}
+	}
 }
